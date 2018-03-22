@@ -48,7 +48,6 @@
         <activity
             android:name=".ProductDescription"
             android:label="Product Description"/>
->>>>>>> d69d8500cda268081d5e6efcf82099be48505d2d
     </application>
 
 </manifest>
