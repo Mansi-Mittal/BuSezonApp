@@ -39,6 +39,16 @@
             android:label="@string/title_activity_signing_up"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".WishlistActivity"></activity>
+        <activity
+            android:name=".ClothingPage"
+            android:label="Clothing" />
+        <activity
+            android:name=".SellHomepage"
+            android:label="Seller Home"/>
+        <activity
+            android:name=".ProductDescription"
+            android:label="Product Description"/>
+>>>>>>> d69d8500cda268081d5e6efcf82099be48505d2d
     </application>
 
 </manifest>
