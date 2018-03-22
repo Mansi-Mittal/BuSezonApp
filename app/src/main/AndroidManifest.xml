@@ -30,6 +30,15 @@
             android:label="">
 
         </activity>
+        <activity
+            android:name=".ClothingPage"
+            android:label="Clothing" />
+        <activity
+            android:name=".SellHomepage"
+            android:label="Seller Home"/>
+        <activity
+            android:name=".ProductDescription"
+            android:label="Product Description"/>
     </application>
 
 </manifest>
