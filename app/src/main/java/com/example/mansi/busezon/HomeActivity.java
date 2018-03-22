@@ -1,5 +1,6 @@
 package com.example.mansi.busezon;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.view.MenuItemCompat;
@@ -55,7 +56,7 @@ public class HomeActivity extends AppCompatActivity {
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
-                if (tabId == R.id.tab_home) {
+                if (tabId == R.id.tab_wishList) {
                     // The tab with id R.id.tab_favorites was selected,
                     // change your content accordingly.
                 }
@@ -98,7 +99,8 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_cart:
-                // User chose the "Settings" item, show the app settings UI...
+                Intent i=new Intent(this,shoppingCart.class);
+                startActivity(i);
                 return true;
 
             case R.id.action_search:
