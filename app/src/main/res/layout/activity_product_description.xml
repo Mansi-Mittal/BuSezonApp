@@ -14,7 +14,6 @@
         android:layout_height="?attr/actionBarSize"
         android:background="#009688"
         android:elevation="4dp"
-
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
@@ -35,7 +34,7 @@
                 android:layout_height="300dp"
                 android:layout_alignParentTop="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/yellowkurti5" />
+                android:src="@drawable/img3" />
 
 
             <TextView
@@ -118,7 +117,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="20dp"
-        android:background="@drawable/round_button"
+        android:background="@android:drawable/ic_btn_speak_now"
         android:gravity="center_vertical|center_horizontal"
         android:text="EDIT"
         android:textColor="#fff" />

@@ -18,7 +18,7 @@ public class SELL_BUY extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         //create intent to open the activity
-                        Intent BUYintent= new Intent(SELL_BUY.this,BUY.class);
+                        Intent BUYintent= new Intent(SELL_BUY.this,HomeActivity.class);
                         //start the new activity
                         startActivity(BUYintent);
                     }
@@ -29,7 +29,7 @@ public class SELL_BUY extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         //create intent to open the activity
-                        Intent SELLintent= new Intent(SELL_BUY.this,SELL.class);
+                        Intent SELLintent= new Intent(SELL_BUY.this,SellHomepage.class);
                         //start the new activity
                         startActivity(SELLintent);
                     }

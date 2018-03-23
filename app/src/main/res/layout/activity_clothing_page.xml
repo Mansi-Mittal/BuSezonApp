@@ -39,13 +39,13 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/pdt10" />
+                    android:src="@drawable/img1" />
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/pdt9" />
+                    android:src="@drawable/img1" />
             </LinearLayout>
 
             <LinearLayout
@@ -57,13 +57,13 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/pdt8" />
+                    android:src="@drawable/img1" />
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/pdt7" />
+                    android:src="@drawable/img1" />
             </LinearLayout>
 
             <LinearLayout
@@ -75,13 +75,13 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/pdt6" />
+                    android:src="@drawable/img1" />
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/pdt5" />
+                    android:src="@drawable/img1" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

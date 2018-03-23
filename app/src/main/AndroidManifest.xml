@@ -18,13 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".HomeActivity"
-                  android:parentActivityName=".MainActivity"
+                  android:parentActivityName=".SELL_BUY"
                   android:label="BuSezon">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".shoppingCart"
             android:parentActivityName=".HomeActivity"
@@ -36,18 +31,32 @@
         </activity>
         <activity
             android:name=".SigningUpActivity"
-            android:label="@string/title_activity_signing_up"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="sign up"></activity>
         <activity android:name=".WishlistActivity"></activity>
         <activity
             android:name=".ClothingPage"
-            android:label="Clothing" />
+            android:label="Clothing" ></activity>
         <activity
             android:name=".SellHomepage"
-            android:label="Seller Home"/>
+            android:label="Seller Home"></activity>
         <activity
             android:name=".ProductDescription"
-            android:label="Product Description"/>
+            android:label="Product Description"
+            android:parentActivityName=".SellHomepage"></activity>
+
+        <activity android:name=".SELL_BUY"
+            android:label="Sell/buy"></activity>
+
+        <activity android:name=".SELL"
+            android:label="Sell"></activity>
+        <activity android:name=".BUY"
+            android:label="Sell"
+            android:parentActivityName=".SELL_BUY"></activity>
+        <activity android:name=".profile_page"
+            android:label="Profile"
+            android:parentActivityName=".SELL_BUY"></activity>
+        <activity android:name=".Add_product"
+            android:label="Add new product"></activity>
     </application>
 
 </manifest>

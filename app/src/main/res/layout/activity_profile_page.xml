@@ -26,7 +26,7 @@ tools:context="com.example.mansi.busezon.profile_page">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHighlight="@color/category_orange"
+        android:textColorHighlight="@android:color/holo_orange_light"
         android:textAlignment="center"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
@@ -146,6 +146,7 @@ tools:context="com.example.mansi.busezon.profile_page">
         android:layout_margin="16dp">
 
         <Button
+            android:id="@+id/wishlist"
             android:layout_width="125dp"
             android:layout_height="match_parent"
             android:text="MY WISHLIST"

@@ -20,6 +20,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
+        Button LoginIn=(Button)findViewById(R.id.login);
+        LoginIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Intent i = new Intent(getApplicationContext(), SELL_BUY.class);
+                startActivity(i);
+            }
+        });
     }
 }

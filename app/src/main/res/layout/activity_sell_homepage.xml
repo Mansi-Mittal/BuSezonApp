@@ -35,17 +35,18 @@
                 android:layout_height="250dp"
                 android:orientation="horizontal">
                 <ImageView
+                    android:id="@+id/sellpdt1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/pdt1" />
+                    android:src="@drawable/img1" />
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/pdt2" />
+                    android:src="@drawable/img1" />
             </LinearLayout>
 
             <LinearLayout
@@ -57,13 +58,13 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/pdt3" />
+                    android:src="@drawable/img1" />
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/pdt4" />
+                    android:src="@drawable/img1" />
             </LinearLayout>
 
             <LinearLayout
@@ -75,13 +76,14 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/pdt5" />
+                    android:src="@drawable/img1" />
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/pdt6" />
+                    android:src="@drawable/img1" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -109,9 +111,10 @@
 
 
 <Button
+    android:id="@+id/addBtn"
     android:layout_width="50dp"
     android:layout_height="50dp"
-    android:background="@drawable/round_button"
+    android:background="@android:drawable/ic_btn_speak_now"
     android:gravity="center_vertical|center_horizontal"
     android:layout_marginRight="20dp"
     android:layout_marginBottom="80dp"
