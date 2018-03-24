@@ -51,6 +51,7 @@
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:textAlignment="viewEnd"
+            android:entries="@array/array_name"
             android:text="category">
         </Spinner>
     </LinearLayout>
@@ -62,36 +63,32 @@
             android:layout_margin="16dp"
             android:layout_below="@+id/category">
          
-           <Button
-            android:id="@+id/buttonLoadPicture"
-            android:layout_height="wrap_content"
+           <TextView
+            android:id="@+id/btn"
+            android:layout_height="50dp"
             android:layout_width="match_parent"
             android:text="SELECT PHOTOS"
+            android:gravity="center"
+            android:layout_gravity="center"
             android:background="#009688"
             android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_below="@+id/category" />
+            android:layout_marginLeft="16dp" />
             <ImageView
                 android:id="@+id/ivImage"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="8dp"
                 android:layout_gravity="center"
-                android:src="@drawable/img1" />
+                android:src="@drawable/images" />
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginLeft="16dp"
                 android:text="SUBMIT"
                 android:background="#009688"
                 android:layout_marginTop="16dp"
                 android:layout_gravity="center"/>
-            <Button
-                android:id="@+id/show_selected_picture_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Show User Selected Picture"/>
             <ImageView
                 android:id="@+id/display_image"
                 android:layout_width="fill_parent"

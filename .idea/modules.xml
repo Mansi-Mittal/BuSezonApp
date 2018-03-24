@@ -3,8 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://C:\Users\Shriya\BuSezonApp\BuSezon.iml" filepath="C:\Users\Shriya\BuSezonApp\BuSezon.iml" />
-      <module fileurl="file://$PROJECT_DIR$/BuSezonApp.iml" filepath="$PROJECT_DIR$/BuSezonApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/BuSezonApp.iml" filepath="$PROJECT_DIR$/.idea/BuSezonApp.iml" />
+      <module fileurl="file://C:\Users\AABHAS JOHAR\Desktop\BuSezonApp\BuSezonApp\BuSezonApp.iml" filepath="C:\Users\AABHAS JOHAR\Desktop\BuSezonApp\BuSezonApp\BuSezonApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\AABHAS JOHAR\Desktop\BuSezonApp\BuSezonApp\app\app.iml" filepath="C:\Users\AABHAS JOHAR\Desktop\BuSezonApp\BuSezonApp\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/multipleimagepickerlibrary/multipleimagepickerlibrary.iml" filepath="$PROJECT_DIR$/multipleimagepickerlibrary/multipleimagepickerlibrary.iml" />
     </modules>
   </component>
 </project>
