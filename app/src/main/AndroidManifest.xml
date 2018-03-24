@@ -26,37 +26,59 @@
             android:label="Shopping Cart">
         </activity>
         <activity android:name=".ProductDesc"
-            android:label="">
+            android:label=""
+            android:parentActivityName=".SellHomepage">
 
         </activity>
         <activity
             android:name=".SigningUpActivity"
-            android:label="sign up"></activity>
-        <activity android:name=".WishlistActivity"></activity>
+            android:label="sign up">
+
+        </activity>
+        <activity android:name=".WishlistActivity">
+
+        </activity>
         <activity
             android:name=".ClothingPage"
-            android:label="Clothing" ></activity>
+            android:label="Clothing" >
+
+        </activity>
         <activity
             android:name=".SellHomepage"
-            android:label="Seller Home"></activity>
+            android:label="Seller Home"
+            android:parentActivityName=".SELL_BUY">
+
+        </activity>
         <activity
             android:name=".ProductDescription"
             android:label="Product Description"
-            android:parentActivityName=".SellHomepage"></activity>
+            android:parentActivityName=".SellHomepage">
+
+        </activity>
 
         <activity android:name=".SELL_BUY"
-            android:label="Sell/buy"></activity>
+            android:label="Sell/buy">
+
+        </activity>
 
         <activity android:name=".SELL"
-            android:label="Sell"></activity>
+            android:label="Sell">
+
+        </activity>
         <activity android:name=".BUY"
             android:label="Sell"
-            android:parentActivityName=".SELL_BUY"></activity>
+            android:parentActivityName=".SELL_BUY">
+
+        </activity>
         <activity android:name=".profile_page"
             android:label="Profile"
-            android:parentActivityName=".SELL_BUY"></activity>
+            android:parentActivityName=".SELL_BUY">
+
+        </activity>
         <activity android:name=".Add_product"
-            android:label="Add new product"></activity>
+            android:label="Add new product">
+
+        </activity>
     </application>
 
 </manifest>
