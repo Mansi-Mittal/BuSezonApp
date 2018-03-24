@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mansi.busezon">
-
+    <!-- This xml is used to add read file permission from external storage such as sdcard -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -76,9 +77,14 @@
 
         </activity>
         <activity android:name=".Add_product"
+
             android:label="Add new product">
+        </activity>
+
+        <activity android:name=".select_photos">
 
         </activity>
+
     </application>
 
 </manifest>
