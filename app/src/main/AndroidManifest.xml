@@ -36,7 +36,9 @@
             android:label="sign up">
 
         </activity>
-        <activity android:name=".WishlistActivity">
+        <activity android:name=".WishlistActivity"
+            android:label="WishList"
+            android:parentActivityName=".profile_page">
 
         </activity>
         <activity
@@ -78,12 +80,14 @@
         </activity>
         <activity android:name=".Add_product"
 
-            android:label="Add new product">
+            android:label="Add new product"
+            android:parentActivityName=".SellHomepage">
         </activity>
 
-        <activity android:name=".select_photos">
-
-        </activity>
+        <activity
+            android:name=".select_photos"
+            android:label="Select Product Images"
+            android:parentActivityName=".Add_product"></activity>
 
     </application>
 
