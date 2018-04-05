@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1044054274072",
+    "firebase_url": "https://busezon-57985.firebaseio.com",
+    "project_id": "busezon-57985",
+    "storage_bucket": "busezon-57985.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1044054274072:android:c88651abfcc30a62",
+        "android_client_info": {
+          "package_name": "com.example.mansi.busezon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1044054274072-gd4dcj92onll4kfu3csvbttl7jpm4ol4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCchQRJ3nbGsm-SUbuLytgxlWy8O1mQwUw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

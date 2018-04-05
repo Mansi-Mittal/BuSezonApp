@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign-up / Login"
+        android:text="Login"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.454"
@@ -31,21 +31,20 @@
         >
 
         <EditText
-            android:id="@+id/editText6"
+            android:id="@+id/editTextloginEmail"
             android:layout_width="match_parent"
             android:layout_height="61dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name"
+            android:hint="Email"
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/editText7"
+            android:id="@+id/editTextloginPassword"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:ems="10"
-            android:inputType="numberPassword"
-            android:text="Password"
+            android:hint="Password"
             android:textSize="20dp" />
 
 
@@ -67,7 +66,7 @@
             android:text="Sign-Up"
             android:layout_margin="7dp"
             android:background="#009688"
-             />
+            />
 
         <Button
             android:id="@+id/login"
@@ -77,7 +76,7 @@
             android:text="Login"
             android:layout_margin="7dp"
             android:background="#009688"
-           />
+            />
 
         <Button
             android:id="@+id/Login_google"
@@ -87,7 +86,7 @@
             android:text="Login with google"
             android:layout_margin="7dp"
             android:background="#009688"
-             />
+            />
 
     </LinearLayout>
 
