@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_home"
+        icon="@drawable/ic_home" />
+    <tab
+        id="@+id/tab_profile"
+        icon="@drawable/ic_friends" />
+    <tab
+        id="@+id/tab_chat"
+        icon="@drawable/ic_chat" />
+
+    <tab
+        id="@+id/tab_wishList"
+        icon="@drawable/ic_wishlist" />
+</tabs>

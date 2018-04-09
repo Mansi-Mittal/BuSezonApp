@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.mansi.busezon">
+    <!-- This xml is used to add read file permission from external storage such as sdcard -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:hardwareAccelerated="false"
+        android:largeHeap="true">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".HomeActivity"
+                  android:parentActivityName=".SELL_BUY"
+                  android:label="BuSezon">
+        </activity>
+        <activity android:name=".shoppingCart"
+            android:parentActivityName=".HomeActivity"
+            android:label="Shopping Cart">
+        </activity>
+        <activity android:name=".ProductDesc"
+            android:label=""
+            android:parentActivityName=".SellHomepage">
+
+        </activity>
+        <activity
+            android:name=".SigningUpActivity"
+            android:label="sign up">
+
+        </activity>
+        <activity android:name=".WishlistActivity"
+            android:label="WishList"
+            android:parentActivityName=".profile_page">
+
+        </activity>
+        <activity
+            android:name=".ClothingPage"
+            android:label="Clothing" >
+
+        </activity>
+        <activity
+            android:name=".SellHomepage"
+            android:label="Seller Home"
+            android:parentActivityName=".SELL_BUY">
+
+        </activity>
+        <activity
+            android:name=".ProductDescription"
+            android:label="Product Description"
+            android:parentActivityName=".SellHomepage">
+
+        </activity>
+
+        <activity android:name=".SELL_BUY"
+            android:label="Sell/buy">
+
+        </activity>
+
+        <activity android:name=".SELL"
+            android:label="Sell">
+
+        </activity>
+        <activity android:name=".BUY"
+            android:label="Sell"
+            android:parentActivityName=".SELL_BUY">
+
+        </activity>
+        <activity android:name=".profile_page"
+            android:label="Profile"
+            android:parentActivityName=".SELL_BUY">
+
+        </activity>
+        <activity android:name=".Add_product"
+
+            android:label="Add new product"
+            android:parentActivityName=".SellHomepage">
+        </activity>
+
+        <activity
+            android:name=".select_photos"
+            android:label="Select Product Images"
+            android:parentActivityName=".Add_product"></activity>
+
+    </application>
+
+</manifest>
