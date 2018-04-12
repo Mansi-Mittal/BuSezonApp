@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.mansi.busezon.GoogleSignInInformation"
+    android:orientation="vertical">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#009688"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+
+    <EditText
+        android:id="@+id/editTextname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:ems="10"
+        android:theme="@style/EditTextStyle"
+        android:textColorHint="#9E9E9E"
+        android:layout_below="@id/my_toolbar"
+        android:inputType="textPersonName"
+        android:hint="Name*" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:ems="10"
+        android:theme="@style/EditTextStyle"
+        android:textColorHint="#9E9E9E"
+        android:layout_below="@id/editTextname"
+        android:hint="Email*"
+        android:id="@+id/editTextEmail"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Phone number*"
+        android:textSize="20dp"
+        android:ems="10"
+        android:theme="@style/EditTextStyle"
+        android:textColorHint="#9E9E9E"
+        android:layout_below="@id/editTextEmail"
+        android:id="@+id/editTextPhoneno"
+        android:inputType="phone" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Address*"
+        android:textSize="20dp"
+        android:ems="10"
+        android:theme="@style/EditTextStyle"
+        android:textColorHint="#9E9E9E"
+        android:layout_below="@id/editTextPhoneno"
+        android:id="@+id/editTextAddress"
+        android:inputType="textPostalAddress" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password*"
+        android:id="@+id/editTextPassword"
+        android:textSize="20dp"
+        android:theme="@style/EditTextStyle"
+        android:textColorHint="#9E9E9E"
+        android:ems="10"
+        android:layout_below="@id/editTextAddress"
+        android:inputType="textPassword"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Confirm Password*"
+        android:id="@+id/editTextCnfPassword"
+        android:textSize="20dp"
+        android:ems="10"
+        android:theme="@style/EditTextStyle"
+        android:textColorHint="#9E9E9E"
+        android:inputType="textPassword"
+        android:layout_below="@id/editTextPassword"
+        />
+    <Button
+        android:id="@+id/signupButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_below="@id/editTextCnfPassword"
+        android:background="@drawable/pretty_button"
+        android:text="Continue" />
+
+</RelativeLayout>

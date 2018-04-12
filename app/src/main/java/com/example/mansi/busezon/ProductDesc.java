@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -33,6 +35,15 @@ public class ProductDesc extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
 
         ab.setDisplayHomeAsUpEnabled(true);
+
+        Button Prod=(Button)findViewById(R.id.editBtn);
+        Prod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Intent i = new Intent(getApplicationContext(), Add_product.class);
+                startActivity(i);
+            }
+        });
 
         TextView prodName=(TextView)findViewById(R.id.prodName);
         prodName.setText("Blue Denim Jeans");

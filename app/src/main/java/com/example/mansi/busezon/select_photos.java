@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.example.mansi.busezon.adapters.ImagesAdapter;
@@ -36,6 +37,11 @@ public class select_photos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_photos);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        //getActionBar().setTitle("BuSezon");
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
         recyclerViewImages = (RecyclerView) findViewById(R.id.recycler_view_images);
         gridLayoutManager = new GridLayoutManager(this, 4);

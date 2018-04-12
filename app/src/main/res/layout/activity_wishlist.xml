@@ -50,5 +50,13 @@
         </TextView>
 
     </LinearLayout>
+        <com.roughike.bottombar.BottomBar
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:background="#009688"
+            app:bb_tabXmlResource="@xml/bottombar_tabs" />
 </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
