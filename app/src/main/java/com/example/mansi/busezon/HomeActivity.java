@@ -57,9 +57,14 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(@IdRes int tabId) {
                 if (tabId == R.id.tab_wishList) {
-                    // The tab with id R.id.tab_favorites was selected,
-                    // change your content accordingly.
+                    Intent i = new Intent(getApplicationContext(), WishlistActivity.class);
+                    startActivity(i);
                 }
+                else if (tabId == R.id.tab_profile) {
+                    Intent i = new Intent(getApplicationContext(), profile_page.class);
+                    startActivity(i);
+                }
+
             }
         });
 
