@@ -3,6 +3,8 @@
     package="com.example.mansi.busezon">
     <!-- This xml is used to add read file permission from external storage such as sdcard -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -87,7 +89,9 @@
         <activity
             android:name=".select_photos"
             android:label="Select Product Images"
-            android:parentActivityName=".Add_product"></activity>
+            android:parentActivityName=".Add_product">
+
+        </activity>
 
     </application>
 
