@@ -29,10 +29,15 @@ public class profile_page extends AppCompatActivity {
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
-                if (tabId == R.id.tab_home) {
-                    // The tab with id R.id.tab_favorites was selected,
-                    // change your content accordingly.
+                if (tabId == R.id.tab_wishList) {
+                    Intent i=new Intent(getApplicationContext(),WishlistActivity.class);
+                    startActivity(i);
                 }
+                else if (tabId == R.id.tab_profile) {
+                    Intent i = new Intent(getApplicationContext(), profile_page.class);
+                    startActivity(i);
+                }
+
             }
         });
         Button Wishlist=(Button)findViewById(R.id.wishlist);

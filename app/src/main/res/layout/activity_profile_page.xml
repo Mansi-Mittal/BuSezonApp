@@ -153,7 +153,7 @@ tools:context="com.example.mansi.busezon.profile_page">
             android:background="#009688"
             /></LinearLayout>
     <ListView
-        android:id="@+id/list"
+        android:id="@+id/lit"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
