@@ -1,35 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.mansi.busezon.SELL_BUY"
     >
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <android.support.v7.widget.Toolbar
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/my_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.1"
-            android:background="#009688"
-            android:elevation="4dp"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />>
+        android:layout_height="?attr/actionBarSize"
+        android:background="#009688"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
         <Button
             android:id ="@+id/push_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:text="PROFILE"
+            android:background="@drawable/pretty_button"
+            android:textColor="#ffffff"
             android:padding="15dp"
+            android:layout_below="@id/my_toolbar"
             android:outlineProvider="paddedBounds"
             android:layout_margin="16dp"
             android:onClick="sendMessage"/>
@@ -40,19 +37,21 @@
             android:gravity="center"
             android:layout_centerInParent="true">
 
-            <TextView
+            <Button
                 android:id="@+id/buy"
-                android:background="#009688"
+                android:background="@drawable/pretty_button"
                 android:gravity="center"
+                android:textColor="#ffffff"
                 android:layout_height="wrap_content"
                 android:text="BUY"
                 android:layout_width="match_parent"
                 android:layout_margin="16dp"/>
 
-            <TextView
+            <Button
                 android:id="@+id/sell"
                 android:gravity="center"
-                android:background="#009688"
+                android:background="@drawable/pretty_button"
+                android:textColor="#ffffff"
                 android:text="SELL"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -66,5 +65,5 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
                 app:bb_tabXmlResource="@xml/bottombar_tabs" />
-    </RelativeLayout>
-</android.support.constraint.ConstraintLayout>
+
+</RelativeLayout>

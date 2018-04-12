@@ -10,4 +10,10 @@
 
     <style name="MyTheme" parent="AppTheme" />
 
+    <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="colorControlActivated">#009688</item>
+        <item name="colorControlNormal">#E0E0E0</item>
+    </style>
+
 </resources>
+

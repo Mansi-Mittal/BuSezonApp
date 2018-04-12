@@ -25,17 +25,17 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.roughike:bottom-bar:2.3.1'
-    compile 'com.android.support:support-vector-drawable:26.1.0'
-    compile 'com.android.support:design:26.1.0'
-    compile 'me.relex:circleindicator:1.2.2@aar'
+    api 'com.android.support:appcompat-v7:26.1.0'
+    api 'com.roughike:bottom-bar:2.3.1'
+    api 'com.android.support:support-vector-drawable:26.1.0'
+    api 'com.android.support:design:26.1.0'
+    api 'me.relex:circleindicator:1.2.2@aar'
 
-    compile 'com.google.firebase:firebase-core:12.0.0'
-    compile 'com.google.firebase:firebase-auth:12.0.0'
-    compile 'com.google.firebase:firebase-database:12.0.0'
-    compile 'com.google.android.gms:play-services-auth:12.0.0'
+    api 'com.google.firebase:firebase-core:12.0.0'
+    api 'com.google.firebase:firebase-auth:12.0.0'
+    api 'com.google.firebase:firebase-database:12.0.0'
+    api 'com.google.android.gms:play-services-auth:12.0.0'
 
-    compile project(path: ':multipleimagepickerlibrary')
+    implementation project(path: ':multipleimagepickerlibrary')
 }
 apply plugin: 'com.google.gms.google-services'

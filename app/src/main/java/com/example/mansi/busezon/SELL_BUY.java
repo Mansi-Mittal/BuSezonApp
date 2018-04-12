@@ -2,8 +2,10 @@ package com.example.mansi.busezon;
 
 import android.app.Application;
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +24,12 @@ public class SELL_BUY extends AppCompatActivity {
         super.onCreate(savedInstanceState);
                 // Set the content of the activity to use the activity_main.xml layout file
                 setContentView(R.layout.activity_sell__buy);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+
         check();
                 TextView BUY= (TextView) findViewById(R.id.buy);
                 BUY.setOnClickListener(new View.OnClickListener() {

@@ -14,6 +14,7 @@
         android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:largeHeap="true"
+        android:label="BuSeZon"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -38,7 +39,7 @@
             android:parentActivityName=".SellHomepage"></activity>
         <activity
             android:name=".SigningUpActivity"
-            android:label="sign up"></activity>
+            android:label="Signup"></activity>
         <activity
             android:name=".WishlistActivity"
             android:label="WishList"
