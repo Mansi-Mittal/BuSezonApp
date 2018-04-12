@@ -53,10 +53,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="61dp"
-        android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="307dp">
+        android:layout_above="@+id/SignUpGoogle">
 
         <Button
             android:id="@+id/signup"
@@ -77,18 +75,17 @@
             android:layout_margin="7dp"
             android:background="#009688"
             />
-
-        <Button
-            android:id="@+id/Login_google"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Login with google"
-            android:layout_margin="7dp"
-            android:background="#009688"
-            />
-
     </LinearLayout>
+
+        <com.google.android.gms.common.SignInButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="#009688"
+            android:layout_weight="1"
+            android:id="@+id/SignUpGoogle"
+            android:layout_alignParentBottom="true"/>
+
 
 
 </RelativeLayout>

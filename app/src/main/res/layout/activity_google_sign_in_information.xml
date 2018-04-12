@@ -4,16 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.mansi.busezon.SigningUpActivity"
-    tools:showIn="@layout/activity_signing_up"
+    tools:context="com.example.mansi.busezon.GoogleSignInInformation"
     android:orientation="vertical">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="140dp"
-        android:text="Sign Up"
-        android:textSize="30dp"/>
+        android:layout_gravity="center"
+        android:text="Google Sign Up"
+        android:textSize="30dp"
+    />
 
     <EditText
         android:id="@+id/editTextname"
@@ -63,6 +62,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="#009688"
-        android:text="Sign Up" />
+        android:text="Continue" />
 
 </LinearLayout>
