@@ -15,6 +15,30 @@
       },
       "oauth_client": [
         {
+          "client_id": "1044054274072-hl28ckgtckevs396vj70783eb4dlht9u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mansi.busezon",
+            "certificate_hash": "a02ce6130f5410810a52f3beb2b77996c572393f"
+          }
+        },
+        {
+          "client_id": "1044054274072-73ncfa4v53k7r6splfo1ighivhuu30oc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mansi.busezon",
+            "certificate_hash": "860f411332c35e3ebde7df37f63128a81a022d87"
+          }
+        },
+        {
+          "client_id": "1044054274072-riolv13umr69pnluqdni0hb9gpb5ls4k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mansi.busezon",
+            "certificate_hash": "e02253c68f7a5c2d8c820efcfcd7b8d9685bbd8f"
+          }
+        },
+        {
           "client_id": "1044054274072-gd4dcj92onll4kfu3csvbttl7jpm4ol4.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +53,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1044054274072-gd4dcj92onll4kfu3csvbttl7jpm4ol4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

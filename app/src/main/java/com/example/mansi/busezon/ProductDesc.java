@@ -12,18 +12,29 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import me.relex.circleindicator.CircleIndicator;
-/**
- * Created by mansi on 23/2/18.
- */
+
 
 public class ProductDesc extends AppCompatActivity {
 
     private static ViewPager mPager;
     private static final Integer[] XMEN= {R.drawable.p_img,R.drawable.p_img1};
     private ArrayList<Integer> XMENArray = new ArrayList<>();
+    RequestQueue rq ;
+    TextView prodName, price;
+    String url = "http://192.168.1.6:3000/products/7";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,11 +56,10 @@ public class ProductDesc extends AppCompatActivity {
             }
         });
 
-        TextView prodName=(TextView)findViewById(R.id.prodName);
-        prodName.setText("Blue Denim Jeans");
-
-        TextView price=(TextView)findViewById(R.id.price);
-        price.setText("Rs 1500");
+        rq= Volley.newRequestQueue(this);
+        sendJsonRequest();
+        prodName=(TextView)findViewById(R.id.prodName);
+        price=(TextView)findViewById(R.id.price);
     }
     private void init() {
         for(int i=0;i<XMEN.length;i++)
@@ -81,6 +91,32 @@ public class ProductDesc extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+
+    public void sendJsonRequest(){
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            prodName.setText(response.getString("name"));
+                            price.setText(response.getString("category"));
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO: Handle error
+
+                    }
+                });
+
+        rq.add(jsonObjectRequest);
     }
 
 }
