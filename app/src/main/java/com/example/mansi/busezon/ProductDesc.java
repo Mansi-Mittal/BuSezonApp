@@ -36,21 +36,13 @@ public class ProductDesc extends AppCompatActivity {
 
         ab.setDisplayHomeAsUpEnabled(true);
 
-        Button Prod=(Button)findViewById(R.id.editBtn);
-        Prod.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                Intent i = new Intent(getApplicationContext(), Add_product.class);
-                startActivity(i);
-            }
-        });
-
         TextView prodName=(TextView)findViewById(R.id.prodName);
         prodName.setText("Blue Denim Jeans");
 
         TextView price=(TextView)findViewById(R.id.price);
         price.setText("Rs 1500");
     }
+
     private void init() {
         for(int i=0;i<XMEN.length;i++)
             XMENArray.add(XMEN[i]);

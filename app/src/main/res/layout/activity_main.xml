@@ -57,11 +57,23 @@
             android:textSize="20dp" />
     </LinearLayout>
 
+    <CheckBox
+        android:id="@+id/keep_logged_in_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/box1"
+        android:layout_height="wrap_content"
+        android:text="Keep me logged in"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="15sp"
+        android:textColor="#424242"
+        android:textAppearance="?android:textAppearanceMedium" />
+
     <Button
         android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/box1"
+        android:layout_below="@id/keep_logged_in_checkbox"
         android:layout_centerHorizontal="true"
         android:layout_margin="7dp"
         android:layout_weight="1"

@@ -49,7 +49,7 @@ public class SellHomepage extends AppCompatActivity {
         SellPdt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Intent i = new Intent(getApplicationContext(), ProductDesc.class);
+                Intent i = new Intent(getApplicationContext(), ProductDescription.class);
                 startActivity(i);
             }
         });
