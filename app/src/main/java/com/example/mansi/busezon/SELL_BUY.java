@@ -28,11 +28,7 @@ import com.roughike.bottombar.OnTabSelectListener;
 
 public class SELL_BUY extends AppCompatActivity {
     private  dbHelper mDbHelper;
-    String name;
-    String email ;
-    String address ;
-    String phoneno ;
-    String password ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,7 +105,7 @@ public class SELL_BUY extends AppCompatActivity {
                         {
                             String name = ds.child("name").getValue(String.class);
                             String email = ds.child("email").getValue(String.class);
-                            String address = ds.child("addres").getValue(String.class);
+                            String address = ds.child("address").getValue(String.class);
                             String phoneno = ds.child("phoneno").getValue(String.class);
                             String password = ds.child("password").getValue(String.class);
                             Toast.makeText(SELL_BUY.this, email + " " + ds.getKey(), Toast.LENGTH_SHORT).show();
