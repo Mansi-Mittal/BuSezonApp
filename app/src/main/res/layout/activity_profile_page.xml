@@ -51,6 +51,7 @@ tools:context="com.example.mansi.busezon.profile_page">
         android:textColor="#020202"
         />
         <TextView
+            android:id="@+id/profilename"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" AAKRITI JOHAR"
@@ -91,6 +92,7 @@ tools:context="com.example.mansi.busezon.profile_page">
         android:layout_gravity="center"
         />
     <TextView
+        android:id="@+id/profilemail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="aakritijohar@gmail.com"
@@ -113,6 +115,7 @@ tools:context="com.example.mansi.busezon.profile_page">
         android:text="contact: "
         />
     <TextView
+        android:id="@+id/profilenumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="998789627672"
@@ -132,6 +135,7 @@ tools:context="com.example.mansi.busezon.profile_page">
             android:text="location: "
             />
         <TextView
+            android:id="@+id/profileaddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="vasant kunj, delhi"
