@@ -68,18 +68,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="10"/>
 
-        <Button
-            android:id="@+id/editBtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_margin="20dp"
-            android:background="@drawable/roundbutton"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="EDIT"
-            android:textColor="#fff" />
-
     </LinearLayout>
 
     <LinearLayout

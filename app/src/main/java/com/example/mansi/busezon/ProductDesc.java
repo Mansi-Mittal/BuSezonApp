@@ -47,6 +47,7 @@ public class ProductDesc extends AppCompatActivity {
 
         ab.setDisplayHomeAsUpEnabled(true);
 
+
         Button Prod=(Button)findViewById(R.id.editBtn);
         Prod.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +61,9 @@ public class ProductDesc extends AppCompatActivity {
         sendJsonRequest();
         prodName=(TextView)findViewById(R.id.prodName);
         price=(TextView)findViewById(R.id.price);
+
     }
+
     private void init() {
         for(int i=0;i<XMEN.length;i++)
             XMENArray.add(XMEN[i]);

@@ -1,7 +1,10 @@
 package com.example.mansi.busezon;
 
 import android.app.Application;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBar;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +14,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mansi.busezon.data.dbContract;
+import com.example.mansi.busezon.data.dbHelper;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,6 +27,7 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
 public class SELL_BUY extends AppCompatActivity {
+    private  dbHelper mDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,10 +105,18 @@ public class SELL_BUY extends AppCompatActivity {
                         {
                             String name = ds.child("name").getValue(String.class);
                             String email = ds.child("email").getValue(String.class);
-                            String address = ds.child("addres").getValue(String.class);
+                            String address = ds.child("address").getValue(String.class);
                             String phoneno = ds.child("phoneno").getValue(String.class);
                             String password = ds.child("password").getValue(String.class);
                             Toast.makeText(SELL_BUY.this, email + " " + ds.getKey(), Toast.LENGTH_SHORT).show();
+                            boolean c = CheckIsDataAlreadyInDBorNot(dbContract.userEntry.TABLE_NAME, dbContract.userEntry.COLUMN_number,phoneno);
+                            if (c == false) {
+                                insertUser(userId,name,email,address,phoneno,password);
+                            }
+                            else {
+                                Toast.makeText(SELL_BUY.this, "user already exists", Toast.LENGTH_SHORT).show();
+                                //no insertion in local database;
+                            }
                         }
                     }
 
@@ -112,6 +126,46 @@ public class SELL_BUY extends AppCompatActivity {
         public void onCancelled(DatabaseError databaseError) {}
 
         });
+    }
+    public boolean CheckIsDataAlreadyInDBorNot(String TableName, String dbfield, String fieldValue) {
+        mDbHelper = new dbHelper(this);
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+        String Query = "Select * from " + TableName + " where " + dbfield + " = " + fieldValue;
+        Cursor cursor = db.rawQuery(Query, null);
+        if(cursor.getCount() <= 0){
+            cursor.close();
+            return false;
+        }
+        cursor.close();
+        return true;
+    }
+    private void insertUser(String user_Id,String nameString,String EMAILString,String addressString,String numbertString,String pass) {
+        // Create database helper
+        dbHelper mDbHelper = new dbHelper(this);
+
+        // Gets the database in write mode
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(dbContract.userEntry.COLUMN_USER_ID, user_Id);
+        values.put(dbContract.userEntry.COLUMN_USER, nameString);
+        values.put(dbContract.userEntry.COLUMN_EMAIL, EMAILString);
+        values.put(dbContract.userEntry.COLUMN_number, numbertString);
+        values.put(dbContract.userEntry.COLUMN_address, addressString);
+        values.put(dbContract.userEntry.COLUMN_password, pass);
+
+        // Insert a new row for user in the database, returning the ID of that new row.
+        long newRowId = db.insert(dbContract.userEntry.TABLE_NAME, null, values);
+
+        // Show a toast message depending on whether or not the insertion was successful
+        if (newRowId == -1) {
+            // If the row ID is -1, then there was an error with insertion.
+            Toast.makeText(this, "Error with saving user", Toast.LENGTH_SHORT).show();
+        } else {
+            // Otherwise, the insertion was successful and we can display a toast with the row ID.
+            Toast.makeText(this, "user saved " + newRowId, Toast.LENGTH_SHORT).show();
+        }
     }
 
         }
