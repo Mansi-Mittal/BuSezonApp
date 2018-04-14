@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -25,11 +24,8 @@
         <activity
             android:name=".HomeActivity"
             android:label="BuSezon"
-            android:parentActivityName=".SELL_BUY"><intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+            android:parentActivityName=".SELL_BUY">
+            </activity>
         <activity
             android:name=".shoppingCart"
             android:label="Shopping Cart"
@@ -81,7 +77,11 @@
             android:name=".select_photos"
             android:label="Select Product Images"
             android:parentActivityName=".Add_product">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
             android:parentActivityName=".Add_product" />

@@ -1,114 +1,139 @@
 package com.example.mansi.busezon;
 
-import android.Manifest;
+
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
-import com.example.mansi.busezon.adapters.ImagesAdapter;
-import com.haresh.multipleimagepickerlibrary.MultiImageSelector;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class select_photos extends AppCompatActivity {
 
-    private FloatingActionButton floatingActionButton;
-    private RecyclerView recyclerViewImages;
-    private GridLayoutManager gridLayoutManager;
-
-    private ArrayList<String> mSelectedImagesList = new ArrayList<>();
-    private final int MAX_IMAGE_SELECTION_LIMIT=100;
-    private static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 401;
-    private final int REQUEST_IMAGE=301;
-
-    private MultiImageSelector mMultiImageSelector;
-    private ImagesAdapter mImagesAdapter;
+    private ImageView image;
+    private Button choose, upload;
+    private final int PICK_IMAGE_REQUEST = 1;
+    String URL ="http://192.168.1.10:3000/products/new";
+    private Bitmap bitmap;
+    ProgressDialog progressDialog;
+    RequestQueue rQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_photos);
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        //getActionBar().setTitle("BuSezon");
-        setSupportActionBar(myToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
-        recyclerViewImages = (RecyclerView) findViewById(R.id.recycler_view_images);
-        gridLayoutManager = new GridLayoutManager(this, 4);
-        recyclerViewImages.setHasFixedSize(true);
-        recyclerViewImages.setLayoutManager(gridLayoutManager);
 
+        image = (ImageView)findViewById(R.id.image);
+        choose = (Button)findViewById(R.id.choose);
+        upload = (Button)findViewById(R.id.upload);
 
-        mMultiImageSelector = MultiImageSelector.create();
+        rQueue = Volley.newRequestQueue(this);
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+        //opening image chooser option
+        choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(checkAndRequestPermissions()) {
-                    mMultiImageSelector.showCamera(true);
-                    mMultiImageSelector.count(MAX_IMAGE_SELECTION_LIMIT);
-                    mMultiImageSelector.multi();
-                    mMultiImageSelector.origin(mSelectedImagesList);
-                    mMultiImageSelector.start(select_photos.this, REQUEST_IMAGE);
-
-//                mMultiImageSelector.showCamera(true);
-//                mMultiImageSelector.single();
-//                mMultiImageSelector.origin(mSelectedImagesList);
-//                mMultiImageSelector.start(MainActivity.this, REQUEST_IMAGE);
-                }
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent,PICK_IMAGE_REQUEST);
             }
         });
 
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //progressDialog = new ProgressDialog(select_photos.this);
+                //progressDialog.setMessage("Uploading, please wait...");
+                //progressDialog.show();
+
+                //sending image to server
+                uploadImage();
+
+            }
+        });
     }
 
-
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_IMAGE){
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
+            Uri filePath = data.getData();
+
             try {
-                mSelectedImagesList = data.getStringArrayListExtra(MultiImageSelector.EXTRA_RESULT);
-                mImagesAdapter = new ImagesAdapter(this,mSelectedImagesList);
-                recyclerViewImages.setAdapter(mImagesAdapter);
+                //getting image from gallery
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+
+                //Setting image to ImageView
+                image.setImageBitmap(bitmap);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private boolean checkAndRequestPermissions() {
-        int externalStoragePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    public void uploadImage(){
+        StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>(){
+            @Override
+            public void onResponse(String response) {
+                //progressDialog.dismiss();
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String Response = jsonObject.getString("response");
+                    Toast.makeText(select_photos.this, Response, Toast.LENGTH_LONG).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        },new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
 
-        List<String> listPermissionsNeeded = new ArrayList<>();
-        if (externalStoragePermission != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        }
+            }
+        }) {
+            //adding parameters to send
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parameters = new HashMap<>();
+                parameters.put("name", "shorts");
+                parameters.put("category","clothing");
+                String imageString = imageToString(bitmap);
+                parameters.put("image", imageString);
+                return parameters;
+            }
+        };
 
-        if (!listPermissionsNeeded.isEmpty()) {
-            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), REQUEST_ID_MULTIPLE_PERMISSIONS);
-            return false;
-        }
-        return true;
+        rQueue.add(request);
     }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        if (requestCode == REQUEST_ID_MULTIPLE_PERMISSIONS) {
-            floatingActionButton.performClick();
-        }
+    public String imageToString(Bitmap bitmap){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return imageString;
     }
-
 
 }
 
