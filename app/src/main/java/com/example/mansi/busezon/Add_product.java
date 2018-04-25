@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -16,7 +17,7 @@ import com.roughike.bottombar.OnTabSelectListener;
 
 public class Add_product extends AppCompatActivity {
     private EditText productName;
-
+    private TextView select_photos ;
 
     @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,6 @@ public class Add_product extends AppCompatActivity {
 
             ab.setDisplayHomeAsUpEnabled(true);
             productName=(EditText)findViewById(R.id.productName);
-
             BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
             bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
                 @Override
@@ -46,8 +46,8 @@ public class Add_product extends AppCompatActivity {
                     }
                 }
             });
-            TextView add = (TextView) findViewById(R.id.btn);
-            add.setOnClickListener(new View.OnClickListener() {
+            select_photos = (TextView) findViewById(R.id.btn);
+            select_photos.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     //create intent to open the activity

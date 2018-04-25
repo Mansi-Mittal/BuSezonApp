@@ -20,11 +20,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".MainActivity">
+
         </activity>
         <activity
             android:name=".HomeActivity"
             android:label="BuSezon"
             android:parentActivityName=".SELL_BUY">
+
             </activity>
         <activity
             android:name=".shoppingCart"
@@ -50,14 +52,21 @@
         <activity
             android:name=".SellHomepage"
             android:label="Seller Home"
-            android:parentActivityName=".SELL_BUY"></activity>
+            android:parentActivityName=".SELL_BUY">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ProductDescription"
             android:label="Product Description"
             android:parentActivityName=".SellHomepage"></activity>
         <activity
             android:name=".SELL_BUY"
-            android:label="Sell/buy"></activity>
+            android:label="Sell/buy">
+        </activity>
         <activity
             android:name=".SELL"
             android:label="Sell"></activity>
@@ -77,11 +86,7 @@
             android:name=".select_photos"
             android:label="Select Product Images"
             android:parentActivityName=".Add_product">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
             android:parentActivityName=".Add_product" />

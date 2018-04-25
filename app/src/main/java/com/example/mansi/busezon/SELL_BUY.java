@@ -62,6 +62,7 @@ public class SELL_BUY extends AppCompatActivity {
                         startActivity(SELLintent);
                     }
                 });
+
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override

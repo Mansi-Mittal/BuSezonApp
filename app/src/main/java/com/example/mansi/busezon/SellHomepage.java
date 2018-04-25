@@ -12,17 +12,10 @@ import android.widget.ImageView;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
-import android.widget.TextView;
-
 
 public class SellHomepage extends AppCompatActivity {
 
-    TextView display = findViewById(R.id.json);
-    public static final String LOG_TAG = SellHomepage.class.getSimpleName();
 
-    /** URL to query the USGS dataset for earthquake information */
-    private static final String USGS_REQUEST_URL =
-            "https://192.168.43.183/products/1";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +40,7 @@ public class SellHomepage extends AppCompatActivity {
         Prod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Intent i = new Intent(getApplicationContext(), Add_product.class);
+                Intent i = new Intent(getApplicationContext(), select_photos.class);
                 startActivity(i);
             }
         });

@@ -103,6 +103,7 @@ public class select_photos extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     String Response = jsonObject.getString("response");
                     Toast.makeText(select_photos.this, Response, Toast.LENGTH_LONG).show();
+                    //image.setImageURI(Response);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

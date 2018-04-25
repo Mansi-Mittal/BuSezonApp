@@ -48,14 +48,14 @@ public class ProductDesc extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
 
-        Button Prod=(Button)findViewById(R.id.editBtn);
+        /*Button Prod=(Button)findViewById(R.id.editBtn);
         Prod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 Intent i = new Intent(getApplicationContext(), Add_product.class);
                 startActivity(i);
             }
-        });
+        });*/
 
         rq= Volley.newRequestQueue(this);
         sendJsonRequest();
