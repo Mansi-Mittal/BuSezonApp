@@ -19,7 +19,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
@@ -30,12 +30,11 @@ dependencies {
     api 'com.android.support:support-vector-drawable:26.1.0'
     api 'com.android.support:design:26.1.0'
     api 'me.relex:circleindicator:1.2.2@aar'
-
     api 'com.google.firebase:firebase-core:12.0.0'
     api 'com.google.firebase:firebase-auth:12.0.0'
     api 'com.google.firebase:firebase-database:12.0.0'
     api 'com.google.android.gms:play-services-auth:12.0.0'
-
     implementation project(path: ':multipleimagepickerlibrary')
+    implementation files('login-with-amazon-sdk.jar')
 }
 apply plugin: 'com.google.gms.google-services'
