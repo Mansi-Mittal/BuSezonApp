@@ -3,23 +3,28 @@ package com.example.mansi.busezon;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.annotation.IdRes;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mansi.busezon.data.dbContract;
 import com.example.mansi.busezon.data.dbHelper;
 import com.google.firebase.auth.FirebaseAuth;
-import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnTabSelectListener;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class profile_page extends AppCompatActivity {
+    private static int RESULT_LOAD_IMAGE = 1;
 
     private TextView profileName,profileEmail,profilePhoneno,profileAddress;
     private  dbHelper mDbHelper;
@@ -28,6 +33,20 @@ public class profile_page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
+        Button buttonLoadImage = (Button) findViewById(R.id.buttonLoadPicture);
+        buttonLoadImage.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                Intent i = new Intent(
+                        Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                startActivityForResult(i, RESULT_LOAD_IMAGE);
+            }
+        });
+
         try {
             profileName = findViewById(R.id.profile_name);
             profileEmail = findViewById(R.id.profile_email);
@@ -43,20 +62,7 @@ public class profile_page extends AppCompatActivity {
             ActionBar ab = getSupportActionBar();
 
             ab.setDisplayHomeAsUpEnabled(true);
-            BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-            bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
-                @Override
-                public void onTabSelected(@IdRes int tabId) {
-                    if (tabId == R.id.tab_wishList) {
-                        Intent i = new Intent(getApplicationContext(), WishlistActivity.class);
-                        startActivity(i);
-                    } else if (tabId == R.id.tab_profile) {
-                        Intent i = new Intent(getApplicationContext(), profile_page.class);
-                        startActivity(i);
-                    }
 
-                }
-            });
             Button Wishlist = (Button) findViewById(R.id.wishlist);
             Wishlist.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -69,6 +75,30 @@ public class profile_page extends AppCompatActivity {
         catch (Exception e)
         {
             Toast.makeText(profile_page.this,e.getMessage(),Toast.LENGTH_LONG).show();
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+            Uri imageUri = data.getData();
+            InputStream imageStream = null;
+            try {
+                imageStream = getContentResolver().openInputStream(imageUri);
+                ImageView imageView = (ImageView) findViewById(R.id.imgView);
+                imageView.setImageBitmap(BitmapFactory.decodeStream(imageStream));
+            } catch (FileNotFoundException e) {
+                // Handle the error
+            } finally {
+                if (imageStream != null) {
+                    try {
+                        imageStream.close();
+                    } catch (IOException e) {
+                        // Ignore the exception
+                    }
+                }
+            }
         }
     }
     void PutValuesInFields() {
