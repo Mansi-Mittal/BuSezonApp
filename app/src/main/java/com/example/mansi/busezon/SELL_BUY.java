@@ -5,11 +5,15 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +33,7 @@ import com.roughike.bottombar.OnTabSelectListener;
 public class SELL_BUY extends AppCompatActivity {
     private  dbHelper mDbHelper;
     private  String User_Id;
+    private DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +41,32 @@ public class SELL_BUY extends AppCompatActivity {
                 // Set the content of the activity to use the activity_main.xml layout file
                 setContentView(R.layout.activity_sell__buy);
 
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        // set item as selected to persist highlight
+                        menuItem.setChecked(true);
+                        // close drawer when item is tapped
+                        mDrawerLayout.closeDrawers();
+
+                        // Add code here to update the UI based on the item selected
+                        // For example, swap UI fragments here
+
+                        return true;
+                    }
+                });
+
+
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
+        ab.setHomeAsUpIndicator(R.drawable.ic_menu_white_18dp);
 //        Toast.makeText(SELL_BUY.this, "hi!!", Toast.LENGTH_SHORT).show();
 
                 TextView BUY= (TextView) findViewById(R.id.buy);
@@ -81,7 +108,18 @@ public class SELL_BUY extends AppCompatActivity {
             }
         });
         check();
-            }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public void sendMessage(View view)
     {
         Intent intent = new Intent(SELL_BUY.this, profile_page.class);
@@ -234,5 +272,5 @@ public class SELL_BUY extends AppCompatActivity {
         }
     }
 
-        }
+}
 

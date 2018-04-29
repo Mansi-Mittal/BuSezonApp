@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <group android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_women"
+                android:title="WOMEN" />
+            <item
+                android:id="@+id/nav_men"
+                android:title="MEN" />
+            <item
+                android:id="@+id/nav_account"
+                android:title="MY ACCOUNT" />
+            <item
+                android:id="@+id/nav_bag"
+                android:title="MY BAG" />
 
+        </group>
 </menu>

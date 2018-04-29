@@ -3,12 +3,18 @@ package com.example.mansi.busezon;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -87,14 +93,35 @@ public class MainActivity extends AppCompatActivity {
             //ActionBar ab = getSupportActionBar();
             // ab.setDisplayHomeAsUpEnabled(true);
 
-            Button SignUp = (Button) findViewById(R.id.signup);
-            SignUp.setOnClickListener(new View.OnClickListener() {
+
+            SpannableString ss = new SpannableString("New to BuSeZon? SignUp Now");
+            ClickableSpan clickableSpan = new ClickableSpan() {
                 @Override
-                public void onClick(View arg0) {
-                    Intent i = new Intent(getApplicationContext(), SigningUpActivity.class);
-                    startActivity(i);
+                public void onClick(View textView) {
+                    startActivity(new Intent(MainActivity.this, SigningUpActivity.class));
                 }
-            });
+                @Override
+                public void updateDrawState(TextPaint ds) {
+                    super.updateDrawState(ds);
+                    ds.setUnderlineText(false);
+                }
+            };
+            ss.setSpan(clickableSpan, 16, 26, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            TextView SingInView = (TextView) findViewById(R.id.signin_info);
+            SingInView.setText(ss);
+            SingInView.setMovementMethod(LinkMovementMethod.getInstance());
+            SingInView.setHighlightColor(Color.TRANSPARENT);
+
+
+//            Button SignUp = (Button) findViewById(R.id.signup);
+//            SignUp.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View arg0) {
+//                    Intent i = new Intent(getApplicationContext(), SigningUpActivity.class);
+//                    startActivity(i);
+//                }
+//            });
 
             buttonlogin = (Button) findViewById(R.id.login);
             progressDialog = new ProgressDialog(this);

@@ -15,12 +15,13 @@
         android:allowBackup="true"
         android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
-        android:largeHeap="true"
         android:label="BuSeZon"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,75 +29,76 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.amazon.identity.auth.device.workflow.WorkflowActivity"
-            android:theme="@android:style/Theme.NoDisplay"
+        <activity
+            android:name="com.amazon.identity.auth.device.workflow.WorkflowActivity"
             android:allowTaskReparenting="true"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.NoDisplay">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
                 <!-- android:host must use the full package name found in Manifest General Attributes -->
-                <data android:host="com.example.mansi.busezon" android:scheme="amzn"/>
+                <data
+                    android:host="com.example.mansi.busezon"
+                    android:scheme="amzn" />
             </intent-filter>
         </activity>
         <activity
             android:name=".HomeActivity"
             android:label="BuSezon"
-            android:parentActivityName=".SELL_BUY"></activity>
+            android:parentActivityName=".SELL_BUY" />
         <activity
             android:name=".shoppingCart"
             android:label="Shopping Cart"
-            android:parentActivityName=".HomeActivity"></activity>
+            android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".ProductDesc"
             android:label=""
-            android:parentActivityName=".SellHomepage"></activity>
+            android:parentActivityName=".SellHomepage" />
         <activity
             android:name=".SigningUpActivity"
-            android:label="Signup"></activity>
+            android:label="Signup" />
         <activity
             android:name=".WishlistActivity"
             android:label="WishList"
-            android:parentActivityName=".profile_page"></activity>
+            android:parentActivityName=".profile_page" />
         <activity
             android:name=".ClothingPage"
-            android:label="Clothing"></activity>
+            android:label="Clothing" />
         <activity
             android:name=".SellHomepage"
             android:label="Seller Home"
-            android:parentActivityName=".SELL_BUY"></activity>
+            android:parentActivityName=".SELL_BUY" />
         <activity
             android:name=".ProductDescription"
             android:label="Product Description"
-            android:parentActivityName=".SellHomepage"></activity>
+            android:parentActivityName=".SellHomepage" />
         <activity
             android:name=".SELL_BUY"
-            android:label="Sell/buy"></activity>
+            android:label="Sell/buy" />
         <activity
             android:name=".SELL"
-            android:label="Sell"></activity>
+            android:label="Sell" />
         <activity
             android:name=".BUY"
             android:label="Sell"
-            android:parentActivityName=".SELL_BUY"></activity>
+            android:parentActivityName=".SELL_BUY" />
         <activity
             android:name=".profile_page"
             android:label="Profile"
-            android:parentActivityName=".SELL_BUY"></activity>
+            android:parentActivityName=".SELL_BUY" />
         <activity
             android:name=".Add_product"
             android:label="Add new product"
-            android:parentActivityName=".SellHomepage"></activity>
+            android:parentActivityName=".SellHomepage" />
         <activity
             android:name=".select_photos"
             android:label="Select Product Images"
-            android:parentActivityName=".Add_product">
-
-        </activity>
-
-            android:parentActivityName=".Add_product" />
-        <activity android:name=".GoogleSignInInformation"></activity>
+            android:parentActivityName=".Add_product"></activity>
+        android:parentActivityName=".Add_product" />
+        <activity android:name=".GoogleSignInInformation" />
     </application>
 
 </manifest>
