@@ -53,11 +53,7 @@
             android:name=".SellHomepage"
             android:label="Seller Home"
             android:parentActivityName=".SELL_BUY">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ProductDescription"
@@ -81,15 +77,16 @@
         <activity
             android:name=".Add_product"
             android:label="Add new product"
-            android:parentActivityName=".SellHomepage"></activity>
-        <activity
-            android:name=".select_photos"
-            android:label="Select Product Images"
-            android:parentActivityName=".Add_product">
+            android:parentActivityName=".SellHomepage">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        </activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity><![CDATA[
 
             android:parentActivityName=".Add_product" />
+        ]]>
         <activity android:name=".GoogleSignInInformation"></activity>
 
 

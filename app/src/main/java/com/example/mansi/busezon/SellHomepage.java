@@ -40,7 +40,7 @@ public class SellHomepage extends AppCompatActivity {
         Prod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Intent i = new Intent(getApplicationContext(), select_photos.class);
+                Intent i = new Intent(getApplicationContext(), Add_product.class);
                 startActivity(i);
             }
         });
