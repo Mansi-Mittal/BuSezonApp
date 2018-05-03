@@ -2,6 +2,7 @@ package com.example.mansi.busezon;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,7 +11,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -18,10 +21,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.haresh.multipleimagepickerlibrary.models.Image;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 
 import me.relex.circleindicator.CircleIndicator;
@@ -34,12 +42,13 @@ public class ProductDesc extends AppCompatActivity {
     private ArrayList<Integer> XMENArray = new ArrayList<>();
     RequestQueue rq ;
     TextView prodName, price;
-    String url = "http://192.168.1.6:3000/products/7";
+    String url = "http://192.168.1.6:3000/products/18";
+    private static ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_desc);
-        init();
+        //init();
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
@@ -61,10 +70,11 @@ public class ProductDesc extends AppCompatActivity {
         sendJsonRequest();
         prodName=(TextView)findViewById(R.id.prodName);
         price=(TextView)findViewById(R.id.price);
+        imageView=(ImageView)findViewById(R.id.imgview);
 
     }
 
-    private void init() {
+    /*private void init() {
         for(int i=0;i<XMEN.length;i++)
             XMENArray.add(XMEN[i]);
 
@@ -73,7 +83,7 @@ public class ProductDesc extends AppCompatActivity {
         CircleIndicator indicator = (CircleIndicator)findViewById(R.id.indicator);
         indicator.setViewPager(mPager);
 
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -105,6 +115,10 @@ public class ProductDesc extends AppCompatActivity {
                         try {
                             prodName.setText(response.getString("name"));
                             price.setText(response.getString("category"));
+                            String img = response.getString("IMAGE_URL");
+                            String url = "http://192.168.1.6:3000" + img;
+                            Glide.with(ProductDesc.this).load(url).into(imageView);
+                            //Toast.makeText(ProductDesc.this, url, Toast.LENGTH_SHORT).show();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
