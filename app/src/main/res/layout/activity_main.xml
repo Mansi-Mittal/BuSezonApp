@@ -16,6 +16,28 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
+    <LinearLayout android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerInParent="true">
+        <ProgressBar
+            android:id="@+id/log_in_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            style="@android:style/Widget.ProgressBar.Inverse"/>
+        <TextView
+            android:id="@+id/profile_info"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:text="@string/default_message"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
 
 
 
@@ -44,17 +66,24 @@
             android:inputType="textPersonName"
             android:textSize="20dp" />
 
-        <EditText
-            android:id="@+id/editTextloginPassword"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:ems="10"
-            android:theme="@style/EditTextStyle"
-            android:textColorHint="#9E9E9E"
-            android:hint="Password*"
-            android:textSize="20dp" />
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true">
+            <EditText
+                android:id="@+id/editTextloginPassword"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:theme="@style/EditTextStyle"
+                android:textColorHint="#9E9E9E"
+                android:hint="Password*"
+                android:textSize="20dp" />
+        </android.support.design.widget.TextInputLayout>
+
     </LinearLayout>
 
     <CheckBox
@@ -100,16 +129,38 @@
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/signup"
+        <ImageButton
+            android:id="@+id/login_with_amazon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="7dp"
-            android:layout_weight="1"
-            android:background="@drawable/pretty_button"
-            android:text="Sign-Up"
-            android:textColor="#ffffff"
-            />
+            android:layout_margin="10dp"
+            android:layout_above="@+id/signin_info"
+            android:layout_alignStart="@+id/signin_info"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/login_button_content_description"
+            android:padding="0dp"
+            android:src="@color/login_button_image_state" />
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/login_with_amazon"
+            android:id="@+id/logout"
+            android:text="@string/logout"
+            android:visibility="gone"
+            android:clickable="true"
+            android:textColor="@color/logout_text_color_state"
+            android:paddingBottom="10dp"/>
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/return_to_app"
+            android:text="@string/return_to_app"
+            android:visibility="gone"
+            android:clickable="true"
+            android:textColor="@color/logout_text_color_state"
+            android:paddingBottom="10dp"/>
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/SignUpGoogle"

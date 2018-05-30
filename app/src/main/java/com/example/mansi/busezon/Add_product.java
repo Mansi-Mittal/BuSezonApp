@@ -41,7 +41,7 @@ public class Add_product extends AppCompatActivity {
     private Button choose, upload ;
     private ImageView image;
     private final int PICK_IMAGE_REQUEST = 1;
-    String URL ="http://192.168.1.6:3000/products/new";
+    String URL ="http://172.20.10.9:3000/products/new";
     private Bitmap bitmap;
     ProgressDialog progressDialog;
     RequestQueue rQueue;

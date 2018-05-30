@@ -1,161 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.mansi.busezon.SellHomepage">
+    android:orientation="vertical">
 
-
-
-<android.support.v7.widget.Toolbar
-    android:id="@+id/my_toolbar"
-    android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:background="#009688"
-    android:elevation="4dp"
-
-    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
-
-    <ScrollView
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="#009688"
+        android:elevation="4dp"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:orientation="horizontal">
+        <GridView
+            android:id="@+id/list1"
+            android:numColumns="2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:orientation="horizontal">
-                <ImageView
-                    android:id="@+id/sellpdt1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/pdt1" />
-                <ImageView
-                    android:id="@+id/sellpdt2"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/pdt2" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:orientation="horizontal">
-                <ImageView
-                    android:id="@+id/sellpdt3"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/pdt3" />
-                <ImageView
-                    android:id="@+id/sellpdt4"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/pdt4" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:orientation="horizontal">
-                <ImageView
-                    android:id="@+id/sellpdt5"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/pdt5" />
-                <ImageView
-                    android:id="@+id/sellpdt6"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/pdt6" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:orientation="horizontal">
-                <ImageView
-                    android:id="@+id/sellpdt7"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/pdt7" />
-                <ImageView
-                    android:id="@+id/sellpdt8"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/pdt8" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:orientation="horizontal">
-                <ImageView
-                    android:id="@+id/sellpdt9"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/pdt9" />
-                <ImageView
-                    android:id="@+id/sellpdt10"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/pdt10" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-    </ScrollView>
-
-
-    <Button
-        android:id="@+id/addBtn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/roundbutton"
-        android:gravity="center_vertical|center_horizontal"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="80dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:text="ADD New"
-        android:textColor="#fff" />
-
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:paddingTop="80dp"/>
+    </GridLayout>
+    <!-- <Button
+         android:id="@+id/addBtn"
+         android:layout_width="50dp"
+         android:layout_height="50dp"
+         android:background="@drawable/roundbutton"
+         android:gravity="center_vertical|center_horizontal"
+         android:layout_marginRight="20dp"
+         android:layout_marginBottom="80dp"
+         android:layout_alignParentBottom="true"
+         android:layout_alignParentRight="true"
+         android:text="ADD New"
+         android:textColor="#fff" />
+ -->
     <com.roughike.bottombar.BottomBar
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#009688"
         android:layout_alignParentBottom="true"
+        android:background="#009688"
         app:bb_tabXmlResource="@xml/bottombar_tabs" />
 
 

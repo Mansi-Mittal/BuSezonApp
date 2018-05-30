@@ -1,43 +1,39 @@
 package com.example.mansi.busezon;
 
+import com.android.volley.toolbox.NetworkImageView;
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-
+import com.android.volley.toolbox.ImageLoader;
 import java.util.List;
 
-/**
- * Created by mansi on 21/2/18.
- */
-
 public class offersAdapter extends ArrayAdapter<offers> {
+
+    ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
     public offersAdapter(Context context, List<offers> offerList) {
         super(context, 0, offerList);
     }
 
     public View getView(int position, View convertView, ViewGroup parent){
-        View listItemView=convertView;
-        if(listItemView==null){
-            listItemView= LayoutInflater.from(getContext()).inflate(
+        if (imageLoader == null)
+            imageLoader = AppController.getInstance().getImageLoader();
+        if(convertView==null){
+            convertView= LayoutInflater.from(getContext()).inflate(
                     R.layout.offers_list_item,parent,false);
         }
+        NetworkImageView thumbNail = (NetworkImageView) convertView.findViewById(R.id.thumbnail);
 
         offers currentOffer=getItem(position);
 
-        TextView desc=(TextView)listItemView.findViewById(R.id.desc);
+        thumbNail.setImageUrl(currentOffer.getImage(), imageLoader);
+
+        TextView desc=convertView.findViewById(R.id.desc);
         String description = currentOffer.getwords();
         desc.setText(description);
-
-        ImageView img = (ImageView)listItemView.findViewById(R.id.img);
-        int image=currentOffer.getImage();
-        img.setImageResource(image);
-
-        return listItemView;
+        return convertView;
     }
 }
