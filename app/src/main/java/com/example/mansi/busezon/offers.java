@@ -8,19 +8,25 @@ import android.net.Uri;
 
 public class offers {
 
-    private int image;
+    private String image;
     private String words;
+    private int id;
 
-    public offers(int image, String words){
+    public offers(int id,String image, String words){
+        this.id = id;
         this.image=image;
         this.words=words;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
     public String getwords() {
         return words;
+    }
+
+    public int getID() {
+        return id;
     }
 }
