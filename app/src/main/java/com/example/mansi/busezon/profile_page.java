@@ -9,12 +9,21 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amazon.identity.auth.device.AuthError;
+import com.amazon.identity.auth.device.api.Listener;
+import com.amazon.identity.auth.device.api.authorization.AuthorizationManager;
+import com.amazon.identity.auth.device.api.authorization.AuthorizeRequest;
+import com.amazon.identity.auth.device.api.authorization.ProfileScope;
+import com.amazon.identity.auth.device.api.workflow.RequestContext;
+import com.amazon.identity.auth.device.datastore.DatabaseHelper;
 import com.example.mansi.busezon.data.dbContract;
 import com.example.mansi.busezon.data.dbHelper;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,6 +31,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.SQLException;
+
+import static com.example.mansi.busezon.data.dbContract.userEntry.TABLE_NAME;
 
 public class profile_page extends AppCompatActivity {
     private static int RESULT_LOAD_IMAGE = 1;
@@ -29,11 +41,76 @@ public class profile_page extends AppCompatActivity {
     private TextView profileName,profileEmail,profilePhoneno,profileAddress;
     private  dbHelper mDbHelper;
     private FirebaseAuth firebaseAuth;
+    private Button logoutButton;
+    private static final String TAG = MainActivity.class.getName();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
         Button buttonLoadImage = (Button) findViewById(R.id.buttonLoadPicture);
+        final String tokenToCheckLoginType =getIntent().getStringExtra("token");
+        String userId=getIntent().getStringExtra("Id");
+        try {
+            Button logoutButton = (Button) findViewById(R.id.logout);
+            Toast.makeText(this,"profile "+tokenToCheckLoginType+"  "+userId,Toast.LENGTH_LONG).show();
+            logoutButton.setOnClickListener(new View.OnClickListener() {
+
+               @Override
+               public void onClick(View v) {
+
+
+                   if (tokenToCheckLoginType.equals("amazon"))
+                   {
+
+                       AuthorizationManager.signOut(getApplicationContext(), new Listener<Void, AuthError>() {
+                           @Override
+                           public void onSuccess(Void response) {
+                               runOnUiThread(new Runnable() {
+                                   @Override
+                                   public void run() {
+                                       try {
+                                           Intent intent = new Intent(profile_page.this, MainActivity.class);
+//                               intent.putExtra("logout","true");
+                                           intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                           startActivity(intent);
+                                       }
+                                       catch (Exception e)
+                                       {
+                                           Toast.makeText(profile_page.this,e.getMessage(),Toast.LENGTH_LONG).show();
+                                       }
+                                   }
+                               });
+                           }
+
+                           @Override
+                           public void onError(AuthError authError) {
+//                               Log.e(TAG, "Error clearing authorization state.", authError);
+                           }
+                       });
+                    } else if (tokenToCheckLoginType.equals("google")||(tokenToCheckLoginType.equals("normal"))) {
+                        FirebaseAuth.getInstance().signOut();
+                       Intent intent=new Intent(profile_page.this,MainActivity.class);
+//                               intent.putExtra("logout","true");
+                       intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                       startActivity(intent);
+                    }
+
+//                   Toast.makeText(profile_page.this, "done", Toast.LENGTH_LONG).show();
+//                    finish();
+               }
+//                    globalVariables.setTokenToCheckLoginType("null");
+//            }
+//
+            });
+        }
+
+        catch (Exception e)
+        {
+            Toast.makeText(profile_page.this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
         buttonLoadImage.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -77,6 +154,13 @@ public class profile_page extends AppCompatActivity {
             Toast.makeText(profile_page.this,e.getMessage(),Toast.LENGTH_LONG).show();
         }
     }
+    public void removeAll()throws SQLException {
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        db.execSQL ("drop table "+TABLE_NAME);
+        db.close ();
+        db.execSQL("create table "+TABLE_NAME);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -104,7 +188,7 @@ public class profile_page extends AppCompatActivity {
     void PutValuesInFields() {
         mDbHelper = new dbHelper(this);
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
-        String Query = "Select * from " + dbContract.userEntry.TABLE_NAME;
+        String Query = "Select * from " + TABLE_NAME;
         Cursor cursor = db.rawQuery(Query, null);
         if (cursor.getCount() <= 0) {
             cursor.close();

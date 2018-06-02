@@ -18,6 +18,7 @@
     <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
+    <item name="visible" type="id"/>
+    <item name="masked" type="id"/>
 </resources>
 

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
@@ -20,7 +19,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -80,12 +78,15 @@ public class MainActivity extends AppCompatActivity {
     private GoogleApiClient googleApiClient;
     private GoogleSignInClient mGoogleSignInClient;
     private DatabaseReference databaseReference;
-    private String user_Id;
-
+    private String user_Id,user_Name;
+    private String tokenToCheckLoginType;
+    private String logoutToken;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        tokenToCheckLoginType="null";
+//        logoutToken="false";
+        user_Name="";
         setContentView(R.layout.activity_main);
         try {
             Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -147,12 +148,24 @@ public class MainActivity extends AppCompatActivity {
 
 
 //login with amazon
+
+//            logoutToken=getIntent().getStringExtra("logout");
+//            if(logoutToken.equals("true"))
+//            {
+//                Toast.makeText(this,"logout done",Toast.LENGTH_LONG).show();
+//            }
+
+
             requestContext = RequestContext.create(this);
+
+
 //ImageButton amazonlogin=(ImageButton)findViewById(R.id.login_with_amazon);
 //amazonlogin.setOnClickListener(new View.OnClickListener() {
 //    @Override
 //    public void onClick(View view) {
 //       // registerUserAmazon();
+
+
 
                requestContext.registerListener(new AuthorizeListener() {
                         /* Authorization was completed successfully. */
@@ -190,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
 //                        @Override
 //                        public void run() {
 //                            showAuthToast("Authorization cancelled");
-                           resetProfileView();
+                           resetProfileView(false);
 //                        }
 //                    });
                         }
@@ -219,7 +232,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void fetchUserProfile() {
         try {
-
+            tokenToCheckLoginType="amazon";
             User.fetch(this, new Listener<User, AuthError>() {
 
                 /* fetch completed successfully. */
@@ -235,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
                         public void run()
                         {
                                 String id = updateProfileData(name, email, account, zipCode);
-                                startIntent(name, email,id);
+
                         }
                     });
                 }
@@ -274,8 +287,9 @@ public class MainActivity extends AppCompatActivity {
         ............................STORE USER DATA INTO FIREBASE.......................................
 
          */
-try
-{
+
+    try
+    {
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
     rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
         @Override
@@ -292,8 +306,10 @@ try
                     break;
                 }
             }
-            if (f == 1) {
-                Toast.makeText(MainActivity.this, " user details added", Toast.LENGTH_LONG).show();
+            if (f == 1)
+            {
+                Toast.makeText(MainActivity.this, " user details added ", Toast.LENGTH_LONG).show();
+                startIntent(name, email,user_Id);
             }
             else {
                 // User not present in db store it with amazon account
@@ -301,6 +317,7 @@ try
                 user_Id = account.replace("amzn1.account.", "");
                 databaseReference.child(user_Id).setValue(userInformation);
                 Toast.makeText(MainActivity.this, "  user details added", Toast.LENGTH_LONG).show();
+                startIntent(name, email,user_Id);
                 f = 1;
 
             }
@@ -329,6 +346,8 @@ private void startIntent(String name,String email,String id)
     i.putExtra("Email", email);
     //Toast.makeText(MainActivity.this, id+"    user", Toast.LENGTH_LONG).show();
     i.putExtra("Id",id);
+    i.putExtra("token",tokenToCheckLoginType);
+//    Toast.makeText(MainActivity.this,tokenToCheckLoginType+"   "+id, Toast.LENGTH_LONG).show();
     startActivity(i);
 }
 
@@ -407,8 +426,9 @@ private void startIntent(String name,String email,String id)
     /**
      * Sets the text in the mProfileText {@link TextView} to the prompt it originally displayed.
      */
-    private void resetProfileView() {
-        setLoggingInState(false);
+    private void resetProfileView(Boolean a)
+    {
+        setLoggingInState(a);
         mProfileText.setText(getString(R.string.default_message));
     }
 
@@ -429,7 +449,7 @@ private void startIntent(String name,String email,String id)
         mLoginButton.setVisibility(Button.VISIBLE);
         setLoggedInButtonsVisibility(Button.GONE);
         mIsLoggedIn = false;
-        resetProfileView();
+        resetProfileView(false);
     }
 
     /**
@@ -477,7 +497,8 @@ private void startIntent(String name,String email,String id)
 
     private void loginclick(View view)
     {
-        String Email=email.getText().toString().trim();
+        tokenToCheckLoginType="normal";
+        final String Email=email.getText().toString().trim();
         String Password=password.getText().toString().trim();
         if(TextUtils.isEmpty(Email))
         {
@@ -497,25 +518,36 @@ private void startIntent(String name,String email,String id)
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressDialog.dismiss();
-                if(task.isSuccessful())
-                {
-                    String userId=firebaseAuth.getCurrentUser().getUid();
-                    Toast.makeText(MainActivity.this,"Logged in Successfully",Toast.LENGTH_SHORT).show();
-                    Intent i=new Intent(getApplicationContext(),SELL_BUY.class);
-                    i.putExtra("Id",userId);
-                    startActivity(i);
-                }
-                else
-                {
-                    Toast.makeText(MainActivity.this,"Try again",Toast.LENGTH_SHORT).show();
+                if (task.isSuccessful()) {
+                    try {
+                        String userId=firebaseAuth.getCurrentUser().getUid();
+                        Toast.makeText(MainActivity.this,"Logged in Successfully",Toast.LENGTH_SHORT).show();
+                        Intent i=new Intent(getApplicationContext(),SELL_BUY.class);
+                        i.putExtra("Id",userId);
+                        i.putExtra("token",tokenToCheckLoginType);
+                        i.putExtra("Email",Email);
+//                        Toast.makeText(MainActivity.this,userId+" "+tokenToCheckLoginType+" "+Email,Toast.LENGTH_SHORT).show();
+                        startActivity(i);
+
+                    } catch (Exception e) {
+                        Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(MainActivity.this, "Try again", Toast.LENGTH_SHORT).show();
+                    return;
                 }
             }
         });
-    }
+
+        }
+
+
+
     //SIGNIN WITH GOOGLE
     @SuppressLint("RestrictedApi")
     public void registerUserGoogle()
     {
+        tokenToCheckLoginType="google";
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -617,6 +649,7 @@ private void startIntent(String name,String email,String id)
     }
     private void check(final String userId,final String Name,final String Email)
     {
+//        Toast.makeText(MainActivity.this,tokenToCheckLoginType, Toast.LENGTH_LONG).show();
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -630,6 +663,7 @@ private void startIntent(String name,String email,String id)
                         i.putExtra("Name", Name);
                         i.putExtra("Email", Email);
                         i.putExtra("Id", userId);
+                        i.putExtra("token",tokenToCheckLoginType);
                         startActivity(i);
                         f=0;
                     }
@@ -640,9 +674,11 @@ private void startIntent(String name,String email,String id)
                     i.putExtra("Name", Name);
                     i.putExtra("Email", Email);
                     i.putExtra("Id", userId);
+                    i.putExtra("token",tokenToCheckLoginType);
                     progressDialog.dismiss();
                     startActivity(i);
                 }
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {}

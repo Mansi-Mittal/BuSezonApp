@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -52,4 +54,21 @@ public class WishlistActivity extends AppCompatActivity {
             }
         });
     }
+//    public void startChat(View view)
+//    {
+//        try {
+//            TextView seller_name=(TextView)findViewById(R.id.sellerName);
+//            String sellerName= (String) seller_name.getText();
+//            Chat_UserDetails.chatWith =sellerName;
+//            String loginUser=getIntent().getStringExtra("User_Name");
+//            Chat_UserDetails.username=loginUser;
+////            Toast.makeText(WishlistActivity.this,Chat_UserDetails.chatWith+" "+Chat_UserDetails.username,Toast.LENGTH_LONG).show();
+//            Intent intent = new Intent(WishlistActivity.this, Chat_Message_Acitivty.class);
+//           startActivity(intent);
+//        }
+//        catch (Exception e)
+//        {
+//            Toast.makeText(this,e.getMessage(),Toast.LENGTH_LONG).show();
+//        }
+//    }
 }
