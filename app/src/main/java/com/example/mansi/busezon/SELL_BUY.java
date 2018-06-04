@@ -1,17 +1,16 @@
 package com.example.mansi.busezon;
 
-import android.app.Application;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,19 +19,17 @@ import android.widget.Toast;
 
 import com.example.mansi.busezon.data.dbContract;
 import com.example.mansi.busezon.data.dbHelper;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
 public class SELL_BUY extends AppCompatActivity {
     private  dbHelper mDbHelper;
-    private  String User_Id;
+    public  String User_Id;
     private DrawerLayout mDrawerLayout;
 
     @Override
@@ -90,18 +87,18 @@ public class SELL_BUY extends AppCompatActivity {
                         startActivity(SELLintent);
                     }
                 });
+
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
                 if (tabId == R.id.tab_wishList) {
-                    Intent i=new Intent(getApplicationContext(),WishlistActivity.class);
+                    Intent i = new Intent(getApplicationContext(), WishlistActivity.class);
                     startActivity(i);
                 }
                 else if (tabId == R.id.tab_profile) {
                     Intent i = new Intent(getApplicationContext(), profile_page.class);
-                    if(!User_Id.equals(""))
-                        i.putExtra("UserId",User_Id);
+                    i.putExtra("Id",User_Id);
                     startActivity(i);
                 }
 
@@ -117,7 +114,24 @@ public class SELL_BUY extends AppCompatActivity {
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
-        return super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case R.id.action_cart:
+                Intent i=new Intent(this,shoppingCart.class);
+                startActivity(i);
+                return true;
+
+            case R.id.action_search:
+                // User chose the "Favorite" action, mark the current item
+                // as a favorite...
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+
     }
 
     public void sendMessage(View view)
@@ -271,6 +285,7 @@ public class SELL_BUY extends AppCompatActivity {
         //    Toast.makeText(this, "user saved " + newRowId, Toast.LENGTH_SHORT).show();
         }
     }
+
 
 }
 

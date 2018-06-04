@@ -19,8 +19,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.mansi.busezon.SELL_BUY"
-        >
+        tools:context="com.example.mansi.busezon.SELL_BUY">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/my_toolbar"

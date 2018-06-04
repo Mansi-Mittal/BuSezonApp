@@ -33,8 +33,7 @@ public class WishlistActivity extends AppCompatActivity {
                 if (tabId == R.id.tab_wishList) {
                     Intent i = new Intent(getApplicationContext(), WishlistActivity.class);
                     startActivity(i);
-                }
-                else if (tabId == R.id.tab_profile) {
+                } else if (tabId == R.id.tab_profile) {
                     Intent i = new Intent(getApplicationContext(), profile_page.class);
                     startActivity(i);
                 }
@@ -43,13 +42,19 @@ public class WishlistActivity extends AppCompatActivity {
             }
         });
 
-        Button profile=(Button)findViewById(R.id.Profile);
+        Button profile = (Button) findViewById(R.id.Profile);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Intent i = new Intent(getApplicationContext(), profile_page.class);
-                startActivity(i);
+                sendMessage();
             }
         });
     }
+
+    private void sendMessage() {
+        Intent intent = new Intent(WishlistActivity.this, profile_page.class);
+        startActivity(intent);
+    }
+
+
 }

@@ -38,10 +38,10 @@ public class HomeActivity extends AppCompatActivity {
 
         ArrayList<offers> offersList=new ArrayList<>();
         //offersList.add(new offers(R.drawable.img1,"Great discounts"));
-        offersList.add(new offers(R.drawable.img2,"Great discounts"));
-        offersList.add(new offers(R.drawable.img3,"Great discounts"));
-        offersList.add(new offers(R.drawable.img4,"Great discounts"));
-        offersList.add(new offers(R.drawable.img5,"Great discounts"));
+        //offersList.add(new offers(R.drawable.img2,"Great discounts"));
+        //offersList.add(new offers(R.drawable.img3,"Great discounts"));
+        //offersList.add(new offers(R.drawable.img4,"Great discounts"));
+        //offersList.add(new offers(R.drawable.img5,"Great discounts"));
 
         ListView offersListView = (ListView) findViewById(R.id.list);
 
@@ -120,7 +120,5 @@ public class HomeActivity extends AppCompatActivity {
 
         }
     }
-
-
 
 }
