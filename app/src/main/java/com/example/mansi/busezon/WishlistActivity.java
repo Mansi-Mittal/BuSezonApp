@@ -40,7 +40,16 @@ public class WishlistActivity extends AppCompatActivity {
                     Intent i = new Intent(getApplicationContext(), profile_page.class);
                     startActivity(i);
                 }
-
+                else if (tabId == R.id.tab_chat) {
+                    try {
+                        Intent i = new Intent(WishlistActivity.this, Chat_UsersList_Activity.class);
+                        i.putExtra("user", UserInformation.UserId);
+                        i.putExtra("User_Name", UserInformation.name);
+                        startActivity(i);
+                    } catch (Exception e) {
+                        Toast.makeText(WishlistActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }
 
             }
         });

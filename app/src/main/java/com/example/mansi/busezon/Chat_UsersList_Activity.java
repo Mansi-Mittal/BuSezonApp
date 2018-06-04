@@ -38,7 +38,7 @@ String loginUser;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_userlist);
         Intent intent=getIntent();
-        loginUser= getIntent().getStringExtra("User_Name");
+        loginUser= UserInformation.name;
 
         usersList = (ListView) findViewById(R.id.usersList);
         noUsersText = (TextView) findViewById(R.id.noUsersText);

@@ -79,13 +79,9 @@ public class MainActivity extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private DatabaseReference databaseReference;
     private String user_Id,user_Name;
-    private String tokenToCheckLoginType;
-    private String logoutToken;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        tokenToCheckLoginType="null";
-//        logoutToken="false";
         user_Name="";
         setContentView(R.layout.activity_main);
         try {
@@ -232,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void fetchUserProfile() {
         try {
-            tokenToCheckLoginType="amazon";
+            UserInformation.token="amazon";
             User.fetch(this, new Listener<User, AuthError>() {
 
                 /* fetch completed successfully. */
@@ -346,8 +342,10 @@ private void startIntent(String name,String email,String id)
     i.putExtra("Email", email);
     //Toast.makeText(MainActivity.this, id+"    user", Toast.LENGTH_LONG).show();
     i.putExtra("Id",id);
-    i.putExtra("token",tokenToCheckLoginType);
 //    Toast.makeText(MainActivity.this,tokenToCheckLoginType+"   "+id, Toast.LENGTH_LONG).show();
+    UserInformation.name=name;
+    UserInformation.email=email;
+    UserInformation.UserId=id;
     startActivity(i);
 }
 
@@ -497,7 +495,7 @@ private void startIntent(String name,String email,String id)
 
     private void loginclick(View view)
     {
-        tokenToCheckLoginType="normal";
+       UserInformation.token="normal";
         final String Email=email.getText().toString().trim();
         String Password=password.getText().toString().trim();
         if(TextUtils.isEmpty(Email))
@@ -524,8 +522,10 @@ private void startIntent(String name,String email,String id)
                         Toast.makeText(MainActivity.this,"Logged in Successfully",Toast.LENGTH_SHORT).show();
                         Intent i=new Intent(getApplicationContext(),SELL_BUY.class);
                         i.putExtra("Id",userId);
-                        i.putExtra("token",tokenToCheckLoginType);
                         i.putExtra("Email",Email);
+
+                        UserInformation.email=Email;
+                        UserInformation.UserId=userId;
 //                        Toast.makeText(MainActivity.this,userId+" "+tokenToCheckLoginType+" "+Email,Toast.LENGTH_SHORT).show();
                         startActivity(i);
 
@@ -547,7 +547,7 @@ private void startIntent(String name,String email,String id)
     @SuppressLint("RestrictedApi")
     public void registerUserGoogle()
     {
-        tokenToCheckLoginType="google";
+       UserInformation.token="google";
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -660,10 +660,9 @@ private void startIntent(String name,String email,String id)
                     String id = ds.getKey();
                     if (userId.equals(id)) {
                         Intent i=new Intent(MainActivity.this,SELL_BUY.class);
-                        i.putExtra("Name", Name);
-                        i.putExtra("Email", Email);
-                        i.putExtra("Id", userId);
-                        i.putExtra("token",tokenToCheckLoginType);
+                        UserInformation.name=Name;
+                        UserInformation.email=Email;
+                        UserInformation.UserId=userId;
                         startActivity(i);
                         f=0;
                     }
@@ -674,7 +673,9 @@ private void startIntent(String name,String email,String id)
                     i.putExtra("Name", Name);
                     i.putExtra("Email", Email);
                     i.putExtra("Id", userId);
-                    i.putExtra("token",tokenToCheckLoginType);
+                    UserInformation.name=Name;
+                    UserInformation.email=Email;
+                    UserInformation.UserId=userId;
                     progressDialog.dismiss();
                     startActivity(i);
                 }

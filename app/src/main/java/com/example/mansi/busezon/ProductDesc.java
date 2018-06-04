@@ -153,7 +153,7 @@ public class ProductDesc extends AppCompatActivity {
             TextView seller_name=(TextView)findViewById(R.id.sellerName);
             String sellerName= (String) seller_name.getText();
             Chat_UserDetails.chatWith =sellerName;
-            String loginUser=getIntent().getStringExtra("User_Name");
+            String loginUser=UserInformation.name;
             Chat_UserDetails.username=loginUser;
 //            Toast.makeText(WishlistActivity.this,Chat_UserDetails.chatWith+" "+Chat_UserDetails.username,Toast.LENGTH_LONG).show();
             Intent intent = new Intent(ProductDesc.this, Chat_Message_Acitivty.class);

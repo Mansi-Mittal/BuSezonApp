@@ -49,8 +49,10 @@ public class SELL_BUY extends AppCompatActivity {
                 setContentView(R.layout.activity_sell__buy);
 
     mDrawerLayout = findViewById(R.id.drawer_layout);
-    User_Id = getIntent().getStringExtra("Id");
-    token = getIntent().getStringExtra("token");
+//    User_Id = getIntent().getStringExtra("Id");
+//    UserInformation.email=getIntent().getStringExtra("Email");
+        User_Id=UserInformation.UserId;
+    token=UserInformation.token;
         try {
             check();
         }
@@ -58,7 +60,8 @@ public class SELL_BUY extends AppCompatActivity {
         {
             Toast.makeText(SELL_BUY.this,e.getMessage(),Toast.LENGTH_LONG).show();
         }
-    User_Name = getIntent().getStringExtra("Name");
+        User_Name =UserInformation.name;
+//        Toast.makeText(SELL_BUY.this,UserInformation.UserId+" "+UserInformation.email+" "+UserInformation.name,Toast.LENGTH_LONG).show();
 //        FirebaseUser firebaseUser=firebaseAuth.getCurrentUser();
 //        if(firebaseUser!=null)
 //        {
@@ -129,7 +132,7 @@ try {
 
 //                    Toast.makeText(SELL_BUY.this,User_Id, Toast.LENGTH_LONG).show();
 //                    if(!User_Id.equals("")) {
-                i.putExtra("UserId", User_Id);
+//                i.putExtra("UserId", User_Id);
 //                       Toast.makeText(SELL_BUY.this,token+"   "+User_Id, Toast.LENGTH_LONG).show();
                 i.putExtra("token", token);
 //                    }
@@ -186,8 +189,7 @@ catch (Exception e)
 //        demoRef.push().setValue(value);
 //            Toast.makeText(SELL_BUY.this, "hi!", Toast.LENGTH_SHORT).show();
             rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                String EmailIntent = getIntent().getStringExtra("Email");
-
+                String EmailIntent = UserInformation.email;
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
