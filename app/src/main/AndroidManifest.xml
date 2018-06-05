@@ -86,6 +86,7 @@
             android:name=".Add_product"
             android:label="Add new product"
             android:parentActivityName=".SellHomepage">
+
         </activity>
         <activity android:name=".GoogleSignInInformation"></activity>
         <activity android:name=".Chat_Message_Acitivty"></activity>
