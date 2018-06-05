@@ -15,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -75,6 +76,17 @@ public class HomeActivity extends AppCompatActivity {
                     Intent i = new Intent(getApplicationContext(), profile_page.class);
                     startActivity(i);
                 }
+                else if (tabId == R.id.tab_chat) {
+                    try {
+                        Intent i = new Intent(HomeActivity.this, Chat_UsersList_Activity.class);
+                        i.putExtra("user", UserInformation.UserId);
+                        i.putExtra("User_Name", UserInformation.name);
+                        startActivity(i);
+                    } catch (Exception e) {
+                        Toast.makeText(HomeActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }
+
 
             }
         });
@@ -194,6 +206,5 @@ public class HomeActivity extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(jsonObjectRequest);
     }
     }
-
 
 

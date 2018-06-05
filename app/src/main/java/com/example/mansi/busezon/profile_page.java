@@ -9,25 +9,19 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amazon.identity.auth.device.AuthError;
 import com.amazon.identity.auth.device.api.Listener;
 import com.amazon.identity.auth.device.api.authorization.AuthorizationManager;
-import com.amazon.identity.auth.device.api.authorization.AuthorizeRequest;
-import com.amazon.identity.auth.device.api.authorization.ProfileScope;
-import com.amazon.identity.auth.device.api.workflow.RequestContext;
-import com.amazon.identity.auth.device.datastore.DatabaseHelper;
-import com.example.mansi.busezon.data.dbContract;
 import com.example.mansi.busezon.data.dbHelper;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -40,12 +34,12 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.sql.SQLException;
 
+import static com.android.volley.Request.Method.HEAD;
 import static com.example.mansi.busezon.data.dbContract.userEntry.TABLE_NAME;
+
+
 
 public class profile_page extends AppCompatActivity {
     private static int RESULT_LOAD_IMAGE = 1;
@@ -68,6 +62,8 @@ public class profile_page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
+
+
         //accessing the firebase storage
         storage = FirebaseStorage.getInstance();
         //creates a storage reference
@@ -78,7 +74,6 @@ public class profile_page extends AppCompatActivity {
             logoutButton = (Button) findViewById(R.id.logout);
 //            Toast.makeText(this,"profile "+UserInformation.name,Toast.LENGTH_LONG).show();
             logoutButton.setOnClickListener(new View.OnClickListener() {
-
                @Override
                public void onClick(View v) {
 
@@ -151,7 +146,7 @@ public class profile_page extends AppCompatActivity {
 
             ab.setDisplayHomeAsUpEnabled(true);
 
-            Button Wishlist = (Button) findViewById(R.id.wishlist);
+            TextView Wishlist = (TextView) findViewById(R.id.wishlist);
             Wishlist.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View arg0) {
@@ -167,7 +162,7 @@ public class profile_page extends AppCompatActivity {
         imageView=(ImageView)findViewById(R.id.UserProfileImage);
         StorageReference storageRef1 = storage.getReferenceFromUrl("gs://busezon-57985.appspot.com/images").child(UserInformation.UserId+".jpg");
         try {
-           final File localFile = File.createTempFile("images", "jpg");
+           final File localFile = File.createTempFile("images", UserInformation.UserId+"jpg");
             storageRef1.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {

@@ -65,8 +65,7 @@ public class WishlistActivity extends AppCompatActivity {
             }
         });
 
-
-                offersList = new ArrayList<>();
+        offersList = new ArrayList<>();
         GridView offersListView =findViewById(R.id.list1);
         adapter = new offersAdapter(this, offersList);
         offersListView.setAdapter(adapter);
@@ -85,6 +84,7 @@ public class WishlistActivity extends AppCompatActivity {
         });
 
         Button profile=(Button)findViewById(R.id.Profile);
+
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
