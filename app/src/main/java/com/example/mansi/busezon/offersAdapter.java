@@ -1,13 +1,15 @@
 package com.example.mansi.busezon;
 
-import com.android.volley.toolbox.NetworkImageView;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
 import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
+
 import java.util.List;
 
 public class offersAdapter extends ArrayAdapter<offers> {

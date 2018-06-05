@@ -1,7 +1,5 @@
 package com.example.mansi.busezon;
 
-import android.net.Uri;
-
 /**
  * Created by mansi on 21/2/18.
  */

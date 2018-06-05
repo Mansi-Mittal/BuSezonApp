@@ -42,6 +42,19 @@
          android:text="ADD New"
          android:textColor="#fff" />
  -->
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/addproc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="57dp"
+        android:tint="@android:color/white"
+        app:borderWidth="0dp"
+        app:pressedTranslationZ="0dp"
+        app:srcCompat="@android:drawable/ic_input_add"
+        app:useCompatPadding="true" />
     <com.roughike.bottombar.BottomBar
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
