@@ -15,6 +15,7 @@ import android.util.Base64;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -38,33 +39,43 @@ import java.util.Map;
 
 public class Add_product extends AppCompatActivity {
     private EditText productName;
-    private Button choose, upload ;
+    private EditText color;
+    private EditText brand;
+    private EditText tags;
+    private EditText start_date;
+    private EditText last_date;
+    private Button choose, upload;
     private ImageView image;
     private final int PICK_IMAGE_REQUEST = 1;
-    String URL ="http://172.20.10.9:3000/products/new";
+    String URL = "http://172.20.10.9:3000/products/new";
     private Bitmap bitmap;
     ProgressDialog progressDialog;
     RequestQueue rQueue;
 
     @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_add_product);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_add_product);
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-            Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-            //getActionBar().setTitle("BuSezon");
-            setSupportActionBar(myToolbar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-            ActionBar ab = getSupportActionBar();
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        //getActionBar().setTitle("BuSezon");
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        ActionBar ab = getSupportActionBar();
 
-            ab.setDisplayHomeAsUpEnabled(true);
-            productName=(EditText)findViewById(R.id.productName);
+        ab.setDisplayHomeAsUpEnabled(true);
+        productName = (EditText) findViewById(R.id.productName);
+        color = (EditText) findViewById(R.id.color);
+        brand = (EditText) findViewById(R.id.brand);
+        tags = (EditText) findViewById(R.id.tags);
+        start_date = (EditText) findViewById(R.id.startdate);
+        last_date = (EditText) findViewById(R.id.lastdate);
 
-        image = (ImageView)findViewById(R.id.image);
-        choose = (Button)findViewById(R.id.choose);
-        upload = (Button)findViewById(R.id.upload);
+        image = (ImageView) findViewById(R.id.image);
+        choose = (Button) findViewById(R.id.choose);
+        upload = (Button) findViewById(R.id.upload);
 
         rQueue = Volley.newRequestQueue(this);
 
@@ -75,7 +86,7 @@ public class Add_product extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent,PICK_IMAGE_REQUEST);
+                startActivityForResult(intent, PICK_IMAGE_REQUEST);
             }
         });
 
@@ -92,22 +103,21 @@ public class Add_product extends AppCompatActivity {
             }
         });
 
-            BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-            bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
-                @Override
-                public void onTabSelected(@IdRes int tabId) {
-                    if (tabId == R.id.tab_wishList) {
-                        Intent i = new Intent(getApplicationContext(), WishlistActivity.class);
-                        startActivity(i);
-                    }
-                    else if (tabId == R.id.tab_profile) {
-                        Intent i = new Intent(getApplicationContext(), profile_page.class);
-                        startActivity(i);
-                    }
+        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(@IdRes int tabId) {
+                if (tabId == R.id.tab_wishList) {
+                    Intent i = new Intent(getApplicationContext(), WishlistActivity.class);
+                    startActivity(i);
+                } else if (tabId == R.id.tab_profile) {
+                    Intent i = new Intent(getApplicationContext(), profile_page.class);
+                    startActivity(i);
                 }
-            });
+            }
+        });
 
-        }
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -121,15 +131,16 @@ public class Add_product extends AppCompatActivity {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
 
                 //Setting image to ImageView
-                image.setVisibility(View.VISIBLE);                image.setImageBitmap(bitmap);
+                image.setVisibility(View.VISIBLE);
+                image.setImageBitmap(bitmap);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public void uploadImage(){
-        StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>(){
+    public void uploadImage() {
+        StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 progressDialog.dismiss();
@@ -142,7 +153,7 @@ public class Add_product extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        },new Response.ErrorListener(){
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
 
@@ -153,8 +164,8 @@ public class Add_product extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parameters = new HashMap<>();
                 String name = productName.getText().toString();
-                parameters.put("name",name);
-                parameters.put("category","clothing");
+                parameters.put("name", name);
+                parameters.put("category", "clothing");
                 String imageString = imageToString(bitmap);
                 parameters.put("image", imageString);
                 return parameters;
@@ -163,7 +174,8 @@ public class Add_product extends AppCompatActivity {
 
         rQueue.add(request);
     }
-    public String imageToString(Bitmap bitmap){
+
+    public String imageToString(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
@@ -171,4 +183,65 @@ public class Add_product extends AppCompatActivity {
         return imageString;
     }
 
+    public void onCheckboxClickedsmall(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+
+        // Check which checkbox was clicked
+
+        if (checked) {
+
+        }
+        else
+        {
+
+
+        }
     }
+    public void onCheckboxClickedmedium(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+
+        // Check which checkbox was clicked
+
+        if (checked) {
+
+        }
+        else
+        {
+
+
+        }
+    }
+    public void onCheckboxClickedlarge(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+
+
+        // Check which checkbox was clicked
+
+        if (checked) {
+
+        }
+        else
+        {
+
+
+        }
+    }
+    public void onCheckboxClickedextralarge(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+
+        // Check which checkbox was clicked
+
+                if (checked) {
+
+                }
+                else
+                {
+
+
+        }
+    }
+}

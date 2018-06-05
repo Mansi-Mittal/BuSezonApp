@@ -25,7 +25,6 @@
         android:layout_height="0dp"
         android:layout_weight="0.8"
         android:orientation="vertical">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -81,6 +80,351 @@
                 </Spinner>
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="sub category"
+                    android:textAllCaps="true"
+                    android:textColor="#020202"
+                    android:textSize="18sp"
+                    android:textStyle="italic" />
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:entries="@array/sub_category_fashion"
+                    android:text="sub-category"
+                    android:textAlignment="viewEnd">
+
+                </Spinner>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="sub category"
+                    android:textAllCaps="true"
+                    android:textColor="#020202"
+                    android:textSize="18sp"
+                    android:textStyle="italic" />
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:entries="@array/sub_category_electronics"
+                    android:text="sub-category"
+                    android:textAlignment="viewEnd">
+
+                </Spinner>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="COLOR"
+                    android:textAllCaps="true"
+                    android:textColor="#020202"
+                    android:textSize="18sp"
+                    android:textStyle="italic" />
+
+                <EditText
+                    android:id="@+id/color"
+                    android:layout_width="249dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:ems="10"
+                    android:hint="color"
+                    android:inputType="textPersonName"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textStyle="italic" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="PRICE"
+                    android:textAllCaps="true"
+                    android:textColor="#020202"
+                    android:textSize="18sp"
+                    android:textStyle="italic" />
+
+                <EditText
+                    android:id="@+id/price"
+                    android:layout_width="249dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:ems="10"
+                    android:hint="price"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textStyle="italic" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="BRAND"
+                    android:textAllCaps="true"
+                    android:textColor="#020202"
+                    android:textSize="18sp"
+                    android:textStyle="italic" />
+
+                <EditText
+                    android:id="@+id/brand"
+                    android:layout_width="249dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:ems="10"
+                    android:hint="brand"
+                    android:inputType="text"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textStyle="italic" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="tags"
+                    android:textAllCaps="true"
+                    android:textColor="#020202"
+                    android:textSize="18sp"
+                    android:textStyle="italic" />
+
+                <EditText
+                    android:id="@+id/tags"
+                    android:layout_width="249dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:ems="10"
+                    android:hint="tags"
+                    android:inputType="text"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textStyle="italic" />
+            </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="SIZE"
+            android:textAllCaps="true"
+            android:textColor="#020202"
+            android:textSize="18sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <CheckBox android:id="@+id/checkboxsmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="small"
+                android:onClick="onCheckboxClickedlarge"/>
+            <EditText
+                android:id="@+id/squant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:ems="10"
+                android:hint="quantity"
+                android:inputType="number"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textStyle="italic" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <CheckBox android:id="@+id/checkbox_cheese"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="medium"
+                android:onClick="onCheckboxClickedmedium"/>
+            <EditText
+                android:id="@+id/mquant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:ems="10"
+                android:hint="quantity"
+                android:inputType="number"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textStyle="italic" />
+            </LinearLayout>
+
+            <LinearLayout
+                   android:orientation="horizontal"
+                   android:layout_width="fill_parent"
+                   android:layout_height="fill_parent">
+            <CheckBox android:id="@+id/checkboxlarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="large"
+                android:onClick="onCheckboxClickedsmall"/>
+                <EditText
+                    android:id="@+id/lquant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:ems="10"
+                    android:hint="quantity"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textStyle="italic" />
+            </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+            <CheckBox android:id="@+id/checkboxextralarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="XL"
+                android:onClick="onCheckboxClickedmedium"/>
+                    <EditText
+                        android:id="@+id/sxlquant"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:ems="10"
+                        android:hint="quantity"
+                        android:inputType="number"
+                        android:textAlignment="center"
+                        android:textAllCaps="true"
+                        android:textStyle="italic" />
+                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="discounted price"
+                    android:textAllCaps="true"
+                    android:textColor="#020202"
+                    android:textSize="18sp"
+                    android:textStyle="italic" />
+
+                <EditText
+                    android:id="@+id/discountedprice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:ems="10"
+                    android:hint="price"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textStyle="italic" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="start date"
+                    android:textAllCaps="true"
+                    android:textColor="#020202"
+                    android:textSize="18sp"
+                    android:textStyle="italic" />
+                <EditText
+                    android:id="@+id/startdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:ems="10"
+                    android:hint="date"
+                    android:inputType="date"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textStyle="italic" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="last date"
+                    android:textAllCaps="true"
+                    android:textColor="#020202"
+                    android:textSize="18sp"
+                    android:textStyle="italic" />
+
+                <EditText
+                    android:id="@+id/lastdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:ems="10"
+                    android:hint="date"
+                    android:inputType="date"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textStyle="italic" />
+            </LinearLayout>
             <Button
                 android:id="@+id/choose"
                 android:layout_width="match_parent"
@@ -98,8 +442,8 @@
                 android:layout_height="200dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
-                android:visibility="gone"
-                android:contentDescription="@string/preview"/>
+                android:contentDescription="@string/preview"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/upload"
