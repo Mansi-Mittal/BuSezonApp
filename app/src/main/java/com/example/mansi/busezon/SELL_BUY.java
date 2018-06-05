@@ -34,6 +34,7 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import java.security.spec.ECField;
+import java.util.EventListener;
 
 public class SELL_BUY extends AppCompatActivity {
     private  dbHelper mDbHelper;
@@ -62,14 +63,26 @@ public class SELL_BUY extends AppCompatActivity {
             Toast.makeText(SELL_BUY.this,e.getMessage(),Toast.LENGTH_LONG).show();
         }
         User_Name =UserInformation.name;
-//        Toast.makeText(SELL_BUY.this,UserInformation.UserId+" "+UserInformation.email+" "+UserInformation.name,Toast.LENGTH_LONG).show();
-//        FirebaseUser firebaseUser=firebaseAuth.getCurrentUser();
-//        if(firebaseUser!=null)
-//        {
-//            String userId=firebaseUser.getDisplayName();
-//            Toast.makeText(this, userId, Toast.LENGTH_SHORT).show();
-//        }
-//        Toast.makeText(SELL_BUY.this,User_Id, Toast.LENGTH_LONG).show();
+        if(User_Name==null) {
+            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+            DatabaseReference databaseReference = firebaseDatabase.getReferenceFromUrl("https://busezon-57985.firebaseio.com/").child(UserInformation.UserId);
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    User_Name = (String) dataSnapshot.child("name").getValue();
+                    UserInformation.name=User_Name;
+//                    Toast.makeText(SELL_BUY.this,b+" "+child,Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+//            Toast.makeText(SELL_BUY.this,User_Name,Toast.LENGTH_LONG).show();
+        }
+
+//        Toast.makeText(SELL_BUY.this,UserInformation.UserId+" "+User_Name+" "+UserInformation.name,Toast.LENGTH_LONG).show();
     NavigationView navigationView = findViewById(R.id.nav_view);
     navigationView.setNavigationItemSelectedListener(
             new NavigationView.OnNavigationItemSelectedListener() {
@@ -217,6 +230,7 @@ catch (Exception e)
                         if (email.equals(EmailIntent)) {
                             String name = ds.child("name").getValue(String.class);
                             User_Name=name;
+                            UserInformation.name=User_Name;
                             // String email = ds.child("email").getValue(String.class);
                             String userId = ds.getKey();
                             String address = "";
@@ -253,7 +267,6 @@ catch (Exception e)
                         }
                         }
                     }
-
                 }
 
                 @Override
