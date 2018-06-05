@@ -106,6 +106,7 @@
 
         <activity android:name=".Chat_Message_Acitivty"></activity>
         <activity android:name=".Chat_UsersList_Activity"></activity>
+        <activity android:name=".PaypalConfirmationActivity"></activity>
     </application>
 
 </manifest>
