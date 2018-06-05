@@ -1,5 +1,6 @@
 package com.example.mansi.busezon;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -10,11 +11,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import android.widget.Toast;
-
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
@@ -23,11 +28,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SellHomepage extends AppCompatActivity {
 
     int id =0;
-    String url = "http://172.20.10.9:3000/products?category=clothing";
+    String url = "http://172.20.10.9:3000/products?user_id=1234";
     ArrayList<offers> offersList;
 
     private offersAdapter adapter;
@@ -124,7 +131,8 @@ public class SellHomepage extends AppCompatActivity {
                                     String name = info.getString("name");
                                     String img = info.getString("IMAGE_URL");
                                     String url = "http://172.20.10.9:3000" + img;
-                                    offersList.add(new offers(id,url, name));
+                                    //int sellerID=info.getInt(""); //complete
+                                offersList.add(new offers(id,url, name, 1234));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -142,5 +150,13 @@ public class SellHomepage extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(jsonObjectRequest);
     }
 
+
+   /* public void openOnImgClick(int ID) {
+        Intent appInfo = new Intent(SellHomepage.this, ProductDesc.class);
+        Bundle b = new Bundle();
+        b.putInt("Product_id", ID); //Your id
+        appInfo.putExtras(b); //Put your id to your next Intent
+        startActivity(appInfo);
+    }*/
 }
 
