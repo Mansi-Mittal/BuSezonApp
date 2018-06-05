@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -37,7 +39,16 @@ public class WishlistActivity extends AppCompatActivity {
                     Intent i = new Intent(getApplicationContext(), profile_page.class);
                     startActivity(i);
                 }
-
+                else if (tabId == R.id.tab_chat) {
+                    try {
+                        Intent i = new Intent(WishlistActivity.this, Chat_UsersList_Activity.class);
+                        i.putExtra("user", UserInformation.UserId);
+                        i.putExtra("User_Name", UserInformation.name);
+                        startActivity(i);
+                    } catch (Exception e) {
+                        Toast.makeText(WishlistActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }
 
             }
         });
@@ -46,15 +57,27 @@ public class WishlistActivity extends AppCompatActivity {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                sendMessage();
+                Intent i = new Intent(getApplicationContext(), profile_page.class);
+                startActivity(i);
             }
         });
     }
 
-    private void sendMessage() {
-        Intent intent = new Intent(WishlistActivity.this, profile_page.class);
-        startActivity(intent);
-    }
-
-
+//    public void startChat(View view)
+//    {
+//        try {
+//            TextView seller_name=(TextView)findViewById(R.id.sellerName);
+//            String sellerName= (String) seller_name.getText();
+//            Chat_UserDetails.chatWith =sellerName;
+//            String loginUser=getIntent().getStringExtra("User_Name");
+//            Chat_UserDetails.username=loginUser;
+////            Toast.makeText(WishlistActivity.this,Chat_UserDetails.chatWith+" "+Chat_UserDetails.username,Toast.LENGTH_LONG).show();
+//            Intent intent = new Intent(WishlistActivity.this, Chat_Message_Acitivty.class);
+//           startActivity(intent);
+//        }
+//        catch (Exception e)
+//        {
+//            Toast.makeText(this,e.getMessage(),Toast.LENGTH_LONG).show();
+//        }
+//    }
 }

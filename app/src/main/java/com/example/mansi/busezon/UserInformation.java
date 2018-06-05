@@ -5,7 +5,8 @@ package com.example.mansi.busezon;
  */
 
 public class UserInformation {
-    public String name,address,email,phoneno,password;
+    static public String name,address,email,phoneno,password;
+    static public String UserId,token;
 
     public UserInformation(){};
 

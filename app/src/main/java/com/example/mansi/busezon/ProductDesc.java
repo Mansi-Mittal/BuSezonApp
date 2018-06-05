@@ -8,8 +8,10 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -31,9 +33,10 @@ public class ProductDesc extends AppCompatActivity {
     private static final Integer[] XMEN= {R.drawable.p_img,R.drawable.p_img1};
     private ArrayList<Integer> XMENArray = new ArrayList<>();
     RequestQueue rq ;
-    TextView prodName, price;
+    TextView prodName, price,sellerName;
     String url = "";
     private static ImageView imageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +72,8 @@ public class ProductDesc extends AppCompatActivity {
         prodName=(TextView)findViewById(R.id.prodName);
         price=(TextView)findViewById(R.id.price);
         imageView=(ImageView)findViewById(R.id.imgview);
+
+        sellerName=(TextView)findViewById(R.id.sellerName);
 
     }
 
@@ -134,4 +139,21 @@ public class ProductDesc extends AppCompatActivity {
         rq.add(jsonObjectRequest);
     }
 
+    public void startChat(View view)
+    {
+        try {
+            TextView seller_name=(TextView)findViewById(R.id.sellerName);
+            String sellerName= (String) seller_name.getText();
+            Chat_UserDetails.chatWith =sellerName;
+            String loginUser=UserInformation.name;
+            Chat_UserDetails.username=loginUser;
+//            Toast.makeText(WishlistActivity.this,Chat_UserDetails.chatWith+" "+Chat_UserDetails.username,Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(ProductDesc.this, Chat_Message_Acitivty.class);
+            startActivity(intent);
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(this,e.getMessage(),Toast.LENGTH_LONG).show();
+        }
+    }
 }

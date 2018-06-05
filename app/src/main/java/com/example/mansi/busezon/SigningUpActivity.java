@@ -40,13 +40,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.jar.Attributes;
+
 public class SigningUpActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button buttonsignup;
-    private EditText email,name,phoneno,address,password;
+    private EditText email,editTextLstname,editTextFstname,phoneno,address,password;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
+    String Name;
 
 
     @Override
@@ -63,14 +66,14 @@ public class SigningUpActivity extends AppCompatActivity implements View.OnClick
 
         buttonsignup=(Button)findViewById(R.id.signupButton);
         email=(EditText)findViewById(R.id.editTextEmail);
-        name=(EditText)findViewById(R.id.editTextname);
+        editTextFstname=(EditText)findViewById(R.id.editTextFstname);
+        editTextLstname=(EditText)findViewById(R.id.editTextLstname);
         phoneno=(EditText)findViewById(R.id.editTextPhoneno);
         address=(EditText)findViewById(R.id.editTextAddress);
         password=(EditText)findViewById(R.id.editTextPassword);
         firebaseAuth=FirebaseAuth.getInstance();
         databaseReference= FirebaseDatabase.getInstance().getReference();
         buttonsignup.setOnClickListener(this);
-
 
     }
     @Override
@@ -89,10 +92,12 @@ public class SigningUpActivity extends AppCompatActivity implements View.OnClick
     private void registerUser()
     {
         final String Email=email.getText().toString().trim();
-        final String Name=name.getText().toString().trim();
+        final String FName=editTextFstname.getText().toString().trim();
+        final String LName=editTextLstname.getText().toString().trim();
         final String PhoneNo=phoneno.getText().toString().trim();
         final String Address=address.getText().toString().trim();
         final String Password=password.getText().toString().trim();
+        Name=FName+" "+LName;
         if(TextUtils.isEmpty(Email))
         {
             Toast.makeText(this,"Enter email",Toast.LENGTH_SHORT).show();

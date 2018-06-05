@@ -101,8 +101,10 @@ public class GoogleSignInInformation extends AppCompatActivity implements View.O
         Toast.makeText(GoogleSignInInformation.this,"Resgistered Successfully",Toast.LENGTH_SHORT).show();
         progressDialog.dismiss();
         String userId=getIntent().getStringExtra("Id");
+        String token=getIntent().getStringExtra("token");
         Intent intent=new Intent(this,SELL_BUY.class);
         intent.putExtra("Id",userId);
+        intent.putExtra("token",token);
         startActivity(intent);
     }
 
