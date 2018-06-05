@@ -15,11 +15,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.haresh.multipleimagepickerlibrary.models.Image;
@@ -31,19 +33,21 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import me.relex.circleindicator.CircleIndicator;
 
 
 public class ProductDesc extends AppCompatActivity {
 
-    private static ViewPager mPager;
-    private static final Integer[] XMEN= {R.drawable.p_img,R.drawable.p_img1};
-    private ArrayList<Integer> XMENArray = new ArrayList<>();
-    RequestQueue rq ;
+    RequestQueue rq;
     TextView prodName, price;
     String url = "";
     private static ImageView imageView;
+    private Button button;
+    int value = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,11 +55,11 @@ public class ProductDesc extends AppCompatActivity {
         //init();
 
         Bundle b = getIntent().getExtras();
-        int value = 0; // or other values
-        if(b != null)
+         // or other values
+        if (b != null)
             value = b.getInt("Product_id");
 
-        url = "http://172.20.10.9:3000/products/show/?id="+value;
+        url = "http://172.20.10.9:3000/products/show/?id=" + value;
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -74,11 +78,18 @@ public class ProductDesc extends AppCompatActivity {
             }
         });*/
 
-        rq= Volley.newRequestQueue(this);
+        rq = Volley.newRequestQueue(this);
         sendJsonRequest();
-        prodName=(TextView)findViewById(R.id.prodName);
-        price=(TextView)findViewById(R.id.price);
-        imageView=(ImageView)findViewById(R.id.imgview);
+        prodName = (TextView) findViewById(R.id.prodName);
+        price = (TextView) findViewById(R.id.price);
+        imageView = (ImageView) findViewById(R.id.imgview);
+        button = findViewById(R.id.addToWish);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addToWishlist(124, value);
+            }
+        });
 
     }
 
@@ -97,7 +108,7 @@ public class ProductDesc extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_cart:
-                Intent i=new Intent(this,shoppingCart.class);
+                Intent i = new Intent(this, shoppingCart.class);
                 startActivity(i);
                 return true;
 
@@ -114,7 +125,7 @@ public class ProductDesc extends AppCompatActivity {
         }
     }
 
-    public void sendJsonRequest(){
+    public void sendJsonRequest() {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
@@ -142,6 +153,38 @@ public class ProductDesc extends AppCompatActivity {
                 });
 
         rq.add(jsonObjectRequest);
+    }
+
+    public void addToWishlist(final int sellerID, final int prodID) {
+        String URL = "http://172.20.10.9:3000/wishlists/new";
+        StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String Response = jsonObject.getString("response");
+                    //progressDialog.dismiss();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        }) {
+            //adding parameters to send
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parameters = new HashMap<>();
+                parameters.put("Seller_id", sellerID + "");
+                parameters.put("Product_id", prodID + "");
+                return parameters;
+            }
+        };
+
+        AppController.getInstance().addToRequestQueue(request);
     }
 
 }

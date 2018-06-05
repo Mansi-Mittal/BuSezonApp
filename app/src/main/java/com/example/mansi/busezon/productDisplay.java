@@ -1,6 +1,5 @@
 package com.example.mansi.busezon;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -11,39 +10,47 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
-public class SellHomepage extends AppCompatActivity {
 
+public class productDisplay extends AppCompatActivity {
+
+    String URL="http://172.20.10.9:3000/products/search?search=";
+    String urlParam;
     int id =0;
-    String url = "http://172.20.10.9:3000/products?category=clothing";
+    boolean search ;
+    public offersAdapter adapter;
     ArrayList<offers> offersList;
+    //JSONArray response;
 
-    private offersAdapter adapter;
-    @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sell_homepage);
+        setContentView(R.layout.activity_product_display);
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
+
+        Bundle b = getIntent().getExtras();
+        // or other values
+        if (b != null)
+            urlParam = b.getString("urlParam");
+
+        //if(search){
+            URL = "http://172.20.10.9:3000/products/search?search="+urlParam;
+        //}
 
         offersList = new ArrayList<>();
         GridView offersListView =findViewById(R.id.list1);
@@ -51,11 +58,13 @@ public class SellHomepage extends AppCompatActivity {
         offersListView.setAdapter(adapter);
 
         sendJsonRequest();
+        //response = serverParams.responeArray;
+        //onResponse(response);
 
         offersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent appInfo = new Intent(SellHomepage.this, ProductDesc.class);
+                Intent appInfo = new Intent(productDisplay.this, ProductDesc.class);
                 Bundle b = new Bundle();
                 b.putInt("Product_id", offersList.get(i).getID()); //Your id
                 appInfo.putExtras(b); //Put your id to your next Intent
@@ -63,23 +72,7 @@ public class SellHomepage extends AppCompatActivity {
             }
         });
 
-        /*ImageView SellPdt1=(ImageView) findViewById(R.id.sellpdt1);
-        SellPdt1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                Intent i = new Intent(getApplicationContext(), ProductDescription.class);
-                startActivity(i);
-            }
-        });*/
-        /*Button Prod = (Button) findViewById(R.id.addBtn);
-        Prod.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                Intent i = new Intent(getApplicationContext(), Add_product.class);
-                startActivity(i);
-            }
-        });
-*/
+
         BottomBar bottomBar =findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
@@ -98,18 +91,18 @@ public class SellHomepage extends AppCompatActivity {
 
     public void sendJsonRequest() {
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
-                (url, new Response.Listener<JSONArray>() {
+                (URL, new Response.Listener<JSONArray>() {
 
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
                             for (int i = 0; i <= response.length(); i++) {
                                 JSONObject info = response.getJSONObject(i);
-                                    id = info.getInt("id");
-                                    String name = info.getString("name");
-                                    String img = info.getString("IMAGE_URL");
-                                    String url = "http://172.20.10.9:3000" + img;
-                                    //int sellerID=info.getInt(""); //complete
+                                id = info.getInt("id");
+                                String name = info.getString("name");
+                                String img = info.getString("IMAGE_URL");
+                                String url = "http://172.20.10.9:3000" + img;
+                                //int sellerID=info.getInt(""); //complete
                                 offersList.add(new offers(id,url, name, 1234));
                             }
                         } catch (JSONException e) {
@@ -127,14 +120,4 @@ public class SellHomepage extends AppCompatActivity {
                 });
         AppController.getInstance().addToRequestQueue(jsonObjectRequest);
     }
-
-
-   /* public void openOnImgClick(int ID) {
-        Intent appInfo = new Intent(SellHomepage.this, ProductDesc.class);
-        Bundle b = new Bundle();
-        b.putInt("Product_id", ID); //Your id
-        appInfo.putExtras(b); //Put your id to your next Intent
-        startActivity(appInfo);
-    }*/
 }
-

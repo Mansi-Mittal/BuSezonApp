@@ -83,21 +83,19 @@
                 android:layout_marginRight="16dp"
                 android:background="#f1eded"
                 android:layout_marginBottom="16dp">
-                >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="name:"
-                    android:textColor="#020202"
-                    />
+                    android:textColor="#020202" />
                 <TextView
                     android:id="@+id/profile_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" AAKRITI JOHAR"
-                    android:textColor="#020202"
-                    /> </LinearLayout>
+                    android:textColor="#020202" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -111,8 +109,7 @@
                     android:layout_height="match_parent"
                     android:text="email address: "
                     android:textColor="#020202"
-                    android:layout_gravity="center"
-                    />
+                    android:layout_gravity="center" />
                 <TextView
                     android:id="@+id/profile_email"
                     android:layout_width="wrap_content"
@@ -120,9 +117,8 @@
                     android:text="aakritijohar@gmail.com"
                     android:maxLines="1"
                     android:textColor="#020202"
-
-                    android:layout_gravity="center"
-                    /> </LinearLayout>
+                    android:layout_gravity="center" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -134,15 +130,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textColor="#020202"
-                    android:text="contact: "
-                    />
+                    android:text="contact: " />
                 <TextView
                     android:id="@+id/profile_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="998789627672"
-                    android:textColor="#020202"
-                    /> </LinearLayout>
+                    android:textColor="#020202" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -154,30 +149,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textColor="#020202"
-                    android:text="location: "
-                    />
+                    android:text="location: " />
                 <TextView
                     android:id="@+id/profile_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="vasant kunj, delhi"
-                    android:textColor="#020202"
+                    android:textColor="#020202" />
+            </LinearLayout>
 
-                    /> </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_margin="16dp">
-
-                <Button
+            <Button
                     android:id="@+id/wishlist"
                     android:layout_width="125dp"
                     android:layout_height="match_parent"
                     android:text="MY WISHLIST"
-                    android:background="#009688"
-                    /></LinearLayout>
+                    android:background="#009688" />
+
         </LinearLayout>
     </ScrollView>
 
@@ -185,7 +172,6 @@
         android:id="@+id/logout"
         android:layout_width="70dp"
         android:layout_height="50dp"
-        android:background="@drawable/roundbutton"
         android:gravity="center_vertical|center_horizontal"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
@@ -193,6 +179,7 @@
         android:layout_centerHorizontal="true"
         android:text="LOGOUT"
         android:textColor="#fff" />
+    <!--android:background="@drawable/roundbutton"-->
 
     
 

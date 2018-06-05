@@ -49,9 +49,7 @@
         android:orientation="vertical"
         android:layout_marginTop="75dp"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="106dp"
-
-        >
+        tools:layout_editor_absoluteY="106dp">
 
         <EditText
             android:id="@+id/editTextloginEmail"
