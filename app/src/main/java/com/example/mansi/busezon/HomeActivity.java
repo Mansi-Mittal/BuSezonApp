@@ -75,13 +75,9 @@ public class HomeActivity extends AppCompatActivity {
                         Toast.makeText(HomeActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
-
-
             }
         });
-
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

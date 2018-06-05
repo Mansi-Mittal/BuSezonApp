@@ -37,4 +37,5 @@
         android:background="#009688"
         android:layout_alignParentBottom="true"
         app:bb_tabXmlResource="@xml/bottombar_tabs" />
+
 </LinearLayout>
