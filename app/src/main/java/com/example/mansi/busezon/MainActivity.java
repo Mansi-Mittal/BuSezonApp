@@ -309,7 +309,7 @@ public class MainActivity extends AppCompatActivity {
             }
             else {
                 // User not present in db store it with amazon account
-                UserInformation userInformation = new UserInformation(name, "", email, "", "");
+                FirebaseUserInformation userInformation = new FirebaseUserInformation(name, "", email, "", "");
                 user_Id = account.replace("amzn1.account.", "");
                 databaseReference.child(user_Id).setValue(userInformation);
                 Toast.makeText(MainActivity.this, "  user details added", Toast.LENGTH_LONG).show();
