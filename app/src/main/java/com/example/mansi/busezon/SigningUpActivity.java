@@ -84,9 +84,15 @@ public class SigningUpActivity extends AppCompatActivity implements View.OnClick
     }
     private void saveUserDetails(String Name,String Email,String PhoneNo,String Address,String Password)
     {
-        UserInformation userInformation=new UserInformation(Name,Address,Email,PhoneNo,Password);
-        FirebaseUser user=firebaseAuth.getCurrentUser();
-        databaseReference.child(user.getUid()).setValue(userInformation);
+        try {
+            FirebaseUserInformation userInformation = new FirebaseUserInformation(Name, Address, Email, PhoneNo, Password);
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            databaseReference.child(user.getUid()).setValue(userInformation);
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(this,e.getMessage(),Toast.LENGTH_LONG).show();
+        }
     }
 
     private void registerUser()
@@ -118,7 +124,7 @@ public class SigningUpActivity extends AppCompatActivity implements View.OnClick
         }
         if(TextUtils.isEmpty(PhoneNo)||PhoneNo.length()!=10)
         {
-            Toast.makeText(this,"Enter Phone number",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Enter correct Phone number",Toast.LENGTH_SHORT).show();
             return;
         }
         if(TextUtils.isEmpty(Address))
@@ -133,25 +139,36 @@ public class SigningUpActivity extends AppCompatActivity implements View.OnClick
                 Toast.makeText(this, "Enter Password", Toast.LENGTH_SHORT).show();
             return;
         }
-        progressDialog.setMessage("Registering User...");
-        progressDialog.show();
-        firebaseAuth.createUserWithEmailAndPassword(Email,Password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                progressDialog.dismiss();
-                if(task.isSuccessful())
-                {
-                    saveUserDetails(Name,Email,PhoneNo,Address,Password);
-                    Toast.makeText(SigningUpActivity.this,"Resgistered Successfully",Toast.LENGTH_SHORT).show();
+        try {
+            progressDialog.setMessage("Registering User...");
+            progressDialog.show();
+            firebaseAuth.createUserWithEmailAndPassword(Email, Password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    progressDialog.dismiss();
+                    if (task.isSuccessful()) {
+                        saveUserDetails(Name, Email, PhoneNo, Address, Password);
+                        Toast.makeText(SigningUpActivity.this, "Resgistered Successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(SigningUpActivity.this, SELL_BUY.class);
+                        UserInformation.UserId = firebaseAuth.getCurrentUser().getUid();
+                        UserInformation.token = "normal";
+                        UserInformation.name = Name;
+                        UserInformation.email = Email;
+                        progressDialog.dismiss();
+                        startActivity(intent);
 
-                    //progressDialog.dismiss();
+                    } else {
+                        Toast.makeText(SigningUpActivity.this, "Try again", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
                 }
-                else
-                {
-                    Toast.makeText(SigningUpActivity.this,"Try again",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+            });
+
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(SigningUpActivity.this,e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
 
