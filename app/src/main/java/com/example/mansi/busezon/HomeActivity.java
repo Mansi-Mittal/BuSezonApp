@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class HomeActivity extends AppCompatActivity {
 
     SearchView searchView;
     String URL = "http://172.20.10.9:3000/products/search?search=";
+    Button like;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,27 +43,19 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         //getActionBar().setTitle("BuSezon");
         setSupportActionBar(myToolbar);
-
         ActionBar ab = getSupportActionBar();
-
         ab.setDisplayHomeAsUpEnabled(true);
 
-        //searchView = findViewById(R.id.action_search);
-
-        ArrayList<offers> offersList=new ArrayList<>();
-        //offersList.add(new offers(R.drawable.img1,"Great discounts"));
-        //offersList.add(new offers(R.drawable.img2,"Great discounts"));
-        //offersList.add(new offers(R.drawable.img3,"Great discounts"));
-        //offersList.add(new offers(R.drawable.img4,"Great discounts"));
-        //offersList.add(new offers(R.drawable.img5,"Great discounts"));
+        like = (Button)findViewById(R.id.like);
+        ArrayList<offerLayout> offersList=new ArrayList<>();
+        //offersList.add(new offerLayout(R.drawable.img1,like));
+        offersList.add(new offerLayout(R.drawable.img2,like));
+        offersList.add(new offerLayout(R.drawable.img3,like));
+        offersList.add(new offerLayout(R.drawable.img4,like));
+        offersList.add(new offerLayout(R.drawable.img5,like));
 
         ListView offersListView = (ListView) findViewById(R.id.list);
-
-        // Create a new {@link ArrayAdapter} of earthquakes
-        final offersAdapter adapter = new offersAdapter(this, offersList);
-
-        // Set the adapter on the {@link ListView}
-        // so the list can be populated in the user interface
+        final offerLayoutAdapter adapter = new offerLayoutAdapter(this, offersList);
         offersListView.setAdapter(adapter);
 
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
@@ -133,15 +127,7 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextSubmit(String search) {
-                //String search = searchView.getQuery().toString();
-                /*Intent appInfo = new Intent(HomeActivity.this, productDisplay.class);
-                Bundle d = new Bundle();
-                d.putBoolean("search",true);
-                d.putString("urlParam",search); //Your id
-                appInfo.putExtras(d); //Put your id to your next Intent
-                startActivity(appInfo);*/
-                //URL = "http://172.20.10.9:3000/products/search?search=";
-                //URL += search;
+
                 Intent appInfo = new Intent(HomeActivity.this, productDisplay.class);
                 appInfo.putExtra("urlParam",search);
                 startActivity(appInfo);
@@ -179,32 +165,7 @@ public class HomeActivity extends AppCompatActivity {
 
         }
     }
-    public void sendJsonRequest() {
-        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
-                (URL, new Response.Listener<JSONArray>() {
 
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        try {
-                            //productDisplay.onResponse(response);
-                            serverParams.responeArray = response;
-                            Intent appInfo = new Intent(HomeActivity.this, productDisplay.class);
-                            //appInfo.putExtra("JsonArray",response.toString());
-                            startActivity(appInfo);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
-
-                    }
-                });
-        AppController.getInstance().addToRequestQueue(jsonObjectRequest);
-    }
     }
 
 

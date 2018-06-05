@@ -18,6 +18,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.paytm.pgsdk.PaytmClientCertificate;
@@ -38,10 +40,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentTransactionCallback {
 
     int id =0;
-    String url = "http://172.20.10.9:3000/carts?user_id=1234";
-    ArrayList<offers> offersList;
+    String url = "http://192.168.1.6:3000/carts?user_id=1234";
+    ArrayList<cartItem> cartList;
 
-    private offersAdapter adapter;
+    private cartItemAdapter adapter;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shopping_cart);
@@ -52,10 +54,11 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
         ActionBar ab = getSupportActionBar();
 
         ab.setDisplayHomeAsUpEnabled(true);
-        offersList = new ArrayList<>();
-        GridView offersListView =findViewById(R.id.list1);
-        adapter = new offersAdapter(this, offersList);
-        offersListView.setAdapter(adapter);
+
+        cartList = new ArrayList<>();
+        ListView cartListView =findViewById(R.id.list1);
+        adapter = new cartItemAdapter(this, cartList);
+        cartListView.setAdapter(adapter);
 
         sendJsonRequest();
 
@@ -97,9 +100,11 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
                                 id = info.getInt("id");
                                 String name = info.getString("name");
                                 String img = info.getString("IMAGE_URL");
-                                String url = "http://172.20.10.9:3000" + img;
+                                String url = "http://192.168.1.6:3000" + img;
+                                int price = info.getInt("price");
+                                int qty = info.getInt("Qty");
                                 //int sellerID=info.getInt(""); //complete
-                                offersList.add(new offers(id,url, name, 1234));
+                                cartList.add(new cartItem(url, name, price ,qty));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

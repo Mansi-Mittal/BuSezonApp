@@ -36,6 +36,7 @@
             android:focusableInTouchMode="false"/>
         <Button
             android:id="@+id/AddToWishlist"
+            android:background="#009688"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:focusable="false"
