@@ -55,7 +55,7 @@ public class GoogleSignInInformation extends AppCompatActivity implements View.O
     }
     private void saveUserDetails(String Name,String Email,String PhoneNo,String Address,String Password)
     {
-        UserInformation userInformation=new UserInformation(Name,Address,Email,PhoneNo,Password);
+        FirebaseUserInformation userInformation=new FirebaseUserInformation(Name,Address,Email,PhoneNo,Password);
         FirebaseUser user=firebaseAuth.getCurrentUser();
         databaseReference.child(user.getUid()).setValue(userInformation);
     }
@@ -101,8 +101,10 @@ public class GoogleSignInInformation extends AppCompatActivity implements View.O
         Toast.makeText(GoogleSignInInformation.this,"Resgistered Successfully",Toast.LENGTH_SHORT).show();
         progressDialog.dismiss();
         String userId=getIntent().getStringExtra("Id");
+        String token=getIntent().getStringExtra("token");
         Intent intent=new Intent(this,SELL_BUY.class);
         intent.putExtra("Id",userId);
+        intent.putExtra("token",token);
         startActivity(intent);
     }
 

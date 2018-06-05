@@ -18,9 +18,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amazon.identity.auth.device.api.authorization.User;
 import com.example.mansi.busezon.data.dbContract;
 import com.example.mansi.busezon.data.dbHelper;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,85 +33,131 @@ import com.google.firebase.database.ValueEventListener;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
+import java.security.spec.ECField;
+
 public class SELL_BUY extends AppCompatActivity {
     private  dbHelper mDbHelper;
-    private  String User_Id;
+    private  String User_Id,User_Name;
     private DrawerLayout mDrawerLayout;
-
+    private String token;
+    private FirebaseAuth firebaseAuth;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
                 // Set the content of the activity to use the activity_main.xml layout file
                 setContentView(R.layout.activity_sell__buy);
 
-        mDrawerLayout = findViewById(R.id.drawer_layout);
+    mDrawerLayout = findViewById(R.id.drawer_layout);
+//    User_Id = getIntent().getStringExtra("Id");
+//    UserInformation.email=getIntent().getStringExtra("Email");
+        User_Id=UserInformation.UserId;
+    token=UserInformation.token;
+        try {
+            check();
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(SELL_BUY.this,e.getMessage(),Toast.LENGTH_LONG).show();
+        }
+        User_Name =UserInformation.name;
+//        Toast.makeText(SELL_BUY.this,UserInformation.UserId+" "+UserInformation.email+" "+UserInformation.name,Toast.LENGTH_LONG).show();
+//        FirebaseUser firebaseUser=firebaseAuth.getCurrentUser();
+//        if(firebaseUser!=null)
+//        {
+//            String userId=firebaseUser.getDisplayName();
+//            Toast.makeText(this, userId, Toast.LENGTH_SHORT).show();
+//        }
+//        Toast.makeText(SELL_BUY.this,User_Id, Toast.LENGTH_LONG).show();
+    NavigationView navigationView = findViewById(R.id.nav_view);
+    navigationView.setNavigationItemSelectedListener(
+            new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(MenuItem menuItem) {
+                    // set item as selected to persist highlight
+                    menuItem.setChecked(true);
+                    // close drawer when item is tapped
+                    mDrawerLayout.closeDrawers();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        // set item as selected to persist highlight
-                        menuItem.setChecked(true);
-                        // close drawer when item is tapped
-                        mDrawerLayout.closeDrawers();
+                    // Add code here to update the UI based on the item selected
+                    // For example, swap UI fragments here
 
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
-
-                        return true;
-                    }
-                });
+                    return true;
+                }
+            });
 
 
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
-        ab.setHomeAsUpIndicator(R.drawable.ic_menu_white_18dp);
+try {
+    Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+    setSupportActionBar(myToolbar);
+    ActionBar ab = getSupportActionBar();
+    ab.setDisplayHomeAsUpEnabled(true);
+    ab.setHomeAsUpIndicator(R.drawable.ic_menu_white_18dp);
 //        Toast.makeText(SELL_BUY.this, "hi!!", Toast.LENGTH_SHORT).show();
 
-                TextView BUY= (TextView) findViewById(R.id.buy);
-                BUY.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        //create intent to open the activity
-                        Intent BUYintent= new Intent(SELL_BUY.this,HomeActivity.class);
-                        //start the new activity
-                        startActivity(BUYintent);
-                    }
-                });
+    TextView BUY = (TextView) findViewById(R.id.buy);
+    BUY.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            //create intent to open the activity
+            Intent BUYintent = new Intent(SELL_BUY.this, HomeActivity.class);
+            //start the new activity
+            startActivity(BUYintent);
+        }
+    });
 
-                TextView SELL= (TextView) findViewById(R.id.sell);
-                SELL.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        //create intent to open the activity
-                        Intent SELLintent= new Intent(SELL_BUY.this,SellHomepage.class);
-                        //start the new activity
-                        startActivity(SELLintent);
-                    }
-                });
+    TextView SELL = (TextView) findViewById(R.id.sell);
+    SELL.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            //create intent to open the activity
+            Intent SELLintent = new Intent(SELL_BUY.this, SellHomepage.class);
+            //start the new activity
+            startActivity(SELLintent);
+        }
+    });
+//    Toast.makeText(this,"check 2",Toast.LENGTH_LONG).show();
+    BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+    bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+        @Override
+        public void onTabSelected(@IdRes int tabId) {
+            if (tabId == R.id.tab_wishList) {
+                Intent i = new Intent(getApplicationContext(), WishlistActivity.class);
+//                    i.putExtra("User_Name",User_Name);
+                startActivity(i);
+            } else if (tabId == R.id.tab_profile) {
+                Intent i = new Intent(getApplicationContext(), profile_page.class);
 
-        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
-            @Override
-            public void onTabSelected(@IdRes int tabId) {
-                if (tabId == R.id.tab_wishList) {
-                    Intent i=new Intent(getApplicationContext(),WishlistActivity.class);
+
+//                    Toast.makeText(SELL_BUY.this,User_Id, Toast.LENGTH_LONG).show();
+//                    if(!User_Id.equals("")) {
+//                i.putExtra("UserId", User_Id);
+//                       Toast.makeText(SELL_BUY.this,token+"   "+User_Id, Toast.LENGTH_LONG).show();
+                i.putExtra("token", token);
+//                    }
+                startActivity(i);
+            } else if (tabId == R.id.tab_chat) {
+                try {
+                    Intent i = new Intent(SELL_BUY.this, Chat_UsersList_Activity.class);
+                    i.putExtra("user", User_Id);
+                    i.putExtra("User_Name", User_Name);
                     startActivity(i);
+                } catch (Exception e) {
+                    Toast.makeText(SELL_BUY.this, e.getMessage(), Toast.LENGTH_LONG).show();
                 }
-                else if (tabId == R.id.tab_profile) {
-                    Intent i = new Intent(getApplicationContext(), profile_page.class);
-                    if(!User_Id.equals(""))
-                        i.putExtra("UserId",User_Id);
-                    startActivity(i);
-                }
-
             }
-        });
-        check();
+
+        }
+    });
+
+}
+catch (Exception e)
+{
+    Toast.makeText(SELL_BUY.this,e.getMessage(),Toast.LENGTH_LONG).show();
+}
+
+
     }
 
     @Override
@@ -125,6 +174,7 @@ public class SELL_BUY extends AppCompatActivity {
     {
         Intent intent = new Intent(SELL_BUY.this, profile_page.class);
         intent.putExtra("Id",User_Id);
+        intent.putExtra("token",token);
         startActivity(intent);
     }
 
@@ -139,8 +189,7 @@ public class SELL_BUY extends AppCompatActivity {
 //        demoRef.push().setValue(value);
 //            Toast.makeText(SELL_BUY.this, "hi!", Toast.LENGTH_SHORT).show();
             rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                String EmailIntent = getIntent().getStringExtra("Email");
-
+                String EmailIntent = UserInformation.email;
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
@@ -148,6 +197,7 @@ public class SELL_BUY extends AppCompatActivity {
 //                        Toast.makeText(SELL_BUY.this, email + "  " + EmailIntent, Toast.LENGTH_SHORT).show();
                         if (email.equals(EmailIntent)) {
                             String name = ds.child("name").getValue(String.class);
+                            User_Name=name;
                             // String email = ds.child("email").getValue(String.class);
                             String userId = ds.getKey();
                             String address = "";
@@ -236,7 +286,7 @@ public class SELL_BUY extends AppCompatActivity {
         }
         catch (Exception e)
         {
-            Toast.makeText(SELL_BUY.this, "error checkDB() "+f, Toast.LENGTH_LONG).show();
+            Toast.makeText(SELL_BUY.this, e.getMessage(), Toast.LENGTH_LONG).show();
             //Toast.makeText(SELL_BUY.this,e.getMessage(),Toast.LENGTH_LONG).show();
         }
 
@@ -272,6 +322,7 @@ public class SELL_BUY extends AppCompatActivity {
         //    Toast.makeText(this, "user saved " + newRowId, Toast.LENGTH_SHORT).show();
         }
     }
+
 
 }
 

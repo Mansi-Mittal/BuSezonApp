@@ -41,12 +41,13 @@ import me.relex.circleindicator.CircleIndicator;
 
 public class ProductDesc extends AppCompatActivity {
 
-    RequestQueue rq;
-    TextView prodName, price;
-    String url = "";
     private static ImageView imageView;
     private Button button;
     int value = 0;
+    RequestQueue rq ;
+    TextView prodName, price,sellerName;
+    String url = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +91,8 @@ public class ProductDesc extends AppCompatActivity {
                 addToWishlist(124, value);
             }
         });
+
+        sellerName=(TextView)findViewById(R.id.sellerName);
 
     }
 
@@ -185,6 +188,24 @@ public class ProductDesc extends AppCompatActivity {
         };
 
         AppController.getInstance().addToRequestQueue(request);
+    }
+
+    public void startChat(View view)
+    {
+        try {
+            TextView seller_name=(TextView)findViewById(R.id.sellerName);
+            String sellerName= (String) seller_name.getText();
+            Chat_UserDetails.chatWith =sellerName;
+            String loginUser=UserInformation.name;
+            Chat_UserDetails.username=loginUser;
+//            Toast.makeText(WishlistActivity.this,Chat_UserDetails.chatWith+" "+Chat_UserDetails.username,Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(ProductDesc.this, Chat_Message_Acitivty.class);
+            startActivity(intent);
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(this,e.getMessage(),Toast.LENGTH_LONG).show();
+        }
     }
 
 }

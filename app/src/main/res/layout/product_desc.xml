@@ -59,8 +59,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="24sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:text="100"/>
 
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/sellerName"
+            android:text="seller1"
+            android:onClick="startChat"
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -99,5 +107,6 @@
         android:background="@drawable/pretty_button"
         android:textColor="#ffffff"
         android:text="Add To Bag"/>
+
 </LinearLayout>
 </LinearLayout>

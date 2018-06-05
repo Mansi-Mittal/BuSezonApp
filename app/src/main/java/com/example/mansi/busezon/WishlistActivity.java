@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -46,22 +48,31 @@ public class WishlistActivity extends AppCompatActivity {
                 if (tabId == R.id.tab_wishList) {
                     Intent i = new Intent(getApplicationContext(), WishlistActivity.class);
                     startActivity(i);
-                }
-                else if (tabId == R.id.tab_profile) {
+                } else if (tabId == R.id.tab_profile) {
                     Intent i = new Intent(getApplicationContext(), profile_page.class);
                     startActivity(i);
+                }else if (tabId == R.id.tab_chat) {
+                    try {
+                        Intent i = new Intent(WishlistActivity.this, Chat_UsersList_Activity.class);
+                        i.putExtra("user", UserInformation.UserId);
+                        i.putExtra("User_Name", UserInformation.name);
+                        startActivity(i);
+                    } catch (Exception e) {
+                        Toast.makeText(WishlistActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
                 }
+
             }
         });
 
-        offersList = new ArrayList<>();
+
+                offersList = new ArrayList<>();
         GridView offersListView =findViewById(R.id.list1);
         adapter = new offersAdapter(this, offersList);
         offersListView.setAdapter(adapter);
         //adapter.hideButton();
 
         sendJsonRequest();
-
         offersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -82,6 +93,7 @@ public class WishlistActivity extends AppCompatActivity {
             }
         });
     }
+
     public void sendJsonRequest() {
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
                 (url, new Response.Listener<JSONArray>() {

@@ -40,13 +40,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.jar.Attributes;
+
 public class SigningUpActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button buttonsignup;
-    private EditText email,name,phoneno,address,password;
+    private EditText email,editTextLstname,editTextFstname,phoneno,address,password;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
+    String Name;
 
 
     @Override
@@ -63,14 +66,14 @@ public class SigningUpActivity extends AppCompatActivity implements View.OnClick
 
         buttonsignup=(Button)findViewById(R.id.signupButton);
         email=(EditText)findViewById(R.id.editTextEmail);
-        name=(EditText)findViewById(R.id.editTextname);
+        editTextFstname=(EditText)findViewById(R.id.editTextFstname);
+        editTextLstname=(EditText)findViewById(R.id.editTextLstname);
         phoneno=(EditText)findViewById(R.id.editTextPhoneno);
         address=(EditText)findViewById(R.id.editTextAddress);
         password=(EditText)findViewById(R.id.editTextPassword);
         firebaseAuth=FirebaseAuth.getInstance();
         databaseReference= FirebaseDatabase.getInstance().getReference();
         buttonsignup.setOnClickListener(this);
-
 
     }
     @Override
@@ -81,18 +84,26 @@ public class SigningUpActivity extends AppCompatActivity implements View.OnClick
     }
     private void saveUserDetails(String Name,String Email,String PhoneNo,String Address,String Password)
     {
-        UserInformation userInformation=new UserInformation(Name,Address,Email,PhoneNo,Password);
-        FirebaseUser user=firebaseAuth.getCurrentUser();
-        databaseReference.child(user.getUid()).setValue(userInformation);
+        try {
+            FirebaseUserInformation userInformation = new FirebaseUserInformation(Name, Address, Email, PhoneNo, Password);
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            databaseReference.child(user.getUid()).setValue(userInformation);
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(this,e.getMessage(),Toast.LENGTH_LONG).show();
+        }
     }
 
     private void registerUser()
     {
         final String Email=email.getText().toString().trim();
-        final String Name=name.getText().toString().trim();
+        final String FName=editTextFstname.getText().toString().trim();
+        final String LName=editTextLstname.getText().toString().trim();
         final String PhoneNo=phoneno.getText().toString().trim();
         final String Address=address.getText().toString().trim();
         final String Password=password.getText().toString().trim();
+        Name=FName+" "+LName;
         if(TextUtils.isEmpty(Email))
         {
             Toast.makeText(this,"Enter email",Toast.LENGTH_SHORT).show();
@@ -113,7 +124,7 @@ public class SigningUpActivity extends AppCompatActivity implements View.OnClick
         }
         if(TextUtils.isEmpty(PhoneNo)||PhoneNo.length()!=10)
         {
-            Toast.makeText(this,"Enter Phone number",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Enter correct Phone number",Toast.LENGTH_SHORT).show();
             return;
         }
         if(TextUtils.isEmpty(Address))
@@ -128,25 +139,36 @@ public class SigningUpActivity extends AppCompatActivity implements View.OnClick
                 Toast.makeText(this, "Enter Password", Toast.LENGTH_SHORT).show();
             return;
         }
-        progressDialog.setMessage("Registering User...");
-        progressDialog.show();
-        firebaseAuth.createUserWithEmailAndPassword(Email,Password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                progressDialog.dismiss();
-                if(task.isSuccessful())
-                {
-                    saveUserDetails(Name,Email,PhoneNo,Address,Password);
-                    Toast.makeText(SigningUpActivity.this,"Resgistered Successfully",Toast.LENGTH_SHORT).show();
+        try {
+            progressDialog.setMessage("Registering User...");
+            progressDialog.show();
+            firebaseAuth.createUserWithEmailAndPassword(Email, Password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    progressDialog.dismiss();
+                    if (task.isSuccessful()) {
+                        saveUserDetails(Name, Email, PhoneNo, Address, Password);
+                        Toast.makeText(SigningUpActivity.this, "Resgistered Successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(SigningUpActivity.this, SELL_BUY.class);
+                        UserInformation.UserId = firebaseAuth.getCurrentUser().getUid();
+                        UserInformation.token = "normal";
+                        UserInformation.name = Name;
+                        UserInformation.email = Email;
+                        progressDialog.dismiss();
+                        startActivity(intent);
 
-                    //progressDialog.dismiss();
+                    } else {
+                        Toast.makeText(SigningUpActivity.this, "Try again", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
                 }
-                else
-                {
-                    Toast.makeText(SigningUpActivity.this,"Try again",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+            });
+
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(SigningUpActivity.this,e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
 

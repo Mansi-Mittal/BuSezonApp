@@ -31,7 +31,7 @@ import java.util.Map;
 public class SellHomepage extends AppCompatActivity {
 
     int id =0;
-    String url = "http://172.20.10.9:3000/products?category=clothing";
+    String url = "http://172.20.10.9:3000/products?user_id=1234";
     ArrayList<offers> offersList;
 
     private offersAdapter adapter;
