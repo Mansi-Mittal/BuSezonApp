@@ -1,26 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="180dp"
     android:orientation="vertical"
-    android:paddingEnd="16dp"
+    android:descendantFocusability="blocksDescendants">
+    <!--android:paddingEnd="16dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:paddingStart="16dp">
+    android:paddingStart="16dp"-->
 
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/thumbnail"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.8"/>
+        android:layout_weight="0.8"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 
-    <TextView
-        android:id="@+id/desc"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        android:visibility="visible" />
+        android:orientation="horizontal"
+        android:focusable="false"
+        android:focusableInTouchMode="false">
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:visibility="visible"
+            android:focusable="false"
+            android:focusableInTouchMode="false"/>
+        <Button
+            android:id="@+id/AddToWishlist"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:focusable="false"
+            android:focusableInTouchMode="false" />
+    </LinearLayout>
+
 </LinearLayout>
