@@ -25,15 +25,18 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,7 +45,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Add_product extends AppCompatActivity {
-    private EditText productName;
+    private EditText productName,squant,mquant,lquant,xlquant;
     private EditText color;
     private EditText brand;
     private EditText tags;
@@ -56,7 +59,9 @@ public class Add_product extends AppCompatActivity {
     ProgressDialog progressDialog;
     RequestQueue rQueue;
     Spinner category ,subCategory;
-    String selectedCategory;
+    String selectedCategory, selectedSubCategory;
+    String sizes = "";
+    String qty = "" ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +77,7 @@ public class Add_product extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
 
         ab.setDisplayHomeAsUpEnabled(true);
+
         productName = (EditText) findViewById(R.id.productName);
         color = (EditText) findViewById(R.id.color);
         brand = (EditText) findViewById(R.id.brand);
@@ -82,20 +88,43 @@ public class Add_product extends AppCompatActivity {
         image = (ImageView) findViewById(R.id.image);
         choose = (Button) findViewById(R.id.choose);
         upload = (Button) findViewById(R.id.upload);
+        squant = findViewById(R.id.squant);
+        mquant = findViewById(R.id.mquant);
+        lquant = findViewById(R.id.lquant);
+        xlquant = findViewById(R.id.xlquant);
 
         category = findViewById(R.id.category_btn);
-        subCategory = findViewById(R.id.subCategory);
+        subCategory = findViewById(R.id.subCategoryF);
+
         final LinearLayout subCatLayout = findViewById(R.id.subCategoryLayout);
         final LinearLayout subCatELayout = findViewById(R.id.subCategoryELayout);
+
         category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedCategory = category.getSelectedItem().toString();
-                if(selectedCategory == "FASHION")
+                if(selectedCategory.equalsIgnoreCase("clothing")) {
                     subCatLayout.setVisibility(View.VISIBLE);
-                else
+                    subCatELayout.setVisibility(View.GONE);
+                    subCategory = findViewById(R.id.subCategoryF);
+                }else {
                     subCatELayout.setVisibility(View.VISIBLE);
+                    subCatLayout.setVisibility(View.GONE);
+                    subCategory = findViewById(R.id.subCategoryE);
+                }
             }
             public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        subCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)  {
+                selectedSubCategory = subCategory.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
         rQueue = Volley.newRequestQueue(this);
@@ -116,10 +145,38 @@ public class Add_product extends AppCompatActivity {
             public void onClick(View v) {
                 progressDialog = new ProgressDialog(Add_product.this);
                 progressDialog.setMessage("Uploading, please wait...");
-                //progressDialog.show();
+                progressDialog.show();
+
+                String tagsArray = tags.getText().toString();
 
                 //sending image to server
-                uploadImage();
+                //uploadImage();
+
+                JSONArray prodJsonArray = new JSONArray();
+                JSONObject parameters = new JSONObject();
+                try{
+                    String name = productName.getText().toString();
+                    parameters.put("name", name);
+                    parameters.put("category", selectedCategory);
+                    parameters.put("subCategory",selectedSubCategory);
+                    parameters.put("colour",color.getText().toString());
+                    String imageString = imageToString(bitmap);
+                    parameters.put("image", imageString);
+                    parameters.put("price",price.getText());
+                    parameters.put("brand",brand.getText());
+                    parameters.put("user_id",UserInformation.UserId);
+                    parameters.put("tags",tagsArray);
+                    parameters.put("sizes",sizes);
+                    parameters.put("qty",qty);
+                    parameters.put("sold",false);
+                    prodJsonArray.put(parameters);
+                    //Log.i("jsonString", jsonObject.toString());
+                    uploadImage(parameters);
+
+                }catch(Exception e){
+
+                }
+
 
             }
         });
@@ -160,46 +217,6 @@ public class Add_product extends AppCompatActivity {
         }
     }
 
-    public void uploadImage() {
-        StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                progressDialog.dismiss();
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String Response = jsonObject.getString("response");
-                    Toast.makeText(Add_product.this, Response, Toast.LENGTH_LONG).show();
-                    //image.setImageURI(Response);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-
-            }
-        }) {
-            //adding parameters to send
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> parameters = new HashMap<>();
-                String name = productName.getText().toString();
-                parameters.put("name", name);
-                parameters.put("category", "clothing");
-                String imageString = imageToString(bitmap);
-                parameters.put("image", imageString);
-                parameters.put("price",price.getText().toString());
-                parameters.put("brand",brand.getText().toString());
-                parameters.put("colour",color.getText().toString());
-                parameters.put("user_id","1234");
-                //parameters.put("subCategory",price.getText().toString());
-                return parameters;
-            }
-        };
-
-        rQueue.add(request);
-    }
 
     public String imageToString(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -213,61 +230,67 @@ public class Add_product extends AppCompatActivity {
         // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
 
-        // Check which checkbox was clicked
-
         if (checked) {
-
-        }
-        else
-        {
-
-
+            sizes+= "S ";
+            qty += squant.getText().toString()+ " ";
+        }else{
+            sizes +="N ";
+            qty += "0 ";
         }
     }
     public void onCheckboxClickedmedium(View view) {
         // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
-
-        // Check which checkbox was clicked
-
         if (checked) {
-
-        }
-        else
-        {
-
-
+            sizes+= "M ";
+            qty += mquant.getText().toString()+ " ";
+        }else{
+            sizes +="N ";
+            qty += "0 ";
         }
     }
     public void onCheckboxClickedlarge(View view) {
         // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
-
-
-        // Check which checkbox was clicked
-
         if (checked) {
-
-        }
-        else
-        {
-
-
+            sizes+= "L ";
+            qty += lquant.getText().toString()+ " ";
+        }else{
+            sizes +="N ";
+            qty += "0 ";
         }
     }
     public void onCheckboxClickedextralarge(View view) {
         // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
-
-        // Check which checkbox was clicked
-
-                if (checked) {
-
-                }
-                else
-                {
-
-
+        if (checked) {
+            sizes+= "XL ";
+            qty += xlquant.getText().toString()+ " ";
+        }else{
+            sizes +="N ";
+            qty += "0 ";
         }
     }
+
+    public void uploadImage(JSONObject jsonObject){
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URL, jsonObject,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                       progressDialog.dismiss();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(Add_product.this,"Some Error occured, Try again",Toast.LENGTH_LONG).show();
+
+                    }
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(jsonObjectRequest);
+    }
+
 }

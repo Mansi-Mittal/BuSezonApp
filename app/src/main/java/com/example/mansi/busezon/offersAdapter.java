@@ -46,6 +46,10 @@ public class offersAdapter extends ArrayAdapter<offers> {
         String description = currentOffer.getwords();
         desc.setText(description);
 
+        TextView price = convertView.findViewById(R.id.price);
+        String prodPrice = currentOffer.getPrice()+ "";
+        price.setText(prodPrice);
+
         addToWish = convertView.findViewById(R.id.AddToWishlist);
 
         Context context = getContext();
@@ -59,13 +63,17 @@ public class offersAdapter extends ArrayAdapter<offers> {
                     server.addToBag(sellerID,ID);
                 }
             });
+        }else if(context instanceof SellHomepage){
+            addToWish.setVisibility(View.GONE);
         }else{
             addToWish.setBackgroundResource(R.drawable.wishlist);
             addToWish.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     //progressDialog.show();
+                    //checkIfAlreadyPresent();
                     server.addToWishlist(sellerID,ID);
+
                 }
             });
         }

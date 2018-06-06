@@ -10,12 +10,14 @@ public class offers {
     private String words;
     private int id;
     private int sellerID;
+    private int price;
 
-    public offers(int id, String image, String words, int sellerID){
+    public offers(int id, String image, String words, int sellerID, int price){
         this.id = id;
         this.image=image;
         this.words=words;
         this.sellerID = sellerID;
+        this.price = price;
     }
 
     public String getImage() {
@@ -32,5 +34,9 @@ public class offers {
 
     public int getSellerID() {
         return sellerID;
+    }
+
+    public int getPrice() {
+        return price;
     }
 }

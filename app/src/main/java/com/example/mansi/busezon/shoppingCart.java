@@ -183,6 +183,7 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
                                 String img = info.getString("IMAGE_URL");
                                 String url = "http://192.168.1.6:3000" + img;
                                 String price = info.getString("price");
+                                paymentAmount += price;
                                 String qty = info.getString("Qty");
                                 //int sellerID=info.getInt(""); //complete
                                 cartList.add(new cartItem(url, name, price ,qty));

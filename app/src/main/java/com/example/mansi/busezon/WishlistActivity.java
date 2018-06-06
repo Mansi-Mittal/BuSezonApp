@@ -8,9 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -108,7 +106,7 @@ public class WishlistActivity extends AppCompatActivity {
                                 String img = info.getString("IMAGE_URL");
                                 String url = "http://192.168.1.6:3000" + img;
                                 //int sellerID=info.getInt(""); //complete
-                                offersList.add(new offers(id,url, name, 1234));
+                                offersList.add(new offers(id,url, name, 1234, 0));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

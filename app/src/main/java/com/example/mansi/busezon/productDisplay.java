@@ -102,8 +102,9 @@ public class productDisplay extends AppCompatActivity {
                                 String name = info.getString("name");
                                 String img = info.getString("IMAGE_URL");
                                 String url = "http://192.168.1.6:3000" + img;
+                                int price = info.getInt("price");
                                 //int sellerID=info.getInt(""); //complete
-                                offersList.add(new offers(id,url, name, 1234));
+                                offersList.add(new offers(id,url, name, 1234, price));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
