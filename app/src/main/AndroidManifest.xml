@@ -25,19 +25,17 @@
         <activity
             android:name=".MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
-
-        </activity>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+ </activity>
 
         <activity
             android:name=".HomeActivity"
             android:label="BuSezon"
             android:parentActivityName=".SELL_BUY">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            </activity>
+ </activity>
         <activity
             android:name=".shoppingCart"
             android:label="Shopping Cart"

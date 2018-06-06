@@ -67,7 +67,7 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
     ArrayList<cartItem> cartList;
     private Button buttonPay;
     private EditText editTextAmount;
-
+    private int totalPrice;
     //Payment Amount
     private String paymentAmount;
 
@@ -92,7 +92,7 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
         ActionBar ab = getSupportActionBar();
 
         ab.setDisplayHomeAsUpEnabled(true);
-
+        totalPrice=0;
 
         cartList = new ArrayList<>();
         ListView cartListView =findViewById(R.id.list1);
@@ -170,6 +170,7 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
     }
 
     public void sendJsonRequest() {
+totalPrice=0;
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
                 (url, new Response.Listener<JSONArray>() {
 
@@ -183,6 +184,8 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
                                 String img = info.getString("IMAGE_URL");
                                 String url = "http://192.168.1.6:3000" + img;
                                 String price = info.getString("price");
+                                int priceConvt=Integer.valueOf(price);
+                                totalPrice+=priceConvt;
                                 String qty = info.getString("Qty");
                                 //int sellerID=info.getInt(""); //complete
                                 cartList.add(new cartItem(url, name, price ,qty));
@@ -211,7 +214,7 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
     private void getPayment() {
         //Getting the amount from editText
         try {
-            paymentAmount ="10";
+            paymentAmount= String.valueOf(totalPrice);
 //        Toast.makeText(MainActivity.this,"hi",Toast.LENGTH_LONG).show();
             //Creating a paypalpayment
             PayPalPayment payment = new PayPalPayment(new BigDecimal(String.valueOf(paymentAmount)), "USD", "Price",
