@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amazon.identity.auth.device.api.authorization.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.OnProgressListener;
@@ -55,9 +56,11 @@ public class PaypalConfirmationActivity extends AppCompatActivity {
        if(!jsonDetails.getString("state").equals("approved"))
        {
            Toast.makeText(this,"Payment failed!!! Going back to cart.",Toast.LENGTH_LONG).show();
+           UserInformation.payment=false;
            Intent intent=new Intent(PaypalConfirmationActivity.this,shoppingCart.class);
            startActivity(intent);
        }
+        UserInformation.payment=true;
 
     }
 

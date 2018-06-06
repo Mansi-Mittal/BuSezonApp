@@ -33,7 +33,7 @@ import java.util.ArrayList;
 public class HomeActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     SearchView searchView;
-    String URL = "http://172.20.10.9:3000/products/search?search=";
+    String URL = "http://192.168.0.106:3000/products/search?search=";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

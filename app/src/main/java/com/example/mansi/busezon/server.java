@@ -45,12 +45,12 @@ public class server {
 
 
     public  static void addToWishlist(int sellerID, int prodID) {
-        String URL = "http://172.20.10.9:3000/wishlists/new";
+        String URL = "http://192.168.0.106:3000/wishlists/new";
         serverRequest(URL, sellerID, prodID);
 
     }
     public static void addToBag(int sellerID, int prodID) {
-            String URL = "http://172.20.10.9:3000/carts/new";
+            String URL = "http://192.168.0.106:3000/carts/new";
             serverRequest(URL,sellerID,prodID);
     }
 

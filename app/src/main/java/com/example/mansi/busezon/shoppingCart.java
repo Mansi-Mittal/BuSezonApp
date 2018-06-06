@@ -60,7 +60,7 @@ import java.util.Map;
 public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentTransactionCallback {
 
     int id =0;
-    String url = "http://172.20.10.9:3000/carts?user_id=1234";
+    String url = "http://192.168.0.106:3000/carts?user_id=1234";
     ArrayList<offers> offersList;
     private Button buttonPay;
     private EditText editTextAmount;
@@ -177,7 +177,7 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
                                 id = info.getInt("id");
                                 String name = info.getString("name");
                                 String img = info.getString("IMAGE_URL");
-                                String url = "http://172.20.10.9:3000" + img;
+                                String url = "http://192.168.0.106:3000" + img;
                                 //int sellerID=info.getInt(""); //complete
                                 offersList.add(new offers(id,url, name, 1234));
                             }

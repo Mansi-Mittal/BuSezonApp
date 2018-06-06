@@ -53,7 +53,7 @@ public class ProductDesc extends AppCompatActivity {
         if (b != null)
             value = b.getInt("Product_id");
 
-        url = "http://172.20.10.9:3000/products/show/?id=" + value;
+        url = "http://192.168.0.106:3000/products/show/?id=" + value;
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -131,7 +131,7 @@ public class ProductDesc extends AppCompatActivity {
                             prodName.setText(response.getString("name"));
                             price.setText(response.getString("category"));
                             String img = response.getString("IMAGE_URL");
-                            String url = "http://172.20.10.9:3000" + img;
+                            String url = "http://192.168.0.106:3000" + img;
                             Glide.with(ProductDesc.this).load(url).into(imageView);
                             //Toast.makeText(ProductDesc.this, url, Toast.LENGTH_SHORT).show();
 
