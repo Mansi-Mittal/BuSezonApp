@@ -2,6 +2,7 @@ package com.example.mansi.busezon;
 
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -14,10 +15,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -43,14 +47,17 @@ public class Add_product extends AppCompatActivity {
     private EditText brand;
     private EditText tags;
     private EditText start_date;
-    private EditText last_date;
+    private EditText last_date,price;
     private Button choose, upload;
     private ImageView image;
     private final int PICK_IMAGE_REQUEST = 1;
-    String URL = "http://192.168.0.106:3000/products/new";
+
+    String URL = "http://192.168.1.6:3000/products/new";
     private Bitmap bitmap;
     ProgressDialog progressDialog;
     RequestQueue rQueue;
+    Spinner category ,subCategory;
+    String selectedCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,11 +79,26 @@ public class Add_product extends AppCompatActivity {
         tags = (EditText) findViewById(R.id.tags);
         start_date = (EditText) findViewById(R.id.startdate);
         last_date = (EditText) findViewById(R.id.lastdate);
-
+        price = (EditText) findViewById(R.id.Pprice);
         image = (ImageView) findViewById(R.id.image);
         choose = (Button) findViewById(R.id.choose);
         upload = (Button) findViewById(R.id.upload);
 
+        category = findViewById(R.id.category_btn);
+        subCategory = findViewById(R.id.subCategory);
+        final LinearLayout subCatLayout = findViewById(R.id.subCategoryLayout);
+        final LinearLayout subCatELayout = findViewById(R.id.subCategoryELayout);
+        category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedCategory = category.getSelectedItem().toString();
+                if(selectedCategory == "FASHION")
+                    subCatLayout.setVisibility(View.VISIBLE);
+                else
+                    subCatELayout.setVisibility(View.VISIBLE);
+            }
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
         rQueue = Volley.newRequestQueue(this);
 
         //opening image chooser option
@@ -168,6 +190,11 @@ public class Add_product extends AppCompatActivity {
                 parameters.put("category", "clothing");
                 String imageString = imageToString(bitmap);
                 parameters.put("image", imageString);
+                parameters.put("price",price.getText().toString());
+                parameters.put("brand",brand.getText().toString());
+                parameters.put("colour",color.getText().toString());
+                parameters.put("user_id","1234");
+                //parameters.put("subCategory",price.getText().toString());
                 return parameters;
             }
         };

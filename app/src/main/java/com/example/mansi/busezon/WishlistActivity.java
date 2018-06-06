@@ -28,7 +28,9 @@ import java.util.ArrayList;
 public class WishlistActivity extends AppCompatActivity {
 
     int id =0;
-    String url = "http://192.168.0.106:3000/wishlists?user_id=1234";
+
+    String url = "http://192.168.1.6:3000/wishlists?user_id=1234";
+
     ArrayList<offers> offersList;
     private offersAdapter adapter;
     @Override
@@ -83,15 +85,15 @@ public class WishlistActivity extends AppCompatActivity {
             }
         });
 
-        Button profile=(Button)findViewById(R.id.Profile);
+        //Button profile=(Button)findViewById(R.id.Profile);
 
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                Intent i = new Intent(getApplicationContext(), profile_page.class);
-                startActivity(i);
-            }
-        });
+        //profile.setOnClickListener(new View.OnClickListener() {
+            //@Override
+          //  public void onClick(View arg0) {
+        //        Intent i = new Intent(getApplicationContext(), profile_page.class);
+         //       startActivity(i);
+          //  }
+        //});
     }
 
     public void sendJsonRequest() {
@@ -106,7 +108,9 @@ public class WishlistActivity extends AppCompatActivity {
                                 id = info.getInt("id");
                                 String name = info.getString("name");
                                 String img = info.getString("IMAGE_URL");
-                                String url = "http://192.168.0.106:3000" + img;
+
+                                String url = "http://192.168.1.6:3000" + img;
+
                                 //int sellerID=info.getInt(""); //complete
                                 offersList.add(new offers(id,url, name, 1234));
                             }
