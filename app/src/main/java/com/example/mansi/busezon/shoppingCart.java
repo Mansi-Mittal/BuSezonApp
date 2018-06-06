@@ -1,17 +1,27 @@
 package com.example.mansi.busezon;
 
+
 import android.app.Activity;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+
+import android.widget.Toast;
+
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -24,6 +34,9 @@ import org.json.JSONObject;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import android.widget.Toast;
+//import com.paytm.pgsdk.PaytmClientCertificate;
+//import com.paytm.pgsdk.PaytmMerchant;
+
 
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
@@ -32,18 +45,17 @@ import com.paypal.android.sdk.payments.PaymentActivity;
 import com.paypal.android.sdk.payments.PaymentConfirmation;
 import com.paytm.pgsdk.PaytmClientCertificate;
 //import com.paytm.pgsdk.PaytmMerchant;
-import com.paytm.pgsdk.PaytmMerchant;
-import com.paytm.pgsdk.PaytmOrder;
-import com.paytm.pgsdk.PaytmPGService;
-import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
-import java.util.HashMap;
+//import com.paytm.pgsdk.PaytmOrder;
+//import com.paytm.pgsdk.PaytmPGService;
+//import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
+//import java.util.HashMap;
 import java.util.Map;
 
-import retrofit2.Call;
-import retrofit2.Callback;
+//import retrofit2.Call;
+//import retrofit2.Callback;
 //import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+//import retrofit2.Retrofit;
+//import retrofit2.converter.gson.GsonConverterFactory;
 
 public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentTransactionCallback {
 
@@ -78,6 +90,33 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
         ActionBar ab = getSupportActionBar();
 
         ab.setDisplayHomeAsUpEnabled(true);
+
+        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(@IdRes int tabId) {
+                if (tabId == R.id.tab_wishList) {
+                    Intent i = new Intent(getApplicationContext(), WishlistActivity.class);
+                    startActivity(i);
+                }
+                else if (tabId == R.id.tab_profile) {
+                    Intent i = new Intent(getApplicationContext(), profile_page.class);
+                    startActivity(i);
+                }
+                else if (tabId == R.id.tab_chat) {
+                    try {
+                        Intent i = new Intent(shoppingCart.this, Chat_UsersList_Activity.class);
+                        i.putExtra("user", UserInformation.UserId);
+                        i.putExtra("User_Name", UserInformation.name);
+                        startActivity(i);
+                    } catch (Exception e) {
+                        Toast.makeText(shoppingCart.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }
+    }
+
+        });
+
         offersList = new ArrayList<>();
         GridView offersListView =findViewById(R.id.list1);
         adapter = new offersAdapter(this, offersList);
@@ -106,7 +145,6 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
         startService(intent);
 
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
