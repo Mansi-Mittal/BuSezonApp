@@ -7,7 +7,6 @@ package com.example.mansi.busezon;
 public class FirebaseUserInformation
 {
     public String name,address,email,phoneno,password;
-    public boolean seller,buyer;
 
     public FirebaseUserInformation(){};
 
