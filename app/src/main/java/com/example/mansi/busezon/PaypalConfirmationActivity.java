@@ -44,12 +44,14 @@ public class PaypalConfirmationActivity extends AppCompatActivity {
         //Views
         TextView textViewId = (TextView) findViewById(R.id.paymentId);
         TextView textViewStatus= (TextView) findViewById(R.id.paymentStatus);
-      TextView textViewAmount = (TextView) findViewById(R.id.paymentAmount);
-
+      TextView textViewAmountINR = (TextView) findViewById(R.id.paymentAmountINR);
+        TextView textViewAmountUSD = (TextView) findViewById(R.id.paymentAmountUSD);
         //Showing the details from json object
         textViewId.setText(jsonDetails.getString("id"));
         textViewStatus.setText(jsonDetails.getString("state"));
-       textViewAmount.setText(paymentAmount+" USD");
+       textViewAmountUSD.setText(paymentAmount+" USD");
+       int amount=Integer.valueOf(paymentAmount)*67;
+       textViewAmountINR.setText(amount+" INR");
        if(!jsonDetails.getString("state").equals("approved"))
        {
            Toast.makeText(this,"Payment failed!!! Going back to cart.",Toast.LENGTH_LONG).show();
