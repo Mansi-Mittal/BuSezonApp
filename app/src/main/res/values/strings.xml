@@ -7,6 +7,22 @@
         <item>ELECTRONICS</item>
            
     </string-array>
+    <string-array name="sub_category_fashion">
+               
+        <item>sports</item>
+               
+        <item>TopWear</item>
+        <item>Indian</item>
+        <item>BottomWear</item>
+    </string-array>
+    <string-array name="sub_category_electronics">
+               
+        <item>Mobile/Tablets</item>
+               
+        <item>TV</item>
+        <item>Computers/Laptop</item>
+        <item>Otherappliances</item>
+    </string-array>
     <string name="menu_settings">Settings</string>
     <string name="login_with_amazon">Login with Amazon</string>
     <string name="logout">Logout</string>

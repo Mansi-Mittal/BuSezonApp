@@ -5,7 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
@@ -14,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -25,23 +29,23 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 
 public class HomeActivity extends AppCompatActivity {
-
+    private DrawerLayout mDrawerLayout;
     SearchView searchView;
-    String URL = "http://172.20.10.9:3000/products/search?search=";
+    String URL = "http://192.168.1.6:3000/products/search?search=";
     Button like;
+    int id = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         //getActionBar().setTitle("BuSezon");
+        mDrawerLayout = findViewById(R.id.drawer_layout);
         setSupportActionBar(myToolbar);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
@@ -53,10 +57,39 @@ public class HomeActivity extends AppCompatActivity {
         offersList.add(new offerLayout(R.drawable.img3,like));
         offersList.add(new offerLayout(R.drawable.img4,like));
         offersList.add(new offerLayout(R.drawable.img5,like));
+        ab.setHomeAsUpIndicator(R.drawable.ic_menu_white_18dp);
+        ab.setDisplayHomeAsUpEnabled(true);
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        // set item as selected to persist highlight
+                        menuItem.setChecked(true);
+                        // close drawer when item is tapped
+                        mDrawerLayout.closeDrawers();
+
+                        // Add code here to update the UI based on the item selected
+                        // For example, swap UI fragments here
+
+                        return true;
+                    }
+                });
+
 
         ListView offersListView = (ListView) findViewById(R.id.list);
         final offerLayoutAdapter adapter = new offerLayoutAdapter(this, offersList);
         offersListView.setAdapter(adapter);
+
+        offersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent appInfo = new Intent(HomeActivity.this, productDisplay.class);
+                appInfo.putExtra("offer_id",id);
+                startActivity(appInfo);
+            }
+        });
 
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
@@ -80,20 +113,9 @@ public class HomeActivity extends AppCompatActivity {
                         Toast.makeText(HomeActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
-
-
             }
         });
-
-        /*searchView.setOnSearchClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });*/
-
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -114,15 +136,10 @@ public class HomeActivity extends AppCompatActivity {
             }
         };
 
-
         MenuItemCompat.setOnActionExpandListener(searchItem, expandListener);
-
         SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-
         SearchView search = (SearchView) menu.findItem(R.id.action_search).getActionView();
-
         search.setSearchableInfo(manager.getSearchableInfo(getComponentName()));
-
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
@@ -148,6 +165,9 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home:
+                    mDrawerLayout.openDrawer(GravityCompat.START);
+                    return true;
             case R.id.action_cart:
                 Intent i = new Intent(this, shoppingCart.class);
                 startActivity(i);

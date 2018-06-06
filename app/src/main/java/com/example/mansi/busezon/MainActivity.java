@@ -518,12 +518,13 @@ private void startIntent(String name,String email,String id)
                 progressDialog.dismiss();
                 if (task.isSuccessful()) {
                     try {
-                        String userId=firebaseAuth.getCurrentUser().getUid();
+                        FirebaseUser currentUser=firebaseAuth.getCurrentUser();
+                        String userId=currentUser.getUid();
                         Toast.makeText(MainActivity.this,"Logged in Successfully",Toast.LENGTH_SHORT).show();
                         Intent i=new Intent(getApplicationContext(),SELL_BUY.class);
                         i.putExtra("Id",userId);
                         i.putExtra("Email",Email);
-
+                        UserInformation.name=currentUser.getDisplayName();
                         UserInformation.email=Email;
                         UserInformation.UserId=userId;
 //                        Toast.makeText(MainActivity.this,userId+" "+tokenToCheckLoginType+" "+Email,Toast.LENGTH_SHORT).show();

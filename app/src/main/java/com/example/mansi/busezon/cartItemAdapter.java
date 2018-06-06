@@ -43,15 +43,15 @@ public class cartItemAdapter extends ArrayAdapter<cartItem> {
 
         TextView name = convertView.findViewById(R.id.cart_name);
         String currentName = current.getName();
-        name.setText(currentName);
+        name.setText("Product Name : "+currentName);
 
         TextView price = convertView.findViewById(R.id.cart_price);
         String P =current.getPrice()+"";
-        price.setText(P);
+        price.setText("Price :" + P);
 
         TextView qty = convertView.findViewById(R.id.cart_qty);
         String Qty = current.getQty()+"";
-        qty.setText(Qty);
+        qty.setText("Qty : "+ Qty);
         return convertView;
     }
 

@@ -15,18 +15,26 @@
         android:layout_weight="0.1"
         android:background="#009688"
         android:elevation="4dp"
+        android:layout_marginBottom="10dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
 
     <ListView
         android:id="@+id/list1"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.82"
+        android:layout_weight="0.75"
         android:divider="@null"
-        android:dividerHeight="0dp"/>
+        android:dividerHeight="5dp" />
+
+    <Button
+        android:id="@+id/proceedToPay"
+        android:layout_height="0dp"
+        android:layout_width="200dp"
+        android:layout_weight="0.07"
+        android:layout_marginStart="80dp"
+        android:text="Proceed to pay"/>
 
 
     <com.roughike.bottombar.BottomBar

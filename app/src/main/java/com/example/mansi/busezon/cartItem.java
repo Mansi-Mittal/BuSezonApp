@@ -8,10 +8,10 @@ public class cartItem {
 
     private String image;
     private String name;
-    private int price;
-    private int qty;
+    private String price;
+    private String qty;
 
-    public cartItem(String image, String name, int price, int qty) {
+    public cartItem(String image, String name, String price, String qty) {
         this.image = image;
         this.name = name;
         this.price = price;
@@ -27,11 +27,11 @@ public class cartItem {
         return name;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public int getQty() {
+    public String getQty() {
         return qty;
     }
 }

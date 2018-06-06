@@ -6,9 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -17,14 +14,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.amazon.identity.auth.device.api.authorization.User;
 import com.example.mansi.busezon.data.dbContract;
 import com.example.mansi.busezon.data.dbHelper;
-
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,13 +25,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
-import java.security.spec.ECField;
-
 public class SELL_BUY extends AppCompatActivity {
     private  dbHelper mDbHelper;
 
     private  String User_Id,User_Name;
-    private DrawerLayout mDrawerLayout;
+
     private String token;
     private FirebaseAuth firebaseAuth;
     @Override
@@ -49,7 +39,7 @@ public class SELL_BUY extends AppCompatActivity {
                 // Set the content of the activity to use the activity_main.xml layout file
                 setContentView(R.layout.activity_sell__buy);
 
-    mDrawerLayout = findViewById(R.id.drawer_layout);
+
 //    User_Id = getIntent().getStringExtra("Id");
 //    UserInformation.email=getIntent().getStringExtra("Email");
         User_Id=UserInformation.UserId;
@@ -62,30 +52,26 @@ public class SELL_BUY extends AppCompatActivity {
             Toast.makeText(SELL_BUY.this,e.getMessage(),Toast.LENGTH_LONG).show();
         }
         User_Name =UserInformation.name;
-//        Toast.makeText(SELL_BUY.this,UserInformation.UserId+" "+UserInformation.email+" "+UserInformation.name,Toast.LENGTH_LONG).show();
-//        FirebaseUser firebaseUser=firebaseAuth.getCurrentUser();
-//        if(firebaseUser!=null)
-//        {
-//            String userId=firebaseUser.getDisplayName();
-//            Toast.makeText(this, userId, Toast.LENGTH_SHORT).show();
-//        }
-//        Toast.makeText(SELL_BUY.this,User_Id, Toast.LENGTH_LONG).show();
-    NavigationView navigationView = findViewById(R.id.nav_view);
-    navigationView.setNavigationItemSelectedListener(
-            new NavigationView.OnNavigationItemSelectedListener() {
+        if(User_Name==null) {
+            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+            DatabaseReference databaseReference = firebaseDatabase.getReferenceFromUrl("https://busezon-57985.firebaseio.com/").child(UserInformation.UserId);
+            databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
-                public boolean onNavigationItemSelected(MenuItem menuItem) {
-                    // set item as selected to persist highlight
-                    menuItem.setChecked(true);
-                    // close drawer when item is tapped
-                    mDrawerLayout.closeDrawers();
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    User_Name = (String) dataSnapshot.child("name").getValue();
+                    UserInformation.name=User_Name;
+//                    Toast.makeText(SELL_BUY.this,b+" "+child,Toast.LENGTH_LONG).show();
+                }
 
-                    // Add code here to update the UI based on the item selected
-                    // For example, swap UI fragments here
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-                    return true;
                 }
             });
+//            Toast.makeText(SELL_BUY.this,User_Name,Toast.LENGTH_LONG).show();
+        }
+
+//        Toast.makeText(SELL_BUY.this,UserInformation.UserId+" "+User_Name+" "+UserInformation.name,Toast.LENGTH_LONG).show();
 
 
 
@@ -94,7 +80,8 @@ try {
     setSupportActionBar(myToolbar);
     ActionBar ab = getSupportActionBar();
     ab.setDisplayHomeAsUpEnabled(true);
-    ab.setHomeAsUpIndicator(R.drawable.ic_menu_white_18dp);
+
+
 //        Toast.makeText(SELL_BUY.this, "hi!!", Toast.LENGTH_SHORT).show();
 
 
@@ -164,11 +151,7 @@ catch (Exception e)
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                mDrawerLayout.openDrawer(GravityCompat.START);
-                return true;
-        }
+
         switch (item.getItemId()) {
             case R.id.action_cart:
                 Intent i=new Intent(this,shoppingCart.class);
@@ -217,6 +200,7 @@ catch (Exception e)
                         if (email.equals(EmailIntent)) {
                             String name = ds.child("name").getValue(String.class);
                             User_Name=name;
+                            UserInformation.name=User_Name;
                             // String email = ds.child("email").getValue(String.class);
                             String userId = ds.getKey();
                             String address = "";
@@ -253,7 +237,6 @@ catch (Exception e)
                         }
                         }
                     }
-
                 }
 
                 @Override

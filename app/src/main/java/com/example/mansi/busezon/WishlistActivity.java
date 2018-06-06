@@ -83,15 +83,15 @@ public class WishlistActivity extends AppCompatActivity {
             }
         });
 
-        Button profile=(Button)findViewById(R.id.Profile);
+        //Button profile=(Button)findViewById(R.id.Profile);
 
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                Intent i = new Intent(getApplicationContext(), profile_page.class);
-                startActivity(i);
-            }
-        });
+        //profile.setOnClickListener(new View.OnClickListener() {
+            //@Override
+          //  public void onClick(View arg0) {
+        //        Intent i = new Intent(getApplicationContext(), profile_page.class);
+         //       startActivity(i);
+          //  }
+        //});
     }
 
     public void sendJsonRequest() {

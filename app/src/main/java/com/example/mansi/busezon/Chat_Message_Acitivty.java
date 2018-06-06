@@ -20,7 +20,6 @@ import com.firebase.client.FirebaseError;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class Chat_Message_Acitivty extends AppCompatActivity {
     LinearLayout layout;
     RelativeLayout layout_2;
