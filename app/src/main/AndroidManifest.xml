@@ -25,10 +25,7 @@
         <activity
             android:name=".MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <activity
@@ -36,6 +33,10 @@
             android:label="BuSezon"
             android:parentActivityName=".SELL_BUY">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             </activity>
         <activity
             android:name=".shoppingCart"
@@ -61,10 +62,7 @@
             android:name=".SellHomepage"
             android:label="Seller Home"
             android:parentActivityName=".SELL_BUY">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity
             android:name=".ProductDescription"
@@ -74,6 +72,7 @@
         <activity
             android:name=".SELL_BUY"
             android:label="Sell/buy">
+
         </activity>
         <activity
             android:name=".SELL"
@@ -100,7 +99,7 @@
             <!--android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation|keyboard" />-->
 
         <activity android:name=".productDisplay"
-            android:label="results">
+            android:label=" ">
 
         </activity>
 

@@ -51,6 +51,7 @@ public class offersAdapter extends ArrayAdapter<offers> {
         Context context = getContext();
         if(context instanceof WishlistActivity) {
             //addToWish.setVisibility(View.GONE);
+            addToWish.setBackgroundResource(R.drawable.cart);
             addToWish.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -59,7 +60,7 @@ public class offersAdapter extends ArrayAdapter<offers> {
                 }
             });
         }else{
-            addToWish.setText("<3");
+            addToWish.setBackgroundResource(R.drawable.wishlist);
             addToWish.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
