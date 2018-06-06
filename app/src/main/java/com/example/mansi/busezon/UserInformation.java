@@ -7,5 +7,7 @@ package com.example.mansi.busezon;
 public class UserInformation {
     public static String name,address,email,phoneno,password;
     public static String UserId,token;
+    public static boolean payment=false;
+
 
 }
