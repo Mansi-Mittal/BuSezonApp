@@ -33,6 +33,8 @@ import org.json.JSONObject;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+
+import android.widget.ListView;
 import android.widget.Toast;
 //import com.paytm.pgsdk.PaytmClientCertificate;
 //import com.paytm.pgsdk.PaytmMerchant;
@@ -60,8 +62,9 @@ import java.util.Map;
 public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentTransactionCallback {
 
     int id =0;
-    String url = "http://172.20.10.9:3000/carts?user_id=1234";
-    ArrayList<offers> offersList;
+    private cartItemAdapter adapter;
+    String url = "http://192.168.1.6:3000/carts?user_id=1234";
+    ArrayList<cartItem> cartList;
     private Button buttonPay;
     private EditText editTextAmount;
 
@@ -78,7 +81,6 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
             // or live (ENVIRONMENT_PRODUCTION)
             .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
             .clientId(PaypalConfig.PAYPAL_CLIENT_ID);
-    private offersAdapter adapter;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +92,12 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
         ActionBar ab = getSupportActionBar();
 
         ab.setDisplayHomeAsUpEnabled(true);
+
+
+        cartList = new ArrayList<>();
+        ListView cartListView =findViewById(R.id.list1);
+        adapter = new cartItemAdapter(this, cartList);
+        cartListView.setAdapter(adapter);
 
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
@@ -117,10 +125,6 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
 
         });
 
-        offersList = new ArrayList<>();
-        GridView offersListView =findViewById(R.id.list1);
-        adapter = new offersAdapter(this, offersList);
-        offersListView.setAdapter(adapter);
 
         sendJsonRequest();
 
@@ -177,9 +181,11 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
                                 id = info.getInt("id");
                                 String name = info.getString("name");
                                 String img = info.getString("IMAGE_URL");
-                                String url = "http://172.20.10.9:3000" + img;
+                                String url = "http://192.168.1.6:3000" + img;
+                                String price = info.getString("price");
+                                String qty = info.getString("Qty");
                                 //int sellerID=info.getInt(""); //complete
-                                offersList.add(new offers(id,url, name, 1234));
+                                cartList.add(new cartItem(url, name, price ,qty));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

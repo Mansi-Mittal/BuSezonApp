@@ -16,6 +16,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -33,7 +36,9 @@ import java.util.ArrayList;
 public class HomeActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     SearchView searchView;
-    String URL = "http://172.20.10.9:3000/products/search?search=";
+    String URL = "http://192.168.1.6:3000/products/search?search=";
+    Button like;
+    int id = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,12 +47,17 @@ public class HomeActivity extends AppCompatActivity {
         //getActionBar().setTitle("BuSezon");
         mDrawerLayout = findViewById(R.id.drawer_layout);
         setSupportActionBar(myToolbar);
-
         ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+
+        like = (Button)findViewById(R.id.like);
+        ArrayList<offerLayout> offersList=new ArrayList<>();
+        //offersList.add(new offerLayout(R.drawable.img1,like));
+        offersList.add(new offerLayout(R.drawable.img2,like));
+        offersList.add(new offerLayout(R.drawable.img3,like));
+        offersList.add(new offerLayout(R.drawable.img4,like));
+        offersList.add(new offerLayout(R.drawable.img5,like));
         ab.setHomeAsUpIndicator(R.drawable.ic_menu_white_18dp);
-        ab.setHomeAsUpIndicator(R.drawable.ic_shopping_cart_black_24dp);
-
-
         ab.setDisplayHomeAsUpEnabled(true);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -67,23 +77,19 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 });
 
-        //searchView = findViewById(R.id.action_search);
-
-        ArrayList<offers> offersList=new ArrayList<>();
-        //offersList.add(new offers(R.drawable.img1,"Great discounts"));
-        //offersList.add(new offers(R.drawable.img2,"Great discounts"));
-        //offersList.add(new offers(R.drawable.img3,"Great discounts"));
-        //offersList.add(new offers(R.drawable.img4,"Great discounts"));
-        //offersList.add(new offers(R.drawable.img5,"Great discounts"));
 
         ListView offersListView = (ListView) findViewById(R.id.list);
-
-        // Create a new {@link ArrayAdapter} of earthquakes
-        final offersAdapter adapter = new offersAdapter(this, offersList);
-
-        // Set the adapter on the {@link ListView}
-        // so the list can be populated in the user interface
+        final offerLayoutAdapter adapter = new offerLayoutAdapter(this, offersList);
         offersListView.setAdapter(adapter);
+
+        offersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent appInfo = new Intent(HomeActivity.this, productDisplay.class);
+                appInfo.putExtra("offer_id",id);
+                startActivity(appInfo);
+            }
+        });
 
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
@@ -130,28 +136,15 @@ public class HomeActivity extends AppCompatActivity {
             }
         };
 
-
         MenuItemCompat.setOnActionExpandListener(searchItem, expandListener);
-
         SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-
         SearchView search = (SearchView) menu.findItem(R.id.action_search).getActionView();
-
         search.setSearchableInfo(manager.getSearchableInfo(getComponentName()));
-
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
             public boolean onQueryTextSubmit(String search) {
-                //String search = searchView.getQuery().toString();
-                /*Intent appInfo = new Intent(HomeActivity.this, productDisplay.class);
-                Bundle d = new Bundle();
-                d.putBoolean("search",true);
-                d.putString("urlParam",search); //Your id
-                appInfo.putExtras(d); //Put your id to your next Intent
-                startActivity(appInfo);*/
-                //URL = "http://172.20.10.9:3000/products/search?search=";
-                //URL += search;
+
                 Intent appInfo = new Intent(HomeActivity.this, productDisplay.class);
                 appInfo.putExtra("urlParam",search);
                 startActivity(appInfo);
@@ -192,32 +185,7 @@ public class HomeActivity extends AppCompatActivity {
 
         }
     }
-    public void sendJsonRequest() {
-        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
-                (URL, new Response.Listener<JSONArray>() {
 
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        try {
-                            //productDisplay.onResponse(response);
-                            serverParams.responeArray = response;
-                            Intent appInfo = new Intent(HomeActivity.this, productDisplay.class);
-                            //appInfo.putExtra("JsonArray",response.toString());
-                            startActivity(appInfo);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
-
-                    }
-                });
-        AppController.getInstance().addToRequestQueue(jsonObjectRequest);
-    }
     }
 
 

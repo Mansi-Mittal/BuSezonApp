@@ -22,7 +22,21 @@
                 android:text="Payment Amount : " />
 
             <TextView
-                android:id="@+id/paymentAmount"
+                android:id="@+id/paymentAmountINR"
+                android:layout_width="wrap_content"
+                android:textStyle="bold"
+                android:layout_height="wrap_content" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Payment Amount : " />
+
+            <TextView
+                android:id="@+id/paymentAmountUSD"
                 android:layout_width="wrap_content"
                 android:textStyle="bold"
                 android:layout_height="wrap_content" />
