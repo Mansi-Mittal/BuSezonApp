@@ -29,15 +29,13 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-        </activity>
+ </activity>
 
         <activity
             android:name=".HomeActivity"
             android:label="BuSezon"
             android:parentActivityName=".SELL_BUY">
-
-            </activity>
+ </activity>
         <activity
             android:name=".shoppingCart"
             android:label="Shopping Cart"
