@@ -71,6 +71,7 @@
                     android:textStyle="italic" />
 
                 <Spinner
+                    android:id="@+id/category_btn"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:entries="@array/array_name"
@@ -81,10 +82,12 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/subCategoryLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -97,6 +100,7 @@
                     android:textStyle="italic" />
 
                 <Spinner
+                    android:id="@+id/subCategory"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:entries="@array/sub_category_fashion"
@@ -131,10 +135,12 @@
                 <!--</Spinner>-->
             <!--</LinearLayout>-->
             <LinearLayout
+                android:id="@+id/subCategoryELayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -203,7 +209,7 @@
                     android:textStyle="italic" />
 
                 <EditText
-                    android:id="@+id/price"
+                    android:id="@+id/Pprice"
                     android:layout_width="249dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
