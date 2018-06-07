@@ -109,6 +109,7 @@ try {
     });
 //    Toast.makeText(this,"check 2",Toast.LENGTH_LONG).show();
     BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+    bottomBar.setDefaultTabPosition(0);
     bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
         @Override
         public void onTabSelected(@IdRes int tabId) {
@@ -326,7 +327,10 @@ catch (Exception e)
         }
     }
     @Override
-    public void onBackPressed() { }
+    public void onBackPressed() {
+        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+        bottomBar.setDefaultTabPosition(0);
+    }
 
 
 }

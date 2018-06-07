@@ -86,8 +86,7 @@
 
         <!-- <activity android:name="com.paytm.pgsdk.PaytmPGActivity" -->
         <!-- android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation|keyboard" /> -->
-
-<<<<<<< HEAD
+        
         <activity android:name=".productDisplay"
             android:label=" ">
 
@@ -97,14 +96,7 @@
         <activity android:name=".Chat_UsersList_Activity"></activity>
         <activity android:name=".PaypalConfirmationActivity"></activity>
         <activity android:name=".ProfileEditInformation"></activity>
-=======
-        <activity
-            android:name=".productDisplay"
-            android:label=" "></activity>
-        <activity android:name=".Chat_Message_Acitivty" />
-        <activity android:name=".Chat_UsersList_Activity" />
-        <activity android:name=".PaypalConfirmationActivity" />
->>>>>>> 5a3615f26a29b5ed67b2eeb9596e5a843a3e8a56
+
     </application>
 
 </manifest>

@@ -219,6 +219,7 @@ totalPrice=0;
     private void getPayment() {
         //Getting the amount from editText
         try {
+
             paymentAmount= String.valueOf(totalPrice);
 //        Toast.makeText(MainActivity.this,"hi",Toast.LENGTH_LONG).show();
             //Creating a paypalpayment
