@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
@@ -66,12 +67,13 @@ public class offersAdapter extends ArrayAdapter<offers> {
             addToWish.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //progressDialog.show();
                     server.removeFromWish(UserInformation.UserId,ID);
-                    if(!server.checkIfAlreadyExistCart(UserInformation.UserId,currentOffer.getID())) {
+                    if(server.checkIfAlreadyExistCart(UserInformation.UserId,currentOffer.getID())) {
+                        Toast.makeText(AppController.getInstance(),"Product already in cart",Toast.LENGTH_LONG).show();
+                    }else{
                         server.addToBag(UserInformation.UserId, ID);
                     }
-                    ShowPopup(v);
+                    //ShowPopup(v);
                 }
             });
         }else if(context instanceof SellHomepage){
@@ -81,7 +83,9 @@ public class offersAdapter extends ArrayAdapter<offers> {
             addToWish.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(!server.checkIfAlreadyExist(UserInformation.UserId,currentOffer.getID())){
+                    if(server.checkIfAlreadyExist(UserInformation.UserId,currentOffer.getID())){
+                        Toast.makeText(AppController.getInstance(),"Product already in wishlist",Toast.LENGTH_LONG).show();
+                    }else{
                         server.addToWishlist(UserInformation.UserId,currentOffer.getID());
                     }
 

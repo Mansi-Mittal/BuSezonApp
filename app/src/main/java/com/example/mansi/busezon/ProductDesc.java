@@ -52,7 +52,7 @@ public class ProductDesc extends AppCompatActivity {
          // or other values
         if (b != null)
             value = b.getInt("Product_id");
-        url =server.URL+"products/show/?id=" + value;
+        url =server.URL+"products/show?id=" + value;
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
