@@ -1,8 +1,11 @@
 package com.example.mansi.busezon;
 
+import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
@@ -20,15 +23,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
-
-import org.json.JSONArray;
 
 import java.util.ArrayList;
 
@@ -62,18 +61,90 @@ public class HomeActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
+        final Menu menuNav =  navigationView.getMenu();
         navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
+                new NavigationView.OnNavigationItemSelectedListener()
+                {
+                    Dialog myDialog=new Dialog(HomeActivity.this);
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        MenuItem fashion=menuNav.findItem(R.id.nav_fashion);
+                        MenuItem electronics=menuNav.findItem(R.id.nav_electronics);
+                        MenuItem account=menuNav.findItem(R.id.nav_account);
+                        MenuItem mybag=menuNav.findItem(R.id.nav_bag);
+                        fashion.setChecked(false);
+                        mybag.setChecked(false);
+                        account.setChecked(false);
+                        electronics.setChecked(false);
                         // set item as selected to persist highlight
                         menuItem.setChecked(true);
-                        // close drawer when item is tapped
                         mDrawerLayout.closeDrawers();
+                        // close drawer when item is tapped
+
+                       if(fashion.isChecked())
+                       {
+                           fashion.setChecked(false);
+                           mybag.setChecked(false);
+                           account.setChecked(false);
+                           electronics.setChecked(false);
+                           TextView txtclose;
+                           myDialog.setContentView(R.layout.custompopupfashion);
+                           txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
+                           txtclose.setText("close");
+                           txtclose.setOnClickListener(new View.OnClickListener() {
+                               @Override
+                               public void onClick(View v) {
+                                   myDialog.dismiss();
+                               }
+                           });
+                           myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                           myDialog.show();
+
+                       }
+                        else if(electronics.isChecked()) {
+                           fashion.setChecked(false);
+                           mybag.setChecked(false);
+                           account.setChecked(false);
+                           electronics.setChecked(false);
+                           TextView txtclose;
+                           myDialog.setContentView(R.layout.custompopupelectronics);
+                           txtclose = (TextView) myDialog.findViewById(R.id.txtclose);
+                           txtclose.setText("close");
+                           txtclose.setOnClickListener(new View.OnClickListener() {
+                               @Override
+                               public void onClick(View v) {
+                                   myDialog.dismiss();
+                               }
+                           });
+                           myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                           myDialog.show();
+
+                       }
+                        else if(account.isChecked())
+                        {
+                            fashion.setChecked(false);
+                            mybag.setChecked(false);
+                            account.setChecked(false);
+                            electronics.setChecked(false);
+                            startActivity(new Intent(HomeActivity.this,profile_page.class));
+
+                        }
+                        else if(mybag.isChecked())
+                        {
+                            fashion.setChecked(false);
+                            mybag.setChecked(false);
+                            account.setChecked(false);
+                            electronics.setChecked(false);
+                            startActivity(new Intent(HomeActivity.this,shoppingCart.class));
+                        }
+
 
                         // Add code here to update the UI based on the item selected
                         // For example, swap UI fragments here
-
+                        fashion.setChecked(false);
+                        mybag.setChecked(false);
+                        account.setChecked(false);
+                        electronics.setChecked(false);
                         return true;
                     }
                 });
@@ -115,6 +186,7 @@ public class HomeActivity extends AppCompatActivity {
                         Toast.makeText(HomeActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
+
             }
         });
     }

@@ -121,7 +121,7 @@
                             android:textColor="@android:color/white"
                             android:textStyle="bold"
                             android:background="#009688"
-                             />
+                            />
 
                         <TextView
                             android:id="@+id/medium"
@@ -135,7 +135,7 @@
                             android:textColor="@android:color/white"
                             android:textStyle="bold"
 
-                             />
+                            />
 
                         <TextView
                             android:id="@+id/large"
@@ -148,7 +148,7 @@
                             android:background="#009688"
                             android:textColor="@android:color/white"
                             android:textStyle="bold"
-                             />
+                            />
 
                         <TextView
                             android:id="@+id/xl"
@@ -160,7 +160,7 @@
                             android:background="#009688"
                             android:textColor="@android:color/white"
                             android:textStyle="bold"
-                             />
+                            />
                     </LinearLayout>
 
                     <TextView
@@ -221,22 +221,22 @@
         android:orientation="horizontal">
 
 
-    <Button
-        android:id="@+id/addToWish"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="0.5"
-        android:background="@drawable/pretty_button"
-        android:textColor="#ffffff"
-        android:text="Save"/>
-    <Button
-        android:id="@+id/addToBag"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="0.5"
-        android:background="@drawable/pretty_button"
-        android:textColor="#ffffff"
-        android:text="Add To Bag"/>
+        <Button
+            android:id="@+id/addToWish"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:background="@drawable/pretty_button"
+            android:textColor="#ffffff"
+            android:text="Save"/>
+        <Button
+            android:id="@+id/addToBag"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:background="@drawable/pretty_button"
+            android:textColor="#ffffff"
+            android:text="Add To Bag"/>
 
-</LinearLayout>
+    </LinearLayout>
 </LinearLayout>

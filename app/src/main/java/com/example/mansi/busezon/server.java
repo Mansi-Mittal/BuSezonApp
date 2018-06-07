@@ -19,8 +19,8 @@ import java.util.Map;
 
 public class server {
     static String Response="";
-    static String URL = "http://172.16.54.102:3000/";
-    static String ImageURL = "http://172.16.54.102:3000";
+    static String URL = "http://172.20.10.9:3000/";
+    static String ImageURL = "http://172.20.10.9:3000";
     public static void serverRequest(String URL,final String userID,final int prodID,final boolean check){
         //String Response="";
         StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>(){

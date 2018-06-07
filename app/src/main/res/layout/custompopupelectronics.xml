@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="350dp"
-    android:layout_height="150dp"
+    android:layout_height="250dp"
     android:background="#B4CDCD	"
     android:padding="5dp"
     android:layout_gravity="center">
@@ -30,7 +30,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="select your size"
+            android:text="select subcategory"
             android:textSize="20dp"
             android:textAllCaps="true"
             android:layout_margin="20dp"
@@ -38,25 +38,30 @@
 
     </LinearLayout>
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center">
-        <CheckBox android:id="@+id/checksmall"
+        <CheckBox android:id="@+id/checkMobile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="S" />
-        <CheckBox android:id="@+id/checklarge"
+            android:text="Mobile"
+            android:onClick="electronicsMobile"/>
+        <CheckBox android:id="@+id/checkTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="M" />
-        <CheckBox android:id="@+id/checkboxlarge"
+            android:text="Tv"
+            android:onClick="electronicsTv"/>
+
+        <CheckBox android:id="@+id/checkLaptop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="L" />
-        <CheckBox android:id="@+id/checkextralarge"
+            android:text="Laptop"
+            android:onClick="electronicsLaptop"/>
+        <CheckBox android:id="@+id/checkApp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="XL" />
+            android:text="Other Appliances"
+            android:onClick="electronicsOtherAppliances"/>
 </LinearLayout>
 </LinearLayout>

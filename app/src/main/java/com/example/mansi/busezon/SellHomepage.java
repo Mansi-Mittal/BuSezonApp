@@ -102,6 +102,11 @@ public class SellHomepage extends AppCompatActivity {
         });
     }
 
+    public void onResume() {
+
+        super.onResume();
+        sendJsonRequest();
+    }
     public void sendJsonRequest() {
         //progressDialog.show();
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest

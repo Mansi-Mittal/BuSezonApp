@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
         <group android:checkableBehavior="single">
             <item
-                android:id="@+id/nav_women"
-                android:title="ELECTRONICS" />
-            <item
-                android:id="@+id/nav_men"
+                android:id="@+id/nav_fashion"
                 android:title="FASHION" />
+            <item
+                android:id="@+id/nav_electronics"
+                android:title="ELECTRONICS" />
+
             <item
                 android:id="@+id/nav_account"
                 android:title="MY ACCOUNT" />
             <item
                 android:id="@+id/nav_bag"
                 android:title="MY BAG" />
-
         </group>
 </menu>
