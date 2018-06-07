@@ -8,7 +8,6 @@ public class FirebaseUserInformation
 {
     public String name,address,email,phoneno,password;
 
-
     public FirebaseUserInformation(){};
 
     public FirebaseUserInformation(String name, String address, String email, String phoneno, String password) {

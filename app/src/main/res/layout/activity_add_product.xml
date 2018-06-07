@@ -489,7 +489,6 @@
                 android:layout_marginTop="16dp"
                 android:background="#009688"
                 android:text="SUBMIT" />
-
         </LinearLayout>
     </ScrollView>
 
