@@ -95,6 +95,7 @@ public class PaypalConfirmationActivity extends AppCompatActivity {
 
     private void sendMessage(String payId)
     {
+        Toast.makeText(this,UserInformation.name,Toast.LENGTH_LONG).show();
         Firebase reference1, reference2;
         Firebase.setAndroidContext(this);
         reference1 = new Firebase("https://busezon-57985.firebaseio.com/messages/BuSezon_" +UserInformation.name);

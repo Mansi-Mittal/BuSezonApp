@@ -54,10 +54,12 @@ String loginUser;
 
         String url = "https://busezon-57985.firebaseio.com/messages.json";
 
-
+try
+{
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
-            public void onResponse(String s) {
+            public void onResponse(String s)
+            {
                 doOnSuccess(s);
             }
         }, new Response.ErrorListener() {
@@ -80,27 +82,26 @@ String loginUser;
             }
         });
 
-        try {
-            Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-            setSupportActionBar(myToolbar);
-            ActionBar ab = getSupportActionBar();
-            ab.setDisplayHomeAsUpEnabled(true);
-
-            BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-            bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
-                @Override
-                public void onTabSelected(@IdRes int tabId) {
-                    if (tabId == R.id.tab_wishList) {
-                        Intent i = new Intent(getApplicationContext(), WishlistActivity.class);
-//                    i.putExtra("User_Name",User_Name);
-                        startActivity(i);
-                    } else if (tabId == R.id.tab_profile) {
-                        Intent i = new Intent(getApplicationContext(), profile_page.class);
-                        startActivity(i);
-                    }
-
-                }
-            });
+//            Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+//            setSupportActionBar(myToolbar);
+//            ActionBar ab = getSupportActionBar();
+//            ab.setDisplayHomeAsUpEnabled(true);
+//
+//            BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+//            bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+//                @Override
+//                public void onTabSelected(@IdRes int tabId) {
+//                    if (tabId == R.id.tab_wishList) {
+//                        Intent i = new Intent(getApplicationContext(), WishlistActivity.class);
+////                    i.putExtra("User_Name",User_Name);
+//                        startActivity(i);
+//                    } else if (tabId == R.id.tab_profile) {
+//                        Intent i = new Intent(getApplicationContext(), profile_page.class);
+//                        startActivity(i);
+//                    }
+//
+//                }
+//            });
 
         }
         catch (Exception e)
@@ -117,16 +118,20 @@ String loginUser;
 
             while(i.hasNext()){
                 key = i.next().toString();
-
+//                Toast.makeText(Chat_UsersList_Activity.this,totalUsers,Toast.LENGTH_LONG).show();
                 if(!key.equals(Chat_UserDetails.username))
                 {
                     String users[]=key.split("_");
                     String messenger=users[0]+"_"+loginUser;
-//                    Toast.makeText(Chat_UsersList_Activity.this,loginUser,Toast.LENGTH_LONG).show();
-                    if(!al.contains(users[0])&&(!users[0].equals(loginUser))&&(key.equals(messenger)))
+//                    Toast.makeText(Chat_UsersList_Activity.this,users[0],Toast.LENGTH_LONG).show();
+                    if((!al.contains(users[0]))&&(!users[0].equals(loginUser))&&(key.equals(messenger)))
+                    {
                         al.add(users[0]);
-                }
 
+
+//                        Toast.makeText(Chat_UsersList_Activity.this,totalUsers,Toast.LENGTH_LONG).show();
+                    }
+                }
                 totalUsers++;
             }
 
