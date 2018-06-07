@@ -23,6 +23,12 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.example.mansi.busezon.data.dbContract;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,21 +44,23 @@ public class ProductDesc extends AppCompatActivity {
     private Button button;
     int value = 0;
     RequestQueue rq ;
-    TextView prodName, price,sellerName;
+    TextView prodName;
+    TextView price;
+    TextView sellerName;
     String url = "";
-
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_desc);
         //init();
-
+        databaseReference = FirebaseDatabase.getInstance().getReference();
         Bundle b = getIntent().getExtras();
          // or other values
         if (b != null)
             value = b.getInt("Product_id");
-        url =server.URL+"products/show/?id=" + value;
+        url =server.URL+"products/show?id=" + value;
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -131,6 +139,38 @@ public class ProductDesc extends AppCompatActivity {
                             price.setText(response.getString("category"));
                             String img = response.getString("IMAGE_URL");
                             String url = server.ImageURL+ img;
+                            final String seller_id = response.getString("user_id");
+                            try {
+                                final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+                                rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                                            String dbId = ds.getKey();
+                                            if (dbId.equals(seller_id))
+                                            {
+                                                String seller_Name;
+                                                if (ds.hasChild("name") == true) {
+                                                    seller_Name = ds.child("name").getValue(String.class);
+                                                    sellerName.setText(seller_Name);
+                                                    break;
+                                                }
+
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+                                    }
+
+                                });
+                            }
+                            catch (Exception e)
+                            {
+                                Toast.makeText(ProductDesc.this, "user 1111", Toast.LENGTH_SHORT).show();
+                            }
                             Glide.with(ProductDesc.this).load(url).into(imageView);
                             //Toast.makeText(ProductDesc.this, url, Toast.LENGTH_SHORT).show();
 
