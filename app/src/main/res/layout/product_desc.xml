@@ -68,8 +68,6 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:text="size:"/>
-<<<<<<< HEAD
-=======
         <!--<LinearLayout-->
             <!--android:layout_width="wrap_content"-->
             <!--android:layout_height="wrap_content"-->
@@ -103,7 +101,6 @@
                 <!--android:layout_marginEnd="10dp"-->
                 <!--android:text="XL"/>-->
         <!--</LinearLayout>-->
->>>>>>> 846fc0160aa4c51c3628ca407d0c590348517cd4
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
