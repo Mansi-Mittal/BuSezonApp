@@ -2,6 +2,7 @@ package com.example.mansi.busezon;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,8 +60,8 @@ public class cartItemAdapter extends ArrayAdapter<cartItem> {
             @Override
             public void onClick(View view) {
                 server.removeFromBag(UserInformation.UserId,current.getId());
-                shoppingCart s =new shoppingCart();
-                //s.reload();
+                Intent app = new Intent(AppController.getInstance(),shoppingCart.class);
+                AppController.getInstance().startActivity(app);
             }
         });
 

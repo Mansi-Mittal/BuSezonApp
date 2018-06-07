@@ -41,7 +41,13 @@ public class PaypalConfirmationActivity extends AppCompatActivity {
 
         //Getting Intent
         Intent intent = getIntent();
+        Bundle b = getIntent().getExtras();
+        // or other values
+        int prod_id = 0;
+        if (b != null)
+            prod_id = b.getInt("prod_id");
 
+        server.removeFromBag(UserInformation.UserId,prod_id);
 
         try {
             JSONObject jsonDetails = new JSONObject(intent.getStringExtra("PaymentDetails"));

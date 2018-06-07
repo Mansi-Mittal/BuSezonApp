@@ -261,11 +261,12 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
                         //Getting the payment details
                         String paymentDetails = confirm.toJSONObject().toString(4);
                         Log.i("paymentExample", paymentDetails);
-                        Toast.makeText(shoppingCart.this,paymentDetails,Toast.LENGTH_LONG).show();
+                        //Toast.makeText(shoppingCart.this,paymentDetails,Toast.LENGTH_LONG).show();
                         //Starting a new activity for the payment details and also putting the payment details with intent
                         startActivity(new Intent(this, PaypalConfirmationActivity.class)
                                 .putExtra("PaymentDetails", paymentDetails)
-                                .putExtra("PaymentAmount", paymentAmount));
+                                .putExtra("PaymentAmount", paymentAmount)
+                                .putExtra("prod_id",id));
 
                     } catch (JSONException e) {
                         Log.e("paymentExample", "an extremely unlikely failure occurred: ", e);
@@ -278,5 +279,6 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
             }
         }
     }
+
 
 }

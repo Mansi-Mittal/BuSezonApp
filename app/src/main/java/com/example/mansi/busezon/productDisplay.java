@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class productDisplay extends AppCompatActivity {
 
-    String URL = server.URL+"products/search?search=";
+    String URL = "";
     String urlParam;
     int id =0;
     boolean search ;
@@ -47,10 +47,13 @@ public class productDisplay extends AppCompatActivity {
         // or other values
         if (b != null)
             urlParam = b.getString("urlParam");
+            search = b.getBoolean("search");
 
-        //if(search){
-            URL += urlParam;
-        //}
+        if(search){
+            URL = server.URL+"products/search?search=" + urlParam;
+        }else{
+            URL = server.URL+"products?category=" + urlParam;
+        }
 
         offersList = new ArrayList<>();
         GridView offersListView =findViewById(R.id.list1);

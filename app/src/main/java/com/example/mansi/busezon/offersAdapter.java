@@ -5,6 +5,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
@@ -73,7 +74,7 @@ public class offersAdapter extends ArrayAdapter<offers> {
                     }else{
                         server.addToBag(UserInformation.UserId, ID);
                     }
-                    //ShowPopup(v);
+                    ShowPopup(v);
                 }
             });
         }else if(context instanceof SellHomepage){
@@ -83,7 +84,7 @@ public class offersAdapter extends ArrayAdapter<offers> {
             addToWish.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(server.checkIfAlreadyExist(UserInformation.UserId,currentOffer.getID())){
+                    if(server.checkIfAlreadyExistCart(UserInformation.UserId,currentOffer.getID())){
                         Toast.makeText(AppController.getInstance(),"Product already in wishlist",Toast.LENGTH_LONG).show();
                     }else{
                         server.addToWishlist(UserInformation.UserId,currentOffer.getID());
@@ -106,6 +107,8 @@ public class offersAdapter extends ArrayAdapter<offers> {
             @Override
             public void onClick(View v) {
                 myDialog.dismiss();
+                Intent app = new Intent(AppController.getInstance(),WishlistActivity.class);
+                AppController.getInstance().startActivity(app);
             }
         });
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

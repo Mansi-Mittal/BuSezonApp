@@ -105,6 +105,11 @@ public class SellHomepage extends AppCompatActivity {
     public void onResume() {
 
         super.onResume();
+        offersList = new ArrayList<>();
+        GridView offersListView =findViewById(R.id.list1);
+        adapter = new offersAdapter(this, offersList);
+        offersListView.setAdapter(adapter);
+
         sendJsonRequest();
     }
     public void sendJsonRequest() {

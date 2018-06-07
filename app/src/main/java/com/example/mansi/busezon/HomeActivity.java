@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,7 @@ public class HomeActivity extends AppCompatActivity {
     String URL = server.URL+"products/search?search=";
     Button like;
     int id = 0;
+    String category = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +109,8 @@ public class HomeActivity extends AppCompatActivity {
                            account.setChecked(false);
                            electronics.setChecked(false);
                            TextView txtclose;
+                           category = "electronics";
+
                            myDialog.setContentView(R.layout.custompopupelectronics);
                            txtclose = (TextView) myDialog.findViewById(R.id.txtclose);
                            txtclose.setText("close");
@@ -221,6 +225,7 @@ public class HomeActivity extends AppCompatActivity {
 
                 Intent appInfo = new Intent(HomeActivity.this, productDisplay.class);
                 appInfo.putExtra("urlParam",search);
+                appInfo.putExtra("search",true);
                 startActivity(appInfo);
                 return true;
 
@@ -240,8 +245,8 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                    mDrawerLayout.openDrawer(GravityCompat.START);
-                    return true;
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
             case R.id.action_cart:
                 Intent i = new Intent(this, shoppingCart.class);
                 startActivity(i);
@@ -259,7 +264,18 @@ public class HomeActivity extends AppCompatActivity {
 
         }
     }
+     public void electronicsMobile(View view){
+         boolean checked = ((CheckBox) view).isChecked();
 
+         if (checked) {
+             Intent app = new Intent(HomeActivity.this,productDisplay.class);
+             app.putExtra("urlParam",category);
+             app.putExtra("search",false);
+             startActivity(app);
+         }else{
+
+         }
+     }
     }
 
 
