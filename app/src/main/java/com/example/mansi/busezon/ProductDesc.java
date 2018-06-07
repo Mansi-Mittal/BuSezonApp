@@ -136,9 +136,10 @@ public class ProductDesc extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             prodName.setText(response.getString("name"));
-                            price.setText("₹"+response.getString("category"));
+                            price.setText("₹"+response.getString("price"));
                             String img = response.getString("IMAGE_URL");
                             String url = server.ImageURL+ img;
+                            Glide.with(ProductDesc.this).load(url).into(imageView);
                             final String seller_id = response.getString("user_id");
                             try {
                                 final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
@@ -171,7 +172,6 @@ public class ProductDesc extends AppCompatActivity {
                             {
                                 Toast.makeText(ProductDesc.this, "user 1111", Toast.LENGTH_SHORT).show();
                             }
-                            Glide.with(ProductDesc.this).load(url).into(imageView);
                             //Toast.makeText(ProductDesc.this, url, Toast.LENGTH_SHORT).show();
 
                         } catch (JSONException e) {
