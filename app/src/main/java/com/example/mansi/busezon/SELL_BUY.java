@@ -80,7 +80,7 @@ try {
     Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
     setSupportActionBar(myToolbar);
     ActionBar ab = getSupportActionBar();
-    ab.setDisplayHomeAsUpEnabled(true);
+//    ab.setDisplayHomeAsUpEnabled(true);
 
 
 //        Toast.makeText(SELL_BUY.this, "hi!!", Toast.LENGTH_SHORT).show();
