@@ -34,10 +34,10 @@ import java.util.Map;
 public class SellHomepage extends AppCompatActivity {
 
     int id =0;
+    int var = 0;
     String url = server.URL+"products?user_id="+UserInformation.UserId;
     ArrayList<offers> offersList;
     private offersAdapter adapter;
-    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,9 @@ public class SellHomepage extends AppCompatActivity {
         adapter = new offersAdapter(this, offersList);
         offersListView.setAdapter(adapter);
 
+        ProgressDialog progressDialog = new ProgressDialog(this);
         sendJsonRequest();
+        var = 1;
 
         offersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -105,7 +107,14 @@ public class SellHomepage extends AppCompatActivity {
     public void onResume() {
 
         super.onResume();
-        sendJsonRequest();
+        if(var!=1) {
+            offersList = new ArrayList<>();
+            GridView offersListView = findViewById(R.id.list1);
+            adapter = new offersAdapter(this, offersList);
+            offersListView.setAdapter(adapter);
+            sendJsonRequest();
+            var =0;
+        }
     }
     public void sendJsonRequest() {
         //progressDialog.show();
