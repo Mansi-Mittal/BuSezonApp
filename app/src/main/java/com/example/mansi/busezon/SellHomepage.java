@@ -34,7 +34,7 @@ import java.util.Map;
 public class SellHomepage extends AppCompatActivity {
 
     int id =0;
-    String url = "http://192.168.1.6:3000/products?user_id="+UserInformation.UserId;
+    String url = server.URL+"products?user_id="+UserInformation.UserId;
     ArrayList<offers> offersList;
     private offersAdapter adapter;
     ProgressDialog progressDialog;
@@ -115,8 +115,7 @@ public class SellHomepage extends AppCompatActivity {
                                     id = info.getInt("id");
                                     String name = info.getString("name");
                                     String img = info.getString("IMAGE_URL");
-
-                                    String url = "http://192.168.1.6:3000" + img;
+                                    String url = server.ImageURL + img;
                                     int price = info.getInt("price");
                                     String sellerID=info.getString("user_id"); //complete
                                 offersList.add(new offers(id,url, name, sellerID,price));

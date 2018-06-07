@@ -36,7 +36,7 @@ import java.util.Map;
 public class WishlistActivity extends AppCompatActivity {
     Dialog myDialog;
     int id =0;
-    String url = "http://192.168.1.6:3000/wishlists?user_id="+UserInformation.UserId;
+    String url = server.URL+"wishlists?user_id="+UserInformation.UserId;
     ArrayList<offers> offersList;
     private offersAdapter adapter;
     @Override
@@ -121,7 +121,7 @@ public class WishlistActivity extends AppCompatActivity {
                                 id = info.getInt("id");
                                 String name = info.getString("name");
                                 String img = info.getString("IMAGE_URL");
-                                String url = "http://192.168.1.6:3000" + img;
+                                String url = server.ImageURL + img;
                                 int price = info.getInt("price");
                                 String sellerID=info.getString("user_id"); //complete
                                 offersList.add(new offers(id,url, name, sellerID, price));

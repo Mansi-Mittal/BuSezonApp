@@ -52,7 +52,7 @@ public class ProductDesc extends AppCompatActivity {
          // or other values
         if (b != null)
             value = b.getInt("Product_id");
-        url = "http://192.168.1.6:3000/products/show/?id=" + value;
+        url =server.URL+"products/show/?id=" + value;
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -80,7 +80,7 @@ public class ProductDesc extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addToWishlist(124, value);
+                server.addToWishlist(UserInformation.UserId, value);
             }
         });
 
@@ -130,7 +130,7 @@ public class ProductDesc extends AppCompatActivity {
                             prodName.setText(response.getString("name"));
                             price.setText("₹"+response.getString("category"));
                             String img = response.getString("IMAGE_URL");
-                            String url = "http://192.168.0.106:3000" + img;
+                            String url = server.ImageURL+ img;
                             Glide.with(ProductDesc.this).load(url).into(imageView);
                             //Toast.makeText(ProductDesc.this, url, Toast.LENGTH_SHORT).show();
 
@@ -150,37 +150,6 @@ public class ProductDesc extends AppCompatActivity {
         rq.add(jsonObjectRequest);
     }
 
-    public void addToWishlist(final int sellerID, final int prodID) {
-        String URL = "http://172.20.10.9:3000/wishlists/new";
-        StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String Response = jsonObject.getString("response");
-                    //progressDialog.dismiss();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-
-            }
-        }) {
-            //adding parameters to send
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> parameters = new HashMap<>();
-                parameters.put("Seller_id", sellerID + "");
-                parameters.put("Product_id", prodID + "");
-                return parameters;
-            }
-        };
-
-        AppController.getInstance().addToRequestQueue(request);
-    }
 
     public void startChat(View view)
     {
