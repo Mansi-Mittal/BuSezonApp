@@ -1,27 +1,20 @@
 package com.example.mansi.busezon;
 
 import android.app.Dialog;
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.firebase.client.Firebase;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
@@ -30,13 +23,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class WishlistActivity extends AppCompatActivity {
     Dialog myDialog;
     int id =0;
-    String url = "http://192.168.1.6:3000/wishlists?user_id="+UserInformation.UserId;
+    String url = server.URL+"wishlists?user_id="+UserInformation.UserId;
     ArrayList<offers> offersList;
     private offersAdapter adapter;
     @Override
@@ -121,7 +112,7 @@ public class WishlistActivity extends AppCompatActivity {
                                 id = info.getInt("id");
                                 String name = info.getString("name");
                                 String img = info.getString("IMAGE_URL");
-                                String url = "http://192.168.1.6:3000" + img;
+                                String url = server.ImageURL + img;
                                 int price = info.getInt("price");
                                 String sellerID=info.getString("user_id"); //complete
                                 offersList.add(new offers(id,url, name, sellerID, price));

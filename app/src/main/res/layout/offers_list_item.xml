@@ -7,9 +7,10 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="37dp">
+
         <Button
             android:id="@+id/close"
-            android:layout_width="wrap_content"
+            android:layout_width="65dp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
@@ -17,8 +18,8 @@
             android:backgroundTint="#009688"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:text="close"
-            android:textSize="14sp" />
+            android:text="x"
+            android:textSize="10sp" />
     </RelativeLayout>
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/thumbnail"
