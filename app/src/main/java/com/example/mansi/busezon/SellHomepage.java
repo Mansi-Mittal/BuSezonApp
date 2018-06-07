@@ -34,12 +34,11 @@ import java.util.Map;
 public class SellHomepage extends AppCompatActivity {
 
     int id =0;
-
-    String url = "http://192.168.1.6:3000/products?user_id=1234";
-
+    String url = server.URL+"products?user_id="+UserInformation.UserId;
     ArrayList<offers> offersList;
-
     private offersAdapter adapter;
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,23 +67,6 @@ public class SellHomepage extends AppCompatActivity {
             }
         });
 
-        /*ImageView SellPdt1=(ImageView) findViewById(R.id.sellpdt1);
-        SellPdt1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                Intent i = new Intent(getApplicationContext(), ProductDescription.class);
-                startActivity(i);
-            }
-        });*/
-        /*Button Prod = (Button) findViewById(R.id.addBtn);
-        Prod.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                Intent i = new Intent(getApplicationContext(), Add_product.class);
-                startActivity(i);
-            }
-        });
-*/
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
@@ -121,21 +103,22 @@ public class SellHomepage extends AppCompatActivity {
     }
 
     public void sendJsonRequest() {
+        //progressDialog.show();
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
                 (url, new Response.Listener<JSONArray>() {
-
                     @Override
                     public void onResponse(JSONArray response) {
+                        //progressDialog.dismiss();
                         try {
                             for (int i = 0; i <= response.length(); i++) {
                                 JSONObject info = response.getJSONObject(i);
                                     id = info.getInt("id");
                                     String name = info.getString("name");
                                     String img = info.getString("IMAGE_URL");
-
-                                    String url = "http://192.168.1.6:3000" + img;
-                                    //int sellerID=info.getInt(""); //complete
-                                offersList.add(new offers(id,url, name, 1234));
+                                    String url = server.ImageURL + img;
+                                    int price = info.getInt("price");
+                                    String sellerID=info.getString("user_id"); //complete
+                                offersList.add(new offers(id,url, name, sellerID,price));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

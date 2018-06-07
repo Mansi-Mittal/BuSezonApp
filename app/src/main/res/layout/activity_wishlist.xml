@@ -14,13 +14,13 @@
         android:elevation="4dp"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-    <Button
+    <!--<Button
         android:onClick="ShowPopup"
         android:layout_margin="100dp"
         android:background="@drawable/buttonstyle"
         android:text="show popup"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" />-->
     <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

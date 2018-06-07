@@ -100,7 +100,7 @@
                     android:textStyle="italic" />
 
                 <Spinner
-                    android:id="@+id/subCategory"
+                    android:id="@+id/subCategoryF"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:entries="@array/sub_category_fashion"
@@ -109,31 +109,7 @@
 
                 </Spinner>
             </LinearLayout>
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_margin="16dp"-->
-                <!--android:orientation="horizontal">-->
 
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_margin="10dp"-->
-                    <!--android:text="sub category"-->
-                    <!--android:textAllCaps="true"-->
-                    <!--android:textColor="#020202"-->
-                    <!--android:textSize="18sp"-->
-                    <!--android:textStyle="italic" />-->
-
-                <!--<Spinner-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:entries="@array/sub_category_electronics"-->
-                    <!--android:text="sub-category"-->
-                    <!--android:textAlignment="viewEnd">-->
-
-                <!--</Spinner>-->
-            <!--</LinearLayout>-->
             <LinearLayout
                 android:id="@+id/subCategoryELayout"
                 android:layout_width="match_parent"
@@ -152,6 +128,15 @@
                     android:textSize="18sp"
                     android:textStyle="italic" />
 
+                <Spinner
+                    android:id="@+id/subCategoryE"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:entries="@array/sub_category_electronics"
+                    android:text="sub-category"
+                    android:textAlignment="viewEnd">
+
+                </Spinner>
                 <EditText
                     android:id="@+id/gender"
                     android:layout_width="249dp"
@@ -163,6 +148,7 @@
                     android:textAlignment="center"
                     android:textAllCaps="true"
                     android:textStyle="italic" />
+
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -276,74 +262,74 @@
                     android:textAllCaps="true"
                     android:textStyle="italic" />
             </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="SIZE"
-            android:textAllCaps="true"
-            android:textColor="#020202"
-            android:textSize="18sp"
-            android:textStyle="italic" />
-    </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-            <CheckBox android:id="@+id/checkboxsmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="small"
-                android:onClick="onCheckboxClickedlarge"/>
-            <EditText
-                android:id="@+id/squant"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:ems="10"
-                android:hint="quantity"
-                android:inputType="number"
-                android:textAlignment="center"
-                android:textAllCaps="true"
-                android:textStyle="italic" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-            <CheckBox android:id="@+id/checkbox_cheese"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="medium"
-                android:onClick="onCheckboxClickedmedium"/>
-            <EditText
-                android:id="@+id/mquant"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:ems="10"
-                android:hint="quantity"
-                android:inputType="number"
-                android:textAlignment="center"
-                android:textAllCaps="true"
-                android:textStyle="italic" />
+                android:layout_margin="16dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="SIZE"
+                    android:textAllCaps="true"
+                    android:textColor="#020202"
+                    android:textSize="18sp"
+                    android:textStyle="italic" />
             </LinearLayout>
 
             <LinearLayout
-                   android:orientation="horizontal"
-                   android:layout_width="fill_parent"
-                   android:layout_height="fill_parent">
-            <CheckBox android:id="@+id/checkboxlarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="large"
-                android:onClick="onCheckboxClickedsmall"/>
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+                <CheckBox android:id="@+id/checkboxsmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="small"
+                    android:onClick="onCheckboxClickedsmall"/>
+                <EditText
+                    android:id="@+id/squant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:ems="10"
+                    android:hint="quantity"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textStyle="italic" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+                <CheckBox android:id="@+id/checkboxmedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="medium"
+                    android:onClick="onCheckboxClickedmedium"/>
+                <EditText
+                    android:id="@+id/mquant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:ems="10"
+                    android:hint="quantity"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textStyle="italic" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+                <CheckBox android:id="@+id/checkboxlarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="large"
+                    android:onClick="onCheckboxClickedlarge"/>
                 <EditText
                     android:id="@+id/lquant"
                     android:layout_width="match_parent"
@@ -356,27 +342,27 @@
                     android:textAllCaps="true"
                     android:textStyle="italic" />
             </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
-            <CheckBox android:id="@+id/checkboxextralarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="XL"
-                android:onClick="onCheckboxClickedmedium"/>
-                    <EditText
-                        android:id="@+id/sxlquant"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:ems="10"
-                        android:hint="quantity"
-                        android:inputType="number"
-                        android:textAlignment="center"
-                        android:textAllCaps="true"
-                        android:textStyle="italic" />
-                </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+                <CheckBox android:id="@+id/checkboxextralarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="XL"
+                    android:onClick="onCheckboxClickedextralarge"/>
+                <EditText
+                    android:id="@+id/xlquant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:ems="10"
+                    android:hint="quantity"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textStyle="italic" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

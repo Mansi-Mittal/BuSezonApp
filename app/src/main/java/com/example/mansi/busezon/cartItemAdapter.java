@@ -23,6 +23,7 @@ public class cartItemAdapter extends ArrayAdapter<cartItem> {
 
     ImageLoader imageLoader = AppController.getInstance().getImageLoader();
     ProgressDialog progressDialog;
+    Button removeFromCart,moveToWishlist;
 
     public cartItemAdapter(Context context, List<cartItem> CartList) {
 
@@ -36,7 +37,7 @@ public class cartItemAdapter extends ArrayAdapter<cartItem> {
             convertView = LayoutInflater.from(getContext()).inflate(
                     R.layout.cart_list_item, parent, false);
         }
-        cartItem current = getItem(position);
+        final cartItem current = getItem(position);
 
         NetworkImageView thumbNail = (NetworkImageView) convertView.findViewById(R.id.cart_thumbnail);
         thumbNail.setImageUrl(current.getImage(), imageLoader);
@@ -52,6 +53,26 @@ public class cartItemAdapter extends ArrayAdapter<cartItem> {
         TextView qty = convertView.findViewById(R.id.cart_qty);
         String Qty = current.getQty()+"";
         qty.setText("Qty : "+ Qty);
+
+        removeFromCart = convertView.findViewById(R.id.rm_Cart);
+        removeFromCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                server.removeFromBag(UserInformation.UserId,current.getId());
+                shoppingCart s =new shoppingCart();
+                //s.reload();
+            }
+        });
+
+        moveToWishlist = convertView.findViewById(R.id.move);
+        moveToWishlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!server.checkIfAlreadyExist(UserInformation.UserId,current.getId())){
+                    server.addToWishlist(UserInformation.UserId,current.getId());
+                }
+            }
+        });
         return convertView;
     }
 

@@ -21,19 +21,35 @@
         android:orientation="horizontal"
         android:focusable="false"
         android:focusableInTouchMode="false">
-        <TextView
-            android:id="@+id/desc"
+        <LinearLayout
+            android:id="@+id/prodDetail"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-            android:visibility="visible"
-            android:focusable="false"
-            android:focusableInTouchMode="false"/>
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:visibility="visible"
+                android:focusable="false"
+                android:focusableInTouchMode="false"/>
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:visibility="visible"
+                android:focusable="false"
+                android:focusableInTouchMode="false"/>
+        </LinearLayout>
+
         <Button
             android:id="@+id/AddToWishlist"
             android:backgroundTint="#009688"
-            android:layout_alignEnd="@+id/desc"
+            android:layout_alignEnd="@+id/prodDetail"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:focusable="false"
@@ -41,5 +57,4 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true" />
     </RelativeLayout>
-
 </LinearLayout>

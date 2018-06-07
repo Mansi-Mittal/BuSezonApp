@@ -12,14 +12,16 @@
         android:layout_height="match_parent"
         android:layout_weight="0.4"
         android:layout_marginEnd="30dp"
-        android:scaleType="fitXY"/>
+        android:scaleType="fitXY"
+        android:focusableInTouchMode="false"/>
 
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_weight ="0.6">
+            android:layout_weight ="0.6"
+            android:focusableInTouchMode="false">
 
             <TextView
                 android:id="@+id/cart_name"
@@ -27,25 +29,29 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                android:visibility="visible" />
+                android:visibility="visible"
+                android:focusableInTouchMode="false"/>
             <TextView
                 android:id="@+id/cart_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                android:visibility="visible" />
+                android:visibility="visible"
+                android:focusableInTouchMode="false"/>
             <TextView
                 android:id="@+id/cart_qty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                android:visibility="visible" />
+                android:visibility="visible"
+                android:focusableInTouchMode="false"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:focusableInTouchMode="false">
                 <Button
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -53,15 +59,19 @@
                     android:id="@+id/rm_Cart"
                     android:textSize="8dp"
                     android:text="remove from cart"
-                    android:textAllCaps="true"/>
+                    android:textAllCaps="true"
+                    android:layout_alignParentBottom="true"
+                    android:focusableInTouchMode="false"/>
                 <Button
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:id="@+id/ad_to_list"
+                    android:id="@+id/move"
                     android:textSize="8dp"
                     android:textAllCaps="true"
-                    android:text="add to wishlist"/>
+                    android:text="Move to wishlist"
+                    android:layout_alignParentBottom="true"
+                    android:focusableInTouchMode="false"/>
             </LinearLayout>
         </LinearLayout>
 </LinearLayout>

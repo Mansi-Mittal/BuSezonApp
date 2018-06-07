@@ -36,16 +36,14 @@ import java.util.Map;
 public class WishlistActivity extends AppCompatActivity {
     Dialog myDialog;
     int id =0;
-
-    String url = "http://192.168.1.6:3000/wishlists?user_id=1234";
-
+    String url = server.URL+"wishlists?user_id="+UserInformation.UserId;
     ArrayList<offers> offersList;
     private offersAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wishlist);
-        myDialog = new Dialog(this);
+        //myDialog = new Dialog(this);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         //getActionBar().setTitle("BuSezon");
@@ -123,11 +121,10 @@ public class WishlistActivity extends AppCompatActivity {
                                 id = info.getInt("id");
                                 String name = info.getString("name");
                                 String img = info.getString("IMAGE_URL");
-
-                                String url = "http://192.168.1.6:3000" + img;
-
-                                //int sellerID=info.getInt(""); //complete
-                                offersList.add(new offers(id,url, name, 1234));
+                                String url = server.ImageURL + img;
+                                int price = info.getInt("price");
+                                String sellerID=info.getString("user_id"); //complete
+                                offersList.add(new offers(id,url, name, sellerID, price));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -144,19 +141,6 @@ public class WishlistActivity extends AppCompatActivity {
                 });
         AppController.getInstance().addToRequestQueue(jsonObjectRequest);
     }
-    public void ShowPopup(View v) {
-        TextView txtclose;
-        myDialog.setContentView(R.layout.custompopup);
-        txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
-        txtclose.setText("close");
-        txtclose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myDialog.dismiss();
-            }
-        });
-        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        myDialog.show();
-    }
+
 }
 
