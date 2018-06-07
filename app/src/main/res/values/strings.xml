@@ -10,15 +10,13 @@
     <string-array name="sub_category_fashion">
                
         <item>sports</item>
-               
         <item>TopWear</item>
         <item>Indian</item>
         <item>BottomWear</item>
     </string-array>
     <string-array name="sub_category_electronics">
                
-        <item>Mobile</item>
-               
+        <item>Mobile</item>     
         <item>TV</item>
         <item>Laptop</item>
         <item>Otherappliances</item>

@@ -4,7 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="210dp"
     android:orientation="vertical">
-
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="37dp">
+        <Button
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="top"
+            android:backgroundTint="#009688"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:text="close"
+            android:textSize="14sp" />
+    </RelativeLayout>
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/thumbnail"
         android:layout_width="match_parent"
@@ -13,7 +28,6 @@
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:scaleType="fitXY"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -45,7 +59,6 @@
                 android:focusable="false"
                 android:focusableInTouchMode="false"/>
         </LinearLayout>
-
         <Button
             android:id="@+id/AddToWishlist"
             android:backgroundTint="#009688"
