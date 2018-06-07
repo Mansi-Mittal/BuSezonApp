@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class productDisplay extends AppCompatActivity {
 
-    String URL="http://192.168.1.6:3000/products/search?search=";
+    String URL = server.URL+"products/search?search=";
     String urlParam;
     int id =0;
     boolean search ;
@@ -49,7 +49,7 @@ public class productDisplay extends AppCompatActivity {
             urlParam = b.getString("urlParam");
 
         //if(search){
-            URL = "http://192.168.1.6:3000/products/search?search="+urlParam;
+            URL += urlParam;
         //}
 
         offersList = new ArrayList<>();
@@ -101,7 +101,7 @@ public class productDisplay extends AppCompatActivity {
                                 id = info.getInt("id");
                                 String name = info.getString("name");
                                 String img = info.getString("IMAGE_URL");
-                                String url = "http://192.168.1.6:3000" + img;
+                                String url = server.ImageURL + img;
                                 int price = info.getInt("price");
                                 String sellerID=info.getString("user_id"); //complete
                                 offersList.add(new offers(id,url, name, sellerID, price));

@@ -66,7 +66,7 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
     ArrayList<offers> offersList;
 
     private cartItemAdapter adapter;
-    String url = "http://192.168.1.6:3000/carts?user_id="+UserInformation.UserId;
+    String url = server.URL+"carts?user_id="+UserInformation.UserId;
     ArrayList<cartItem> cartList;
 
     private Button buttonPay;
@@ -187,7 +187,7 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
                                 String name = info.getString("name");
                                 String img = info.getString("IMAGE_URL");
 
-                                String url = "http://192.168.1.6:3000" + img;
+                                String url = server.ImageURL+ img;
                                 int price = info.getInt("price");
                                 //int priceConvt=Integer.valueOf(price);
                                 totalPrice+=price;

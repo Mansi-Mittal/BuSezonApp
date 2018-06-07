@@ -55,7 +55,7 @@ public class Add_product extends AppCompatActivity {
     private ImageView image;
     private final int PICK_IMAGE_REQUEST = 1;
 
-    String URL = "http://192.168.1.6:3000/products/new";
+    String URL = server.URL+"products/new";
     private Bitmap bitmap;
     ProgressDialog progressDialog;
     RequestQueue rQueue;

@@ -56,9 +56,6 @@
             android:label="WishList"
             android:parentActivityName=".profile_page" />
         <activity
-            android:name=".ClothingPage"
-            android:label="Clothing" />
-        <activity
             android:name=".SellHomepage"
             android:label="Seller Home"
             android:parentActivityName=".SELL_BUY">
@@ -69,21 +66,8 @@
         </activity>
 
         <activity
-            android:name=".ProductDescription"
-            android:label="Product Description"
-            android:parentActivityName=".SellHomepage" />
-        <activity
             android:name=".SELL_BUY"
             android:label="Sell/buy">
-
-        </activity>
-        <activity
-            android:name=".SELL"
-            android:label="Sell" />
-        <activity
-            android:name=".BUY"
-            android:label="Sell"
-            android:parentActivityName=".SELL_BUY">
 
         </activity>
         <activity
@@ -110,7 +94,7 @@
         <activity android:name=".Chat_UsersList_Activity"></activity>
         <activity android:name=".PaypalConfirmationActivity"></activity>
         <activity android:name=".ProfileEditInformation"></activity>
-        
+
 </application>
 
 </manifest>

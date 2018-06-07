@@ -23,7 +23,7 @@ import java.util.Map;
 
 public class serverProduct {
     public static void setSold(Context context,int prod_id, int qty){
-        String URL="http://192.168.1.6:3000/products/sold";
+        String URL=server.URL+"products/sold";
         JSONArray soldjsonArray = new JSONArray();
         JSONObject soldjsonObject = new JSONObject();
         try{
