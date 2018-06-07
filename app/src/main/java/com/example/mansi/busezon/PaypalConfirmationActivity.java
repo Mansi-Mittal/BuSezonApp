@@ -1,10 +1,13 @@
 package com.example.mansi.busezon;
 
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
@@ -61,7 +64,15 @@ public class PaypalConfirmationActivity extends AppCompatActivity {
            startActivity(intent);
        }
         UserInformation.payment=true;
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
+        mBuilder.setSmallIcon(R.drawable.cart);
+        mBuilder.setContentTitle("BuSezon Notification Alert!");
+        mBuilder.setContentText("Hi, Your payment was successful! You will recieve your order in 2 working days!");
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
+// notificationID allows you to update the notification later on.
+ int notificationID=1;
+        mNotificationManager.notify(notificationID, mBuilder.build());
     }
 
     public void startHomeActivity(View view)

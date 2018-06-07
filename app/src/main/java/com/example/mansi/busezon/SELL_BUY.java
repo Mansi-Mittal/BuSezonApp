@@ -42,6 +42,7 @@ public class SELL_BUY extends AppCompatActivity {
 
 //    User_Id = getIntent().getStringExtra("Id");
 //    UserInformation.email=getIntent().getStringExtra("Email");
+
         User_Id=UserInformation.UserId;
     token=UserInformation.token;
         try {
@@ -324,6 +325,8 @@ catch (Exception e)
         //    Toast.makeText(this, "user saved " + newRowId, Toast.LENGTH_SHORT).show();
         }
     }
+    @Override
+    public void onBackPressed() { }
 
 
 }

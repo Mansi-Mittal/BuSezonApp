@@ -243,6 +243,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run()
                         {
+
                                 String id = updateProfileData(name, email, account, zipCode);
 
                         }
@@ -312,7 +313,7 @@ public class MainActivity extends AppCompatActivity {
                 FirebaseUserInformation userInformation = new FirebaseUserInformation(name, "", email, "", "");
                 user_Id = account.replace("amzn1.account.", "");
                 databaseReference.child(user_Id).setValue(userInformation);
-                Toast.makeText(MainActivity.this, "  user details added", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, " Registered Successfully !", Toast.LENGTH_LONG).show();
                 startIntent(name, email,user_Id);
                 f = 1;
 

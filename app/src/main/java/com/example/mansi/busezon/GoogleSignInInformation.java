@@ -33,9 +33,9 @@ public class GoogleSignInInformation extends AppCompatActivity implements View.O
         progressDialog=new ProgressDialog(this);
 
         buttonsignup=(Button)findViewById(R.id.signupButton);
-        String Name=getIntent().getStringExtra("Name");
-        String Email=getIntent().getStringExtra("Email");
-        String Id=getIntent().getStringExtra("Id");
+        String Name=UserInformation.name;
+        String Email=UserInformation.email;
+        String Id=UserInformation.UserId;
         email=(EditText)findViewById(R.id.editTextEmail);
         email.setText(Email);
         name=(EditText)findViewById(R.id.editTextname);
@@ -95,16 +95,21 @@ public class GoogleSignInInformation extends AppCompatActivity implements View.O
                 Toast.makeText(this, "Enter Password", Toast.LENGTH_SHORT).show();
             return;
         }
+        EditText ConfirmPassword=(EditText)findViewById(R.id.editTextCnfPassword);
+        String confirmPassword=ConfirmPassword.getText().toString().trim();
+        if(!confirmPassword.equals(Password))
+        {
+            Toast.makeText(this, "Passwords do not match!!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         progressDialog.setMessage("Registering User...");
         progressDialog.show();
         saveUserDetails(Name, Email, PhoneNo, Address, Password);
         Toast.makeText(GoogleSignInInformation.this,"Resgistered Successfully",Toast.LENGTH_SHORT).show();
         progressDialog.dismiss();
-        String userId=getIntent().getStringExtra("Id");
-        String token=getIntent().getStringExtra("token");
         Intent intent=new Intent(this,SELL_BUY.class);
-        intent.putExtra("Id",userId);
-        intent.putExtra("token",token);
+
         startActivity(intent);
     }
 

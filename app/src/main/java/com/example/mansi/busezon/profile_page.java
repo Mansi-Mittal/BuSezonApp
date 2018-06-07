@@ -1,5 +1,6 @@
 package com.example.mansi.busezon;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -62,9 +63,9 @@ public class profile_page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
-
-
         //accessing the firebase storage
+
+
         storage = FirebaseStorage.getInstance();
         //creates a storage reference
         storageRef = storage.getReference();
@@ -248,43 +249,53 @@ public class profile_page extends AppCompatActivity {
     }
 
     void PutValuesInFields() {
-        mDbHelper = new dbHelper(this);
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
-        String Query = "Select * from " + TABLE_NAME;
-        Cursor cursor = db.rawQuery(Query, null);
-        if (cursor.getCount() <= 0) {
-            cursor.close();
-            Toast.makeText(profile_page.this, "no", Toast.LENGTH_LONG).show();
-        } else
-            {
+        try {
+            mDbHelper = new dbHelper(this);
+            SQLiteDatabase db = mDbHelper.getReadableDatabase();
+            String Query = "Select * from " + TABLE_NAME;
+            Cursor cursor = db.rawQuery(Query, null);
+            if (cursor.getCount() <= 0) {
+                cursor.close();
+                Toast.makeText(profile_page.this, "no", Toast.LENGTH_LONG).show();
+            } else {
 //            String userId = firebaseAuth.getCurrentUser().getUid();
 //               String userId = getIntent().getStringExtra("Id");
-                String userId=UserInformation.UserId;
-       //         Toast.makeText(profile_page.this, userId, Toast.LENGTH_LONG).show();
-            String name = "", email = "", phoneno = "", address = "", bio = "";
+                String userId = UserInformation.UserId;
+                //         Toast.makeText(profile_page.this, userId, Toast.LENGTH_LONG).show();
+                String name = "", email = "", phoneno = "", address = "", bio = "";
 
-            if (cursor.moveToFirst()) {
-                do {
-                    String id = cursor.getString(0);
-                    if (id.equals(userId)) {
-                       // Toast.makeText(profile_page.this,id,Toast.LENGTH_LONG).show();
-                        name = cursor.getString(1);
-                        email = cursor.getString(2);
-                        phoneno = cursor.getString(3);
-                        address = cursor.getString(5);
-                        break;
-                    }
+                if (cursor.moveToFirst()) {
+                    do {
+                        String id = cursor.getString(0);
+                        if (id.equals(userId)) {
+                            // Toast.makeText(profile_page.this,id,Toast.LENGTH_LONG).show();
+                            name = cursor.getString(1);
+                            email = cursor.getString(2);
+                            phoneno = cursor.getString(3);
+                            address = cursor.getString(5);
+                            break;
+                        }
 
-                } while (cursor.moveToNext());
+                    } while (cursor.moveToNext());
+                }
+                profileName.setText(name);
+                profileEmail.setText(email);
+                profilePhoneno.setText(phoneno);
+                profileAddress.setText(address);
+
+                cursor.close();
             }
-            profileName.setText(name);
-            profileEmail.setText(email);
-            profilePhoneno.setText(phoneno);
-            profileAddress.setText(address);
-
-            cursor.close();
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(profile_page.this,e.getMessage(),Toast.LENGTH_LONG).show();
         }
     }
 
 
+    public void editDetails(View view)
+    {
+
+        startActivity(new Intent(this,ProfileEditInformation.class));
+    }
 }

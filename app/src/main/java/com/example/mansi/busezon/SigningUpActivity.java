@@ -103,6 +103,8 @@ public class SigningUpActivity extends AppCompatActivity implements View.OnClick
         final String PhoneNo=phoneno.getText().toString().trim();
         final String Address=address.getText().toString().trim();
         final String Password=password.getText().toString().trim();
+        EditText ConfirmPassword=(EditText)findViewById(R.id.editTextCnfPassword);
+        String confirmPassword=ConfirmPassword.getText().toString().trim();
         Name=FName+" "+LName;
         if(TextUtils.isEmpty(Email))
         {
@@ -137,6 +139,12 @@ public class SigningUpActivity extends AppCompatActivity implements View.OnClick
                 Toast.makeText(this, "Password should be atleast 6 characters long", Toast.LENGTH_SHORT).show();
             else
                 Toast.makeText(this, "Enter Password", Toast.LENGTH_SHORT).show();
+            return;
+        }
+//        Toast.makeText(this,confirmPassword+" "+Password, Toast.LENGTH_SHORT).show();
+        if(!confirmPassword.equals(Password))
+        {
+            Toast.makeText(this, "Passwords do not match!!", Toast.LENGTH_SHORT).show();
             return;
         }
         try {
