@@ -22,8 +22,11 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:ems="10"
+        android:paddingTop="70dp"
         android:theme="@style/EditTextStyle"
         android:textColorHint="#9E9E9E"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_below="@id/my_toolbar"
         android:inputType="textPersonName"
         android:hint="Name*" />
@@ -32,6 +35,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:ems="10"
         android:theme="@style/EditTextStyle"
         android:textColorHint="#9E9E9E"
@@ -45,6 +50,8 @@
         android:layout_height="wrap_content"
         android:hint="Phone number*"
         android:textSize="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:ems="10"
         android:theme="@style/EditTextStyle"
         android:textColorHint="#9E9E9E"
@@ -56,42 +63,67 @@
         android:layout_height="wrap_content"
         android:hint="Address*"
         android:textSize="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:ems="10"
         android:theme="@style/EditTextStyle"
         android:textColorHint="#9E9E9E"
         android:layout_below="@id/editTextPhoneno"
         android:id="@+id/editTextAddress"
         android:inputType="textPostalAddress" />
-    <EditText
+
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password*"
-        android:id="@+id/editTextPassword"
-        android:textSize="20dp"
-        android:theme="@style/EditTextStyle"
-        android:textColorHint="#9E9E9E"
-        android:ems="10"
-        android:layout_below="@id/editTextAddress"
-        android:inputType="textPassword"
-        />
-    <EditText
+        app:passwordToggleEnabled="true"
+        android:id="@+id/p_w"
+        android:layout_below="@id/editTextAddress">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password*"
+            android:id="@+id/editTextPassword"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:theme="@style/EditTextStyle"
+            android:textColorHint="#9E9E9E"
+            android:ems="10"
+            android:inputType="textPassword"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Confirm Password*"
-        android:id="@+id/editTextCnfPassword"
-        android:textSize="20dp"
-        android:ems="10"
-        android:theme="@style/EditTextStyle"
-        android:textColorHint="#9E9E9E"
-        android:inputType="textPassword"
-        android:layout_below="@id/editTextPassword"
-        />
+        app:passwordToggleEnabled="true"
+        android:id="@+id/cp_w"
+        android:layout_below="@id/p_w">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Confirm Password*"
+            android:id="@+id/editTextCnfPassword"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:ems="10"
+            android:theme="@style/EditTextStyle"
+            android:textColorHint="#9E9E9E"
+            android:inputType="textPassword"
+            />
+    </android.support.design.widget.TextInputLayout>
+
     <Button
         android:id="@+id/signupButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
         android:layout_margin="10dp"
-        android:layout_below="@id/editTextCnfPassword"
+        android:layout_below="@id/cp_w"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/pretty_button"
         android:text="Continue" />
 

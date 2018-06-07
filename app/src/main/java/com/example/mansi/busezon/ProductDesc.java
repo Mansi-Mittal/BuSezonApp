@@ -136,7 +136,7 @@ public class ProductDesc extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             prodName.setText(response.getString("name"));
-                            price.setText(response.getString("category"));
+                            price.setText("₹"+response.getString("category"));
                             String img = response.getString("IMAGE_URL");
                             String url = server.ImageURL+ img;
                             final String seller_id = response.getString("user_id");
@@ -195,7 +195,7 @@ public class ProductDesc extends AppCompatActivity {
     {
         try {
             TextView seller_name=(TextView)findViewById(R.id.sellerName);
-            String sellerName= (String) seller_name.getText();
+            String sellerName= "Sold By:" + (String) seller_name.getText();
             Chat_UserDetails.chatWith =sellerName;
             String loginUser=UserInformation.name;
             Chat_UserDetails.username=loginUser;
