@@ -94,7 +94,6 @@
             android:name=".Add_product"
             android:label="Add new product"
             android:parentActivityName=".SellHomepage">
-
         </activity>
         <activity android:name=".GoogleSignInInformation" />
 
@@ -102,12 +101,14 @@
         <!-- android:screenOrientation="portrait" android:configChanges="keyboardHidden|orientation|keyboard" /> -->
         
         <activity android:name=".productDisplay"
-            android:label=" ">
-
+            android:label=" "
+            android:parentActivityName=".HomeActivity">
         </activity>
 
         <activity android:name=".Chat_Message_Acitivty"></activity>
-        <activity android:name=".Chat_UsersList_Activity"></activity>
+        <activity android:name=".Chat_UsersList_Activity"
+            android:parentActivityName=".SELL_BUY">
+        </activity>
         <activity android:name=".PaypalConfirmationActivity"></activity>
         <activity android:name=".ProfileEditInformation"></activity>
         
