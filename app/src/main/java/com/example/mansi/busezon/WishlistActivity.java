@@ -1,11 +1,14 @@
 package com.example.mansi.busezon;
 
 import android.app.Dialog;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +21,7 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.firebase.client.Firebase;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
@@ -26,6 +30,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class WishlistActivity extends AppCompatActivity {
     Dialog myDialog;
@@ -46,13 +52,12 @@ public class WishlistActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+        bottomBar.setDefaultTabPosition(3);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
-                if (tabId == R.id.tab_wishList) {
-                    Intent i = new Intent(getApplicationContext(), WishlistActivity.class);
-                    startActivity(i);
-                } else if (tabId == R.id.tab_profile) {
+
+               if (tabId == R.id.tab_profile) {
                     Intent i = new Intent(getApplicationContext(), profile_page.class);
                     startActivity(i);
                 }else if (tabId == R.id.tab_chat) {
@@ -64,6 +69,11 @@ public class WishlistActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         Toast.makeText(WishlistActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
+                }
+                else if (tabId == R.id.tab_home)
+                {
+                    Intent i = new Intent(getApplicationContext(),SELL_BUY.class);
+                    startActivity(i);
                 }
 
             }
@@ -96,6 +106,7 @@ public class WishlistActivity extends AppCompatActivity {
          //       startActivity(i);
           //  }
         //});
+        UserInformation.payment=true;
     }
 
     public void sendJsonRequest() {

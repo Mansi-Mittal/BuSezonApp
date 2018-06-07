@@ -115,6 +115,7 @@ public class SellHomepage extends AppCompatActivity {
                                     id = info.getInt("id");
                                     String name = info.getString("name");
                                     String img = info.getString("IMAGE_URL");
+
                                     String url = "http://192.168.1.6:3000" + img;
                                     int price = info.getInt("price");
                                     String sellerID=info.getString("user_id"); //complete

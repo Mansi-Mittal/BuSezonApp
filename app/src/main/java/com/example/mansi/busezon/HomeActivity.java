@@ -36,6 +36,7 @@ import java.util.ArrayList;
 public class HomeActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     SearchView searchView;
+
     String URL = "http://192.168.1.6:3000/products/search?search=";
     Button like;
     int id = 0;

@@ -1,16 +1,26 @@
 package com.example.mansi.busezon;
 
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amazon.identity.auth.device.api.authorization.User;
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.OnProgressListener;
@@ -18,6 +28,9 @@ import com.google.firebase.storage.UploadTask;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class PaypalConfirmationActivity extends AppCompatActivity {
 
@@ -61,7 +74,35 @@ public class PaypalConfirmationActivity extends AppCompatActivity {
            startActivity(intent);
        }
         UserInformation.payment=true;
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
+        mBuilder.setSmallIcon(R.drawable.cart);
+        mBuilder.setContentTitle("BuSezon Notification Alert!");
+        mBuilder.setContentText("Hi,You have received a text message from BuSezon!");
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
+        // notificationID allows you to update the notification later on.
+        int notificationID=1;
+        mNotificationManager.notify(notificationID, mBuilder.build());
+        String Paymentid=jsonDetails.getString("id");
+        sendMessage(Paymentid);
+    }
+
+    private void sendMessage(String payId)
+    {
+        Firebase reference1, reference2;
+        Firebase.setAndroidContext(this);
+        reference1 = new Firebase("https://busezon-57985.firebaseio.com/messages/BuSezon_" +UserInformation.name);
+        reference2 = new Firebase("https://busezon-57985.firebaseio.com/messages/" +UserInformation.name+ "_BuSezon");
+
+        String messageText ="Hi, Your payment was successful with Payment Id :"+payId+" You will recieve your order in 2 working days! Don't forget to give your feedback";
+
+        if(!messageText.equals("")){
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("message", messageText);
+            map.put("user", Chat_UserDetails.username);
+            reference1.push().setValue(map);
+            reference2.push().setValue(map);
+        }
     }
 
     public void startHomeActivity(View view)

@@ -16,6 +16,5 @@ public class FirebaseUserInformation
         this.email = email;
         this.phoneno = phoneno;
         this.password = password;
-//        seller=buyer=false;
     }
 }

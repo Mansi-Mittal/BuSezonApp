@@ -42,6 +42,7 @@ public class SELL_BUY extends AppCompatActivity {
 
 //    User_Id = getIntent().getStringExtra("Id");
 //    UserInformation.email=getIntent().getStringExtra("Email");
+
         User_Id=UserInformation.UserId;
     token=UserInformation.token;
         try {
@@ -108,6 +109,7 @@ try {
     });
 //    Toast.makeText(this,"check 2",Toast.LENGTH_LONG).show();
     BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+    bottomBar.setDefaultTabPosition(0);
     bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
         @Override
         public void onTabSelected(@IdRes int tabId) {
@@ -323,6 +325,11 @@ catch (Exception e)
             // Otherwise, the insertion was successful and we can display a toast with the row ID.
         //    Toast.makeText(this, "user saved " + newRowId, Toast.LENGTH_SHORT).show();
         }
+    }
+    @Override
+    public void onBackPressed() {
+        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+        bottomBar.setDefaultTabPosition(0);
     }
 
 

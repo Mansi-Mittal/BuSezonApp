@@ -62,9 +62,13 @@ import java.util.Map;
 public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentTransactionCallback {
 
     int id =0;
+
+    ArrayList<offers> offersList;
+
     private cartItemAdapter adapter;
     String url = "http://192.168.1.6:3000/carts?user_id="+UserInformation.UserId;
     ArrayList<cartItem> cartList;
+
     private Button buttonPay;
     private EditText editTextAmount;
     private int totalPrice;
@@ -182,6 +186,7 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
                                 id = info.getInt("id");
                                 String name = info.getString("name");
                                 String img = info.getString("IMAGE_URL");
+
                                 String url = "http://192.168.1.6:3000" + img;
                                 int price = info.getInt("price");
                                 //int priceConvt=Integer.valueOf(price);
@@ -214,6 +219,7 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
     private void getPayment() {
         //Getting the amount from editText
         try {
+
             paymentAmount= String.valueOf(totalPrice);
 //        Toast.makeText(MainActivity.this,"hi",Toast.LENGTH_LONG).show();
             //Creating a paypalpayment

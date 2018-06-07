@@ -3,7 +3,10 @@ package com.example.mansi.busezon;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,6 +21,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.firebase.client.Firebase;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -74,6 +79,34 @@ String loginUser;
                 startActivity(new Intent(Chat_UsersList_Activity.this, Chat_Message_Acitivty.class));
             }
         });
+
+        try {
+            Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+            setSupportActionBar(myToolbar);
+            ActionBar ab = getSupportActionBar();
+            ab.setDisplayHomeAsUpEnabled(true);
+
+            BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+            bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+                @Override
+                public void onTabSelected(@IdRes int tabId) {
+                    if (tabId == R.id.tab_wishList) {
+                        Intent i = new Intent(getApplicationContext(), WishlistActivity.class);
+//                    i.putExtra("User_Name",User_Name);
+                        startActivity(i);
+                    } else if (tabId == R.id.tab_profile) {
+                        Intent i = new Intent(getApplicationContext(), profile_page.class);
+                        startActivity(i);
+                    }
+
+                }
+            });
+
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(this,e.getMessage(),Toast.LENGTH_LONG).show();
+        }
     }
     public void doOnSuccess(String s){
         try {
