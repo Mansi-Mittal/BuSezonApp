@@ -79,6 +79,7 @@ public class HomeActivity extends AppCompatActivity {
                 });
 
 
+
         ListView offersListView = (ListView) findViewById(R.id.list);
         final offerLayoutAdapter adapter = new offerLayoutAdapter(this, offersList);
         offersListView.setAdapter(adapter);
