@@ -42,10 +42,6 @@ public class offerLayoutAdapter extends ArrayAdapter<offerLayout> {
         ImageView thumbNail = convertView.findViewById(R.id.thumbnail);
         thumbNail.setImageResource(current.getImage());
 
-        /*TextView desc = convertView.findViewById(R.id.desc);
-        String description = current.getName();
-        desc.setText(description);*/
-
         return convertView;
     }
 }

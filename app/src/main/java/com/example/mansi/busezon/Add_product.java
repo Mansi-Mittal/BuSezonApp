@@ -2,7 +2,6 @@ package com.example.mansi.busezon;
 
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -22,27 +21,19 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Add_product extends AppCompatActivity {
     private EditText productName,squant,mquant,lquant,xlquant;
@@ -71,7 +62,6 @@ public class Add_product extends AppCompatActivity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        //getActionBar().setTitle("BuSezon");
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -129,8 +119,6 @@ public class Add_product extends AppCompatActivity {
             }
         });
         rQueue = Volley.newRequestQueue(this);
-
-        //opening image chooser option
         choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,7 +134,7 @@ public class Add_product extends AppCompatActivity {
             public void onClick(View v) {
                 progressDialog = new ProgressDialog(Add_product.this);
                 progressDialog.setMessage("Uploading, please wait...");
-                //progressDialog.show();
+                progressDialog.show();
 
                 String tagsArray = tags.getText().toString();
 
@@ -165,17 +153,13 @@ public class Add_product extends AppCompatActivity {
                     parameters.put("user_id",UserInformation.UserId);
                     parameters.put("tags",tagsArray);
                     parameters.put("sizes",sizes);
-                    //parameters.put("qty",qty);
                     parameters.put("sold",false);
                     prodJsonArray.put(parameters);
-                    //Log.i("jsonString", jsonObject.toString());
                     uploadImage(parameters);
-
+                    progressDialog.dismiss();
                 }catch(Exception e){
 
                 }
-
-
             }
         });
 
@@ -203,10 +187,7 @@ public class Add_product extends AppCompatActivity {
             Uri filePath = data.getData();
 
             try {
-                //getting image from gallery
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-
-                //Setting image to ImageView
                 image.setVisibility(View.VISIBLE);
                 image.setImageBitmap(bitmap);
             } catch (Exception e) {
@@ -225,7 +206,6 @@ public class Add_product extends AppCompatActivity {
     }
 
     public void onCheckboxClickedsmall(View view) {
-        // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
 
         if (checked) {
@@ -237,7 +217,6 @@ public class Add_product extends AppCompatActivity {
         }
     }
     public void onCheckboxClickedmedium(View view) {
-        // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
         if (checked) {
             sizes+= "M ";
@@ -248,7 +227,6 @@ public class Add_product extends AppCompatActivity {
         }
     }
     public void onCheckboxClickedlarge(View view) {
-        // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
         if (checked) {
             sizes+= "L ";
@@ -259,7 +237,6 @@ public class Add_product extends AppCompatActivity {
         }
     }
     public void onCheckboxClickedextralarge(View view) {
-        // Is the view now checked?
         boolean checked = ((CheckBox) view).isChecked();
         if (checked) {
             sizes+= "XL ";
@@ -276,17 +253,14 @@ public class Add_product extends AppCompatActivity {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                       progressDialog.dismiss();
-                       Intent reset = new Intent(Add_product.this, Add_product.class);
-                       startActivity(reset);
+                       finish();
+                       startActivity(getIntent());
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(Add_product.this,"Some Error occured, Try again",Toast.LENGTH_LONG).show();
-                        Intent reset = new Intent(Add_product.this, Add_product.class);
-                        startActivity(reset);
+
 
                     }
                 });

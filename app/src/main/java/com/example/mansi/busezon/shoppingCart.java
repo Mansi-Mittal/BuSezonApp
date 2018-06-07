@@ -53,13 +53,8 @@ import com.paytm.pgsdk.PaytmClientCertificate;
 //import java.util.HashMap;
 import java.util.Map;
 
-//import retrofit2.Call;
-//import retrofit2.Callback;
-//import retrofit2.Response;
-//import retrofit2.Retrofit;
-//import retrofit2.converter.gson.GsonConverterFactory;
 
-public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentTransactionCallback {
+public class shoppingCart extends AppCompatActivity {
 
     int id =0;
 
@@ -90,7 +85,6 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shopping_cart);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        //getActionBar().setTitle("BuSezon");
         setSupportActionBar(myToolbar);
 
         ActionBar ab = getSupportActionBar();
@@ -188,10 +182,8 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
                                 String img = info.getString("IMAGE_URL");
                                 String url = server.ImageURL+ img;
                                 int price = info.getInt("price");
-                                //int priceConvt=Integer.valueOf(price);
                                 totalPrice+=price;
                                 int qty = info.getInt("Qty");
-                                //int sellerID=info.getInt(""); //complete
                                 cartList.add(new cartItem(id,url, name, price ,qty));
                             }
                         } catch (JSONException e) {

@@ -19,22 +19,17 @@ import java.util.Map;
 
 public class server {
     static String Response="";
-    static String URL = "http://172.20.10.9:3000/";
-    static String ImageURL = "http://172.20.10.9:3000";
+    static String URL = "http://192.168.1.6:3000/";//http://172.20.10.9:3000/";
+    static String ImageURL = "http://192.168.1.6:3000";//"http://172.20.10.9:3000";
     public static void serverRequest(String URL,final String userID,final int prodID,final boolean check){
-        //String Response="";
         StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
                 try {
-                    //Log.d("output",response);
                     if(check) {
                         JSONObject jsonObject = new JSONObject(response);
                         Response = jsonObject.getString("message");
                     }
-                    //Toast.makeText(AppController.getInstance(),Response,Toast.LENGTH_LONG).show();
-                    //Response = Data.getString(0);
-                    //progressDialog.dismiss();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -45,7 +40,6 @@ public class server {
 
             }
         }) {
-            //adding parameters to send
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parameters = new HashMap<>();
@@ -58,53 +52,26 @@ public class server {
         AppController.getInstance().addToRequestQueue(request);
     }
 
-    public  static void addToWishlist(String userID, int prodID) {
+    public  static String addToWishlist(String userID, int prodID) {
         String url = URL+"wishlists/new";
-        serverRequest(url, userID, prodID,false);
-
-
+        serverRequest(url,userID,prodID,true);
+        return Response;
     }
-    public static void addToBag(String userID, int prodID) {
+    public static String addToBag(String userID, int prodID) {
         String url = URL+"carts/new";
-            serverRequest(url,userID,prodID,false);
+            serverRequest(url,userID,prodID,true);
+            return Response;
     }
 
-    public static void removeFromBag(String userId, int prodID){
+    public static String removeFromBag(String userId, int prodID){
         String url = URL+"carts/remove";
         serverRequest(url,userId,prodID,false);
+        return Response;
     }
 
-    public static void removeFromWish(String userId, int prodID){
+    public static String removeFromWish(String userId, int prodID){
         String url = URL+"wishlists/remove";
         serverRequest(url,userId,prodID,false);
+        return Response;
     }
-
-    public static boolean checkIfAlreadyExist(String userId,int prodId){
-        String url = URL+"wishlists/find";
-        serverRequest(url,userId,prodId,true);
-        if(Response.equalsIgnoreCase("Found")){
-            return true;
-        }
-        else{
-            return false;
-        }
-
-        //return false;
-    }
-
-    public static boolean checkIfAlreadyExistCart(String userId,int prodId){
-        String url = URL+"carts/find";
-        serverRequest(url,userId,prodId,true);
-
-        if(Response.equalsIgnoreCase("Found")){
-            return true;
-        }
-        else{
-            return false;
-        }
-
-       //return false;
-    }
-
-
 }

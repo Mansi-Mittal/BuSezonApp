@@ -55,8 +55,10 @@ public class SellHomepage extends AppCompatActivity {
         offersListView.setAdapter(adapter);
 
         ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
         sendJsonRequest();
-        var = 1;
+        progressDialog.dismiss();
 
         offersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -64,7 +66,7 @@ public class SellHomepage extends AppCompatActivity {
                 Intent appInfo = new Intent(SellHomepage.this, ProductDesc.class);
                 Bundle b = new Bundle();
                 b.putInt("Product_id", offersList.get(i).getID()); //Your id
-                appInfo.putExtras(b); //Put your id to your next Intent
+                appInfo.putExtras(b);
                 startActivity(appInfo);
             }
         });
@@ -107,22 +109,13 @@ public class SellHomepage extends AppCompatActivity {
     public void onResume() {
 
         super.onResume();
-        if(var!=1) {
-            offersList = new ArrayList<>();
-            GridView offersListView = findViewById(R.id.list1);
-            adapter = new offersAdapter(this, offersList);
-            offersListView.setAdapter(adapter);
-            sendJsonRequest();
-            var =0;
-        }
+        adapter.notifyDataSetChanged();
     }
     public void sendJsonRequest() {
-        //progressDialog.show();
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
                 (url, new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        //progressDialog.dismiss();
                         try {
                             for (int i = 0; i <= response.length(); i++) {
                                 JSONObject info = response.getJSONObject(i);
@@ -149,14 +142,5 @@ public class SellHomepage extends AppCompatActivity {
                 });
         AppController.getInstance().addToRequestQueue(jsonObjectRequest);
     }
-
-
-   /* public void openOnImgClick(int ID) {
-        Intent appInfo = new Intent(SellHomepage.this, ProductDesc.class);
-        Bundle b = new Bundle();
-        b.putInt("Product_id", ID); //Your id
-        appInfo.putExtras(b); //Put your id to your next Intent
-        startActivity(appInfo);
-    }*/
 }
 

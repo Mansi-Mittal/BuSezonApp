@@ -5,7 +5,6 @@ import com.android.volley.toolbox.NetworkImageView;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
@@ -15,25 +14,26 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
-
 import java.util.List;
 
 public class offersAdapter extends ArrayAdapter<offers> {
     Dialog myDialog;
     ImageLoader imageLoader = AppController.getInstance().getImageLoader();
     ProgressDialog progressDialog;
-    int sellerID ;
+    offers currentOffer;
     int ID ;
     Button addToWish;
     View v;
+    List<offers> offerList;
+    private offersAdapter adapter;
 
     public offersAdapter(Context context, List<offers> offerList) {
 
         super(context, 0, offerList);
         myDialog = new Dialog(context);
+        this.offerList = offerList;
+        this.adapter = this;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -44,9 +44,8 @@ public class offersAdapter extends ArrayAdapter<offers> {
             convertView = LayoutInflater.from(getContext()).inflate(
                     R.layout.offers_list_item, parent, false);
         }
-        final offers currentOffer = getItem(position);
-        //final int sellerID = currentOffer.getSellerID();
-        final int ID = currentOffer.getID();
+        currentOffer = getItem(position);
+        ID = currentOffer.getID();
 
         NetworkImageView thumbNail = (NetworkImageView) convertView.findViewById(R.id.thumbnail);
         thumbNail.setImageUrl(currentOffer.getImage(), imageLoader);
@@ -63,36 +62,32 @@ public class offersAdapter extends ArrayAdapter<offers> {
 
         Context context = getContext();
         if(context instanceof WishlistActivity) {
-            //addToWish.setVisibility(View.GONE);
+
             addToWish.setBackgroundResource(R.drawable.cart);
             addToWish.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    server.removeFromWish(UserInformation.UserId,ID);
-                    if(server.checkIfAlreadyExistCart(UserInformation.UserId,currentOffer.getID())) {
-                        Toast.makeText(AppController.getInstance(),"Product already in cart",Toast.LENGTH_LONG).show();
-                    }else{
-                        server.addToBag(UserInformation.UserId, ID);
-                    }
                     ShowPopup(v);
+                    server.removeFromWish(UserInformation.UserId,ID);
+                    String response = server.addToBag(UserInformation.UserId, ID);
+                    Toast.makeText(AppController.getInstance(),response,Toast.LENGTH_LONG).show();
+                    offerList.remove(currentOffer);
+                    adapter.notifyDataSetChanged();
+
                 }
             });
-        }else if(context instanceof SellHomepage){
-            addToWish.setVisibility(View.GONE);
-        }else{
+        }else if(context instanceof shoppingCart || context instanceof productDisplay){
             addToWish.setBackgroundResource(R.drawable.wishlist);
             addToWish.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(server.checkIfAlreadyExistCart(UserInformation.UserId,currentOffer.getID())){
-                        Toast.makeText(AppController.getInstance(),"Product already in wishlist",Toast.LENGTH_LONG).show();
-                    }else{
-                        server.addToWishlist(UserInformation.UserId,currentOffer.getID());
-                    }
-
-
+                    String response = server.addToWishlist(UserInformation.UserId, ID);
+                    Toast.makeText(AppController.getInstance(),response,Toast.LENGTH_LONG).show();
+                    adapter.notifyDataSetChanged();
                 }
             });
+        }else{
+            addToWish.setVisibility(View.GONE);
         }
 
         return convertView;
@@ -103,14 +98,6 @@ public class offersAdapter extends ArrayAdapter<offers> {
         myDialog.setContentView(R.layout.custompopup);
         txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
         txtclose.setText("close");
-        txtclose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myDialog.dismiss();
-                Intent app = new Intent(AppController.getInstance(),WishlistActivity.class);
-                AppController.getInstance().startActivity(app);
-            }
-        });
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         myDialog.show();
     }

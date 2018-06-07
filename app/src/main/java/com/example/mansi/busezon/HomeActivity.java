@@ -36,8 +36,6 @@ import java.util.ArrayList;
 public class HomeActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     SearchView searchView;
-
-    String URL = server.URL+"products/search?search=";
     Button like;
     int id = 0;
     String category = "";
@@ -46,7 +44,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        //getActionBar().setTitle("BuSezon");
         mDrawerLayout = findViewById(R.id.drawer_layout);
         setSupportActionBar(myToolbar);
         ActionBar ab = getSupportActionBar();
@@ -54,7 +51,6 @@ public class HomeActivity extends AppCompatActivity {
 
         like = (Button)findViewById(R.id.like);
         ArrayList<offerLayout> offersList=new ArrayList<>();
-        //offersList.add(new offerLayout(R.drawable.img1,like));
         offersList.add(new offerLayout(R.drawable.img2,like));
         offersList.add(new offerLayout(R.drawable.img3,like));
         offersList.add(new offerLayout(R.drawable.img4,like));
@@ -78,52 +74,50 @@ public class HomeActivity extends AppCompatActivity {
                         mybag.setChecked(false);
                         account.setChecked(false);
                         electronics.setChecked(false);
-                        // set item as selected to persist highlight
                         menuItem.setChecked(true);
                         mDrawerLayout.closeDrawers();
-                        // close drawer when item is tapped
 
-                       if(fashion.isChecked())
-                       {
-                           fashion.setChecked(false);
-                           mybag.setChecked(false);
-                           account.setChecked(false);
-                           electronics.setChecked(false);
-                           TextView txtclose;
-                           myDialog.setContentView(R.layout.custompopupfashion);
-                           txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
-                           txtclose.setText("close");
-                           txtclose.setOnClickListener(new View.OnClickListener() {
-                               @Override
-                               public void onClick(View v) {
-                                   myDialog.dismiss();
-                               }
-                           });
-                           myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                           myDialog.show();
+                        if(fashion.isChecked())
+                        {
+                            fashion.setChecked(false);
+                            mybag.setChecked(false);
+                            account.setChecked(false);
+                            electronics.setChecked(false);
+                            TextView txtclose;
+                            category ="clothing";
+                            myDialog.setContentView(R.layout.custompopupfashion);
+                            txtclose =(TextView) myDialog.findViewById(R.id.txtclose);
+                            txtclose.setText("close");
+                            txtclose.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    myDialog.dismiss();
+                                }
+                            });
+                            myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            myDialog.show();
 
-                       }
+                        }
                         else if(electronics.isChecked()) {
-                           fashion.setChecked(false);
-                           mybag.setChecked(false);
-                           account.setChecked(false);
-                           electronics.setChecked(false);
-                           TextView txtclose;
-                           category = "electronics";
+                            fashion.setChecked(false);
+                            mybag.setChecked(false);
+                            account.setChecked(false);
+                            electronics.setChecked(false);
+                            TextView txtclose;
+                            category = "electronics";
+                            myDialog.setContentView(R.layout.custompopupelectronics);
+                            txtclose = (TextView) myDialog.findViewById(R.id.txtclose);
+                            txtclose.setText("close");
+                            txtclose.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    myDialog.dismiss();
+                                }
+                            });
+                            myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            myDialog.show();
 
-                           myDialog.setContentView(R.layout.custompopupelectronics);
-                           txtclose = (TextView) myDialog.findViewById(R.id.txtclose);
-                           txtclose.setText("close");
-                           txtclose.setOnClickListener(new View.OnClickListener() {
-                               @Override
-                               public void onClick(View v) {
-                                   myDialog.dismiss();
-                               }
-                           });
-                           myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                           myDialog.show();
-
-                       }
+                        }
                         else if(account.isChecked())
                         {
                             fashion.setChecked(false);
@@ -142,9 +136,6 @@ public class HomeActivity extends AppCompatActivity {
                             startActivity(new Intent(HomeActivity.this,shoppingCart.class));
                         }
 
-
-                        // Add code here to update the UI based on the item selected
-                        // For example, swap UI fragments here
                         fashion.setChecked(false);
                         mybag.setChecked(false);
                         account.setChecked(false);
@@ -210,7 +201,7 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
-                return true;  // Return true to expand action view
+                return true;
             }
         };
 
@@ -222,7 +213,8 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextSubmit(String search) {
-
+                searchView.setQuery("", false);
+                searchView.clearFocus();
                 Intent appInfo = new Intent(HomeActivity.this, productDisplay.class);
                 appInfo.putExtra("urlParam",search);
                 appInfo.putExtra("search",true);
@@ -264,18 +256,19 @@ public class HomeActivity extends AppCompatActivity {
 
         }
     }
-     public void electronicsMobile(View view){
-         boolean checked = ((CheckBox) view).isChecked();
+    public void electronicsMobile(View view){
+        boolean checked = ((CheckBox) view).isChecked();
 
-         if (checked) {
-             Intent app = new Intent(HomeActivity.this,productDisplay.class);
-             app.putExtra("urlParam",category);
-             app.putExtra("search",false);
-             startActivity(app);
-         }else{
+        if (checked) {
+            Intent app = new Intent(HomeActivity.this,productDisplay.class);
+            app.putExtra("urlParam",category);
+            app.putExtra("subCat","Mobile");
+            app.putExtra("search",false);
+            startActivity(app);
+        }else{
 
-         }
-     }
+        }
     }
+}
 
 

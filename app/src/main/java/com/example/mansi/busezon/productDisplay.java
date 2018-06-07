@@ -26,13 +26,11 @@ import java.util.ArrayList;
 public class productDisplay extends AppCompatActivity {
 
     String URL = "";
-    String urlParam;
+    String urlParam,subCategory;
     int id =0;
     boolean search ;
     public offersAdapter adapter;
     ArrayList<offers> offersList;
-    //JSONArray response;
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +42,6 @@ public class productDisplay extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
         Bundle b = getIntent().getExtras();
-        // or other values
         if (b != null)
             urlParam = b.getString("urlParam");
             search = b.getBoolean("search");
@@ -52,7 +49,8 @@ public class productDisplay extends AppCompatActivity {
         if(search){
             URL = server.URL+"products/search?search=" + urlParam;
         }else{
-            URL = server.URL+"products?category=" + urlParam;
+            subCategory = b.getString("subCat");
+            URL = server.URL+"products?category=" + urlParam+"&subCategory="+subCategory;
         }
 
         offersList = new ArrayList<>();
@@ -61,17 +59,15 @@ public class productDisplay extends AppCompatActivity {
         offersListView.setAdapter(adapter);
 
         sendJsonRequest();
-        //response = serverParams.responeArray;
-        //onResponse(response);
 
         offersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent appInfo = new Intent(productDisplay.this, ProductDesc.class);
+                Intent openPdtDesc = new Intent(productDisplay.this, ProductDesc.class);
                 Bundle b = new Bundle();
-                b.putInt("Product_id", offersList.get(i).getID()); //Your id
-                appInfo.putExtras(b); //Put your id to your next Intent
-                startActivity(appInfo);
+                b.putInt("Product_id", offersList.get(i).getID());
+                openPdtDesc.putExtras(b);
+                startActivity(openPdtDesc);
             }
         });
 

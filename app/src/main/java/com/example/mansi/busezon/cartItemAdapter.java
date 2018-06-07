@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
@@ -25,20 +26,24 @@ public class cartItemAdapter extends ArrayAdapter<cartItem> {
     ImageLoader imageLoader = AppController.getInstance().getImageLoader();
     ProgressDialog progressDialog;
     Button removeFromCart,moveToWishlist;
+    List<cartItem> CartList;
+    cartItemAdapter adapter;
+    cartItem current ;
 
     public cartItemAdapter(Context context, List<cartItem> CartList) {
 
         super(context, 0, CartList);
+        this.CartList = CartList;
+        this.adapter = this;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
         if (imageLoader == null)
             imageLoader = AppController.getInstance().getImageLoader();
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.cart_list_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.cart_list_item, parent, false);
         }
-        final cartItem current = getItem(position);
+        current = getItem(position);
 
         NetworkImageView thumbNail = (NetworkImageView) convertView.findViewById(R.id.cart_thumbnail);
         thumbNail.setImageUrl(current.getImage(), imageLoader);
@@ -59,9 +64,10 @@ public class cartItemAdapter extends ArrayAdapter<cartItem> {
         removeFromCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                server.removeFromBag(UserInformation.UserId,current.getId());
-                Intent app = new Intent(AppController.getInstance(),shoppingCart.class);
-                AppController.getInstance().startActivity(app);
+                String response = server.removeFromBag(UserInformation.UserId,current.getId());
+                Toast.makeText(AppController.getInstance(),response,Toast.LENGTH_LONG).show();
+                CartList.remove(current);
+                adapter.notifyDataSetChanged();
             }
         });
 
@@ -69,9 +75,11 @@ public class cartItemAdapter extends ArrayAdapter<cartItem> {
         moveToWishlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!server.checkIfAlreadyExist(UserInformation.UserId,current.getId())){
-                    server.addToWishlist(UserInformation.UserId,current.getId());
-                }
+                server.removeFromBag(UserInformation.UserId,current.getId());
+                CartList.remove(current);
+                adapter.notifyDataSetChanged();
+                String response = server.addToWishlist(UserInformation.UserId,current.getId());
+                Toast.makeText(AppController.getInstance(),response,Toast.LENGTH_LONG).show();
             }
         });
         return convertView;

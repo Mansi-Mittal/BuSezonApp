@@ -1,6 +1,7 @@
 package com.example.mansi.busezon;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -25,7 +26,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class WishlistActivity extends AppCompatActivity {
-    Dialog myDialog;
     int id =0;
     String url = server.URL+"wishlists?user_id="+UserInformation.UserId;
     ArrayList<offers> offersList;
@@ -34,10 +34,10 @@ public class WishlistActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wishlist);
-        //myDialog = new Dialog(this);
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading your list.. !!");
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        //getActionBar().setTitle("BuSezon");
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         ActionBar ab = getSupportActionBar();
@@ -74,9 +74,10 @@ public class WishlistActivity extends AppCompatActivity {
         GridView offersListView =findViewById(R.id.list1);
         adapter = new offersAdapter(this, offersList);
         offersListView.setAdapter(adapter);
-        //adapter.hideButton();
 
+        progressDialog.show();
         sendJsonRequest();
+        progressDialog.dismiss();
         offersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -88,15 +89,6 @@ public class WishlistActivity extends AppCompatActivity {
             }
         });
 
-        //Button profile=(Button)findViewById(R.id.Profile);
-
-        //profile.setOnClickListener(new View.OnClickListener() {
-            //@Override
-          //  public void onClick(View arg0) {
-        //        Intent i = new Intent(getApplicationContext(), profile_page.class);
-         //       startActivity(i);
-          //  }
-        //});
         UserInformation.payment=true;
     }
 
@@ -106,6 +98,7 @@ public class WishlistActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(JSONArray response) {
+
                         try {
                             for (int i = 0; i <= response.length(); i++) {
                                 JSONObject info = response.getJSONObject(i);
@@ -132,6 +125,7 @@ public class WishlistActivity extends AppCompatActivity {
                 });
         AppController.getInstance().addToRequestQueue(jsonObjectRequest);
     }
+
 
 }
 

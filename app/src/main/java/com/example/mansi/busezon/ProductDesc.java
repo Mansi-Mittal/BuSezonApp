@@ -41,8 +41,8 @@ import java.util.Map;
 public class ProductDesc extends AppCompatActivity {
 
     private static ImageView imageView;
-    private Button button;
-    int value = 0;
+    private Button button,addToCart;
+    int value = 0,id =0;
     RequestQueue rq ;
     TextView prodName;
     TextView price;
@@ -54,30 +54,17 @@ public class ProductDesc extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_desc);
-        //init();
         databaseReference = FirebaseDatabase.getInstance().getReference();
         Bundle b = getIntent().getExtras();
-         // or other values
         if (b != null)
             value = b.getInt("Product_id");
         url =server.URL+"products/show?id=" + value;
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-
         ActionBar ab = getSupportActionBar();
-
         ab.setDisplayHomeAsUpEnabled(true);
 
-
-        /*Button Prod=(Button)findViewById(R.id.editBtn);
-        Prod.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                Intent i = new Intent(getApplicationContext(), Add_product.class);
-                startActivity(i);
-            }
-        });*/
 
         rq = Volley.newRequestQueue(this);
         sendJsonRequest();
@@ -94,18 +81,15 @@ public class ProductDesc extends AppCompatActivity {
 
         sellerName=(TextView)findViewById(R.id.sellerName);
 
+        addToCart =findViewById(R.id.addToBag);
+        addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String response = server.addToBag(UserInformation.UserId, id);
+                Toast.makeText(ProductDesc.this,response,Toast.LENGTH_LONG).show();
+            }
+        });
     }
-
-    /*private void init() {
-        for(int i=0;i<XMEN.length;i++)
-            XMENArray.add(XMEN[i]);
-
-        mPager = (ViewPager)findViewById(R.id.pager);
-        mPager.setAdapter(new productImageAdapter(ProductDesc.this,XMENArray));
-        CircleIndicator indicator = (CircleIndicator)findViewById(R.id.indicator);
-        indicator.setViewPager(mPager);
-
-    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -135,6 +119,7 @@ public class ProductDesc extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
+                            id = response.getInt("id");
                             prodName.setText(response.getString("name"));
                             price.setText("₹"+response.getString("price"));
                             String img = response.getString("IMAGE_URL");
@@ -195,7 +180,7 @@ public class ProductDesc extends AppCompatActivity {
     {
         try {
             TextView seller_name=(TextView)findViewById(R.id.sellerName);
-            String sellerName= "Sold By:" + (String) seller_name.getText();
+            String sellerName= seller_name.getText().toString();
             Chat_UserDetails.chatWith =sellerName;
             String loginUser=UserInformation.name;
             Chat_UserDetails.username=loginUser;
