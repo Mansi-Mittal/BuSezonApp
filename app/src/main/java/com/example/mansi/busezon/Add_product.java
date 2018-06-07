@@ -279,6 +279,8 @@ public class Add_product extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                        progressDialog.dismiss();
+                       Intent reset = new Intent(Add_product.this, Add_product.class);
+                       startActivity(reset);
                     }
                 },
                 new Response.ErrorListener() {

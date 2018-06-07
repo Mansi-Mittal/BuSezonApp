@@ -1,6 +1,9 @@
 package com.example.mansi.busezon;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.ActionBar;
@@ -9,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -24,15 +28,17 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class WishlistActivity extends AppCompatActivity {
-
+    Dialog myDialog;
     int id =0;
-    String url = "http://192.168.1.6:3000/wishlists?user_id=1234";
+    String url = "http://192.168.1.6:3000/wishlists?user_id="+UserInformation.UserId;
     ArrayList<offers> offersList;
     private offersAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wishlist);
+        //myDialog = new Dialog(this);
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         //getActionBar().setTitle("BuSezon");
         setSupportActionBar(myToolbar);
@@ -105,8 +111,9 @@ public class WishlistActivity extends AppCompatActivity {
                                 String name = info.getString("name");
                                 String img = info.getString("IMAGE_URL");
                                 String url = "http://192.168.1.6:3000" + img;
-                                //int sellerID=info.getInt(""); //complete
-                                offersList.add(new offers(id,url, name, 1234, 0));
+                                int price = info.getInt("price");
+                                String sellerID=info.getString("user_id"); //complete
+                                offersList.add(new offers(id,url, name, sellerID, price));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -125,3 +132,4 @@ public class WishlistActivity extends AppCompatActivity {
     }
 
 }
+

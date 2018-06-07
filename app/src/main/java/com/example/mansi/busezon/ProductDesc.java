@@ -53,7 +53,7 @@ public class ProductDesc extends AppCompatActivity {
         if (b != null)
             value = b.getInt("Product_id");
 
-        url = "http://172.20.10.9:3000/products/show/?id=" + value;
+        url = "http://192.168.1.6:3000/products/show/?id=" + value;
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);

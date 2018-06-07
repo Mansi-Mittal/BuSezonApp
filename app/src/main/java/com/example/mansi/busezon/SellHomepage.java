@@ -34,7 +34,7 @@ import java.util.Map;
 public class SellHomepage extends AppCompatActivity {
 
     int id =0;
-    String url = "http://192.168.1.6:3000/products?user_id=1234";
+    String url = "http://192.168.1.6:3000/products?user_id="+UserInformation.UserId;
     ArrayList<offers> offersList;
     private offersAdapter adapter;
     ProgressDialog progressDialog;
@@ -54,7 +54,6 @@ public class SellHomepage extends AppCompatActivity {
         adapter = new offersAdapter(this, offersList);
         offersListView.setAdapter(adapter);
 
-        progressDialog.show();
         sendJsonRequest();
 
         offersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -104,12 +103,12 @@ public class SellHomepage extends AppCompatActivity {
     }
 
     public void sendJsonRequest() {
+        //progressDialog.show();
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
                 (url, new Response.Listener<JSONArray>() {
-
                     @Override
                     public void onResponse(JSONArray response) {
-                        progressDialog.dismiss();
+                        //progressDialog.dismiss();
                         try {
                             for (int i = 0; i <= response.length(); i++) {
                                 JSONObject info = response.getJSONObject(i);
@@ -118,8 +117,8 @@ public class SellHomepage extends AppCompatActivity {
                                     String img = info.getString("IMAGE_URL");
                                     String url = "http://192.168.1.6:3000" + img;
                                     int price = info.getInt("price");
-                                    //int sellerID=info.getInt(""); //complete
-                                offersList.add(new offers(id,url, name, 1234,price));
+                                    String sellerID=info.getString("user_id"); //complete
+                                offersList.add(new offers(id,url, name, sellerID,price));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
