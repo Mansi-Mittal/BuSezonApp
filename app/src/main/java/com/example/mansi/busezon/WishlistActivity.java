@@ -1,6 +1,5 @@
 package com.example.mansi.busezon;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -84,7 +83,7 @@ public class WishlistActivity extends AppCompatActivity {
                 Intent appInfo = new Intent(WishlistActivity.this, ProductDesc.class);
                 Bundle b = new Bundle();
                 b.putInt("Product_id", offersList.get(i).getID()); //Your id
-                appInfo.putExtras(b); //Put your id to your next Intent
+                appInfo.putExtras(b);
                 startActivity(appInfo);
             }
         });

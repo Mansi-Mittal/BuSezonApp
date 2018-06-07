@@ -156,10 +156,11 @@ public class Add_product extends AppCompatActivity {
                     parameters.put("sold",false);
                     prodJsonArray.put(parameters);
                     uploadImage(parameters);
-                    progressDialog.dismiss();
                 }catch(Exception e){
 
                 }
+                progressDialog.dismiss();
+
             }
         });
 
@@ -260,7 +261,8 @@ public class Add_product extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        finish();
+                        startActivity(getIntent());
 
                     }
                 });

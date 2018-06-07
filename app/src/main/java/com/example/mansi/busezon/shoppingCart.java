@@ -125,11 +125,7 @@ public class shoppingCart extends AppCompatActivity {
 
 
         sendJsonRequest();
-
-        //Button proceedToPay = findViewById(R.id.proceedToPay);
-        //proceedToPay.setText("Proceed To Pay");
         buttonPay = (Button) findViewById(R.id.proceedToPay);
-//        editTextAmount = (EditText) findViewById(R.id.editTextAmount);
 
         buttonPay.setOnClickListener(new View.OnClickListener() {
                                          @Override
@@ -141,7 +137,6 @@ public class shoppingCart extends AppCompatActivity {
 
         );
         Intent intent = new Intent(this, PayPalService.class);
-        //Toast.makeText(MainActivity.this,"hi2",Toast.LENGTH_LONG).show();
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
 
         startService(intent);

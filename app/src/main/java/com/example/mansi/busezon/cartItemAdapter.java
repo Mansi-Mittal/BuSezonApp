@@ -65,7 +65,7 @@ public class cartItemAdapter extends ArrayAdapter<cartItem> {
             @Override
             public void onClick(View view) {
                 String response = server.removeFromBag(UserInformation.UserId,current.getId());
-                Toast.makeText(AppController.getInstance(),response,Toast.LENGTH_LONG).show();
+                //Toast.makeText(AppController.getInstance(),response,Toast.LENGTH_LONG).show();
                 CartList.remove(current);
                 adapter.notifyDataSetChanged();
             }
@@ -79,7 +79,7 @@ public class cartItemAdapter extends ArrayAdapter<cartItem> {
                 CartList.remove(current);
                 adapter.notifyDataSetChanged();
                 String response = server.addToWishlist(UserInformation.UserId,current.getId());
-                Toast.makeText(AppController.getInstance(),response,Toast.LENGTH_LONG).show();
+                //Toast.makeText(AppController.getInstance(),response,Toast.LENGTH_LONG).show();
             }
         });
         return convertView;

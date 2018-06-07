@@ -157,7 +157,6 @@ public class ProductDesc extends AppCompatActivity {
                             {
                                 Toast.makeText(ProductDesc.this, "user 1111", Toast.LENGTH_SHORT).show();
                             }
-                            //Toast.makeText(ProductDesc.this, url, Toast.LENGTH_SHORT).show();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -184,7 +183,6 @@ public class ProductDesc extends AppCompatActivity {
             Chat_UserDetails.chatWith =sellerName;
             String loginUser=UserInformation.name;
             Chat_UserDetails.username=loginUser;
-//            Toast.makeText(WishlistActivity.this,Chat_UserDetails.chatWith+" "+Chat_UserDetails.username,Toast.LENGTH_LONG).show();
             Intent intent = new Intent(ProductDesc.this, Chat_Message_Acitivty.class);
             startActivity(intent);
         }

@@ -70,7 +70,7 @@ public class offersAdapter extends ArrayAdapter<offers> {
                     ShowPopup(v);
                     server.removeFromWish(UserInformation.UserId,ID);
                     String response = server.addToBag(UserInformation.UserId, ID);
-                    Toast.makeText(AppController.getInstance(),response,Toast.LENGTH_LONG).show();
+                    //Toast.makeText(AppController.getInstance(),response,Toast.LENGTH_LONG).show();
                     offerList.remove(currentOffer);
                     adapter.notifyDataSetChanged();
 
@@ -82,12 +82,13 @@ public class offersAdapter extends ArrayAdapter<offers> {
                 @Override
                 public void onClick(View view) {
                     String response = server.addToWishlist(UserInformation.UserId, ID);
-                    Toast.makeText(AppController.getInstance(),response,Toast.LENGTH_LONG).show();
+                    //Toast.makeText(AppController.getInstance(),response,Toast.LENGTH_LONG).show();
                     adapter.notifyDataSetChanged();
                 }
             });
         }else{
             addToWish.setVisibility(View.GONE);
+            adapter.notifyDataSetChanged();
         }
 
         return convertView;
