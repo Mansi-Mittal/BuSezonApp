@@ -186,7 +186,6 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
                                 id = info.getInt("id");
                                 String name = info.getString("name");
                                 String img = info.getString("IMAGE_URL");
-
                                 String url = server.ImageURL+ img;
                                 int price = info.getInt("price");
                                 //int priceConvt=Integer.valueOf(price);
