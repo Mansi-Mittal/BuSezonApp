@@ -4,23 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="210dp"
     android:orientation="vertical">
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="37dp">
+    <!--<RelativeLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content">-->
 
-        <Button
-            android:id="@+id/close"
-            android:layout_width="65dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_gravity="top"
-            android:backgroundTint="#009688"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:text="x"
-            android:textSize="10sp" />
-    </RelativeLayout>
+        <!--<Button-->
+            <!--android:id="@+id/close"-->
+            <!--android:layout_width="65dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_gravity="top"-->
+            <!--android:backgroundTint="#009688"-->
+            <!--android:focusable="false"-->
+            <!--android:focusableInTouchMode="false"-->
+            <!--android:text="X"-->
+            <!--android:textSize="10sp" />-->
+    <!--</RelativeLayout>-->
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/thumbnail"
         android:layout_width="match_parent"

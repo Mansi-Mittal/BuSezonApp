@@ -75,7 +75,7 @@ String loginUser;
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Chat_UserDetails.chatWith = al.get(position);
                 Chat_UserDetails.username=loginUser;
-                Toast.makeText(Chat_UsersList_Activity.this,Chat_UserDetails.chatWith+" "+Chat_UserDetails.username,Toast.LENGTH_LONG).show();
+//                Toast.makeText(Chat_UsersList_Activity.this,Chat_UserDetails.chatWith+" "+Chat_UserDetails.username,Toast.LENGTH_LONG).show();
                 startActivity(new Intent(Chat_UsersList_Activity.this, Chat_Message_Acitivty.class));
             }
         });
@@ -136,6 +136,7 @@ String loginUser;
 
         if(totalUsers <=1){
             noUsersText.setVisibility(View.VISIBLE);
+//            noUsersText.setText("No chats available");
             usersList.setVisibility(View.GONE);
         }
         else{
