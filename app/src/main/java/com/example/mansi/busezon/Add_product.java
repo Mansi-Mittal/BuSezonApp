@@ -146,12 +146,9 @@ public class Add_product extends AppCompatActivity {
             public void onClick(View v) {
                 progressDialog = new ProgressDialog(Add_product.this);
                 progressDialog.setMessage("Uploading, please wait...");
-                progressDialog.show();
+                //progressDialog.show();
 
                 String tagsArray = tags.getText().toString();
-
-                //sending image to server
-                //uploadImage();
 
                 JSONArray prodJsonArray = new JSONArray();
                 JSONObject parameters = new JSONObject();
@@ -168,7 +165,7 @@ public class Add_product extends AppCompatActivity {
                     parameters.put("user_id",UserInformation.UserId);
                     parameters.put("tags",tagsArray);
                     parameters.put("sizes",sizes);
-                    parameters.put("qty",qty);
+                    //parameters.put("qty",qty);
                     parameters.put("sold",false);
                     prodJsonArray.put(parameters);
                     //Log.i("jsonString", jsonObject.toString());
@@ -287,7 +284,9 @@ public class Add_product extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(Add_product.this,"Some Error occured, Try again",Toast.LENGTH_LONG).show();
+                        //Toast.makeText(Add_product.this,"Some Error occured, Try again",Toast.LENGTH_LONG).show();
+                        Intent reset = new Intent(Add_product.this, Add_product.class);
+                        startActivity(reset);
 
                     }
                 });
