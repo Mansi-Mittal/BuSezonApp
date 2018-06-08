@@ -118,18 +118,13 @@ try
 
             while(i.hasNext()){
                 key = i.next().toString();
-//                Toast.makeText(Chat_UsersList_Activity.this,totalUsers,Toast.LENGTH_LONG).show();
                 if(!key.equals(Chat_UserDetails.username))
                 {
                     String users[]=key.split("_");
                     String messenger=users[0]+"_"+loginUser;
-//                    Toast.makeText(Chat_UsersList_Activity.this,users[0],Toast.LENGTH_LONG).show();
                     if((!al.contains(users[0]))&&(!users[0].equals(loginUser))&&(key.equals(messenger)))
                     {
                         al.add(users[0]);
-
-
-//                        Toast.makeText(Chat_UsersList_Activity.this,totalUsers,Toast.LENGTH_LONG).show();
                     }
                 }
                 totalUsers++;

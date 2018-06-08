@@ -87,10 +87,6 @@ public class MainActivity extends AppCompatActivity {
         try {
             Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
             setSupportActionBar(myToolbar);
-            //ActionBar ab = getSupportActionBar();
-            // ab.setDisplayHomeAsUpEnabled(true);
-
-
             SpannableString ss = new SpannableString("New to BuSeZon? SignUp Now");
             ClickableSpan clickableSpan = new ClickableSpan() {
                 @Override
@@ -104,21 +100,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
             ss.setSpan(clickableSpan, 16, 26, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
             TextView SingInView = (TextView) findViewById(R.id.signin_info);
             SingInView.setText(ss);
             SingInView.setMovementMethod(LinkMovementMethod.getInstance());
             SingInView.setHighlightColor(Color.TRANSPARENT);
-
-
-//            Button SignUp = (Button) findViewById(R.id.signup);
-//            SignUp.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View arg0) {
-//                    Intent i = new Intent(getApplicationContext(), SigningUpActivity.class);
-//                    startActivity(i);
-//                }
-//            });
 
             buttonlogin = (Button) findViewById(R.id.login);
             progressDialog = new ProgressDialog(this);
@@ -145,35 +130,11 @@ public class MainActivity extends AppCompatActivity {
 
 //login with amazon
 
-//            logoutToken=getIntent().getStringExtra("logout");
-//            if(logoutToken.equals("true"))
-//            {
-//                Toast.makeText(this,"logout done",Toast.LENGTH_LONG).show();
-//            }
-
-
             requestContext = RequestContext.create(this);
-
-
-//ImageButton amazonlogin=(ImageButton)findViewById(R.id.login_with_amazon);
-//amazonlogin.setOnClickListener(new View.OnClickListener() {
-//    @Override
-//    public void onClick(View view) {
-//       // registerUserAmazon();
-
-
-
                requestContext.registerListener(new AuthorizeListener() {
                         /* Authorization was completed successfully. */
                         @Override
                         public void onSuccess(AuthorizeResult authorizeResult) {
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            // At this point we know the authorization completed, so remove the ability to return to the app to sign-in again
-//                            setLoggingInState(true);
-//                        }
-//                    });
                             fetchUserProfile();
                         }
 
@@ -181,33 +142,15 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onError(AuthError authError) {
                             Log.e(TAG, "AuthError during authorization", authError);
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            showAuthToast("Error during authorization.  Please try again.");
-//                            resetProfileView();
-//                            setLoggingInState(false);
-//                        }
-//                    });
                         }
 
                         /* Authorization was cancelled before it could be completed. */
                         @Override
                         public void onCancel(AuthCancellation authCancellation) {
                             Log.e(TAG, "User cancelled authorization");
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            showAuthToast("Authorization cancelled");
                            resetProfileView(false);
-//                        }
-//                    });
                         }
                     });
-//    }
-//});
-
-//            setContentView(R.layout.activity_main);
                     initializeUI();
         }
         catch(Exception e)
@@ -243,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run()
                         {
-//                            Toast.makeText(getApplicationContext(),name+"  "+email+"  "+account, Toast.LENGTH_LONG).show();
+
                                 String id = updateProfileData(name, email, account, zipCode);
 
                         }
@@ -271,20 +214,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String updateProfileData(final String name, final String email, final String account, String zipCode) {
-//        StringBuilder profileBuilder = new StringBuilder();
-//        profileBuilder.append(String.format("Welcome, %s!\n", name));
-//        profileBuilder.append(String.format("Your email is %s\n", email));
-//        profileBuilder.append(String.format("Your zipCode is %s\n", zipCode));
-//        final String profile = profileBuilder.toString();
-//        Log.d(TAG, "Profile Response: " + profile);
-      //  Toast.makeText(MainActivity.this, "  user 1234", Toast.LENGTH_LONG).show();
+
         mLoginButton.setVisibility(Button.GONE);
         /*
 
         ............................STORE USER DATA INTO FIREBASE.......................................
 
          */
-
     try
     {
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
@@ -293,9 +229,8 @@ public class MainActivity extends AppCompatActivity {
         public void onDataChange(DataSnapshot dataSnapshot) {
             int f = 0;
             for (DataSnapshot ds : dataSnapshot.getChildren()) {
-//
                 String uId=ds.getKey();
-                String DBemail = ds.child(uId).child("email").getValue(String.class);
+                String DBemail = ds.child("email").getValue(String.class);
                 if(DBemail==null)
                     break;
                 if (DBemail.equals(email)) {
@@ -320,7 +255,7 @@ public class MainActivity extends AppCompatActivity {
                 FirebaseUserInformation userInformation = new FirebaseUserInformation(name, "", email, "", "");
                 user_Id = account.replace("amzn1.account.", "");
                 databaseReference.child(user_Id).setValue(userInformation);
-                Toast.makeText(MainActivity.this, " Registered Successfully !", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "user details added !", Toast.LENGTH_LONG).show();
                 UserInformation.name=name;
                 UserInformation.email=email;
                 UserInformation.UserId=user_Id;
@@ -352,9 +287,7 @@ private void startIntent(String name,String email,String id)
     Intent i = new Intent(MainActivity.this, SELL_BUY.class);
     i.putExtra("Name", name);
     i.putExtra("Email", email);
-    //Toast.makeText(MainActivity.this, id+"    user", Toast.LENGTH_LONG).show();
     i.putExtra("Id",id);
-//    Toast.makeText(MainActivity.this,tokenToCheckLoginType+"   "+id, Toast.LENGTH_LONG).show();
     UserInformation.name=name;
     UserInformation.email=email;
     UserInformation.UserId=id;
@@ -382,35 +315,8 @@ private void startIntent(String name,String email,String id)
                     );
                 }
             });
-
-            // Find the button with the logout ID and set up a click handler
-//            View logoutButton = findViewById(R.id.logout);
-//            logoutButton.setOnClickListener(new View.OnClickListener() {
-//
-//                @Override
-//                public void onClick(View v) {
-//                    AuthorizationManager.signOut(getApplicationContext(), new Listener<Void, AuthError>() {
-//                        @Override
-//                        public void onSuccess(Void response) {
-//                            runOnUiThread(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    setLoggedOutState();
-//                                }
-//                            });
-//                        }
-//
-//                        @Override
-//                        public void onError(AuthError authError) {
-//                            Log.e(TAG, "Error clearing authorization state.", authError);
-//                        }
-//                    });
-//                }
-//            });
-
             String logoutText = getString(R.string.logout);
             mProfileText = (TextView) findViewById(R.id.profile_info);
-          //  mLogoutTextView = (TextView) logoutButton;
             mLogoutTextView.setText(logoutText);
             mLogInProgress = (ProgressBar) findViewById(R.id.log_in_progress);
         }
@@ -421,19 +327,6 @@ private void startIntent(String name,String email,String id)
     }
 
     /**
-     * Sets the text in the mProfileText {@link TextView} to the value of the provided String.
-     *
-     * @param profileInfo the String with which to update the {@link TextView}.
-     */
-//    private void updateProfileView(String profileInfo)
-//    {
-//        Log.d(TAG, "Updating profile view");
-//        mProfileText.setText(profileInfo);
-//
-//
-//    }
-
-    /**
      * Sets the text in the mProfileText {@link TextView} to the prompt it originally displayed.
      */
     private void resetProfileView(Boolean a)
@@ -442,40 +335,10 @@ private void startIntent(String name,String email,String id)
         mProfileText.setText(getString(R.string.default_message));
     }
 
-    /**
-     * Sets the state of the application to reflect that the user is currently authorized.
-     */
-    private void setLoggedInState() {
-        mLoginButton.setVisibility(Button.GONE);
-        setLoggedInButtonsVisibility(Button.VISIBLE);
-        mIsLoggedIn = true;
-        setLoggingInState(false);
-    }
-
-    /**
-     * Sets the state of the application to reflect that the user is not currently authorized.
-     */
-    private void setLoggedOutState() {
-        mLoginButton.setVisibility(Button.VISIBLE);
-        setLoggedInButtonsVisibility(Button.GONE);
-        mIsLoggedIn = false;
-        resetProfileView(false);
-    }
-
-    /**
-     * Changes the visibility for both of the buttons that are available during the logged in state
-     *
-     * @param visibility the visibility to which the buttons should be set
-     */
     private void setLoggedInButtonsVisibility(int visibility) {
         mLogoutTextView.setVisibility(visibility);
     }
 
-    /**
-     * Turns on/off display elements which indicate that the user is currently in the process of logging in
-     *
-     * @param loggingIn whether or not the user is currently in the process of logging in
-     */
     private void setLoggingInState(final boolean loggingIn) {
         if (loggingIn) {
             mLoginButton.setVisibility(Button.GONE);
@@ -492,18 +355,9 @@ private void startIntent(String name,String email,String id)
             mProfileText.setVisibility(TextView.VISIBLE);
         }
     }
-
-    private void showAuthToast(String authToastMessage) {
-        Toast authToast = Toast.makeText(getApplicationContext(), authToastMessage, Toast.LENGTH_LONG);
-        authToast.setGravity(Gravity.CENTER, 0, 0);
-        authToast.show();
-    }
-
-
-
-
-
 //LOGIN WITH AMAZON COMPLETE
+
+
 
     private void loginclick(View view)
     {
@@ -644,25 +498,19 @@ private void startIntent(String name,String email,String id)
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = firebaseAuth.getCurrentUser();
-                            // updateUI(user);
+
                             String Name=user.getDisplayName();
                             String Email=user.getEmail();
                             String Id=user.getUid();
                             check(Id,Name,Email);
-
-                            //Toast.makeText(SigningUpActivity.this,"name= "+Name+" email= "+Email+" id= "+Id,Toast.LENGTH_LONG).show();
-
-                        } else {
+                     } else {
                             Toast.makeText(MainActivity.this,"Error google signin failed",Toast.LENGTH_SHORT).show();
                         }
-
-                        // ...
                     }
                 });
     }
     private void check(final String userId,final String Name,final String Email)
     {
-//        Toast.makeText(MainActivity.this,tokenToCheckLoginType, Toast.LENGTH_LONG).show();
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

@@ -67,17 +67,12 @@ public class shoppingCart extends AppCompatActivity {
     private Button buttonPay;
     private EditText editTextAmount;
     private int totalPrice;
-    //Payment Amount
     private String paymentAmount;
-
-    //Paypal intent request code to track onActivityResult method
     public static final int PAYPAL_REQUEST_CODE = 123;
 
 
     //Paypal Configuration Object
     private static PayPalConfiguration config = new PayPalConfiguration()
-            // Start with mock environment.  When ready, switch to sandbox (ENVIRONMENT_SANDBOX)
-            // or live (ENVIRONMENT_PRODUCTION)
             .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
             .clientId(PaypalConfig.PAYPAL_CLIENT_ID);
 
@@ -207,22 +202,12 @@ public class shoppingCart extends AppCompatActivity {
         try {
 //paymentAmount="10";
             paymentAmount= String.valueOf(totalPrice);
-//        Toast.makeText(MainActivity.this,"hi",Toast.LENGTH_LONG).show();
-            //Creating a paypalpayment
             PayPalPayment payment = new PayPalPayment(new BigDecimal(String.valueOf(paymentAmount)), "USD", "Price",
                     PayPalPayment.PAYMENT_INTENT_SALE);
-
-            //Creating Paypal Payment activity intent
             Intent intent = new Intent(this, PaymentActivity.class);
-
-            //putting the paypal configuration to the intent
             intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-
             //Puting paypal payment to the intent
             intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
-//        Toast.makeText(MainActivity.this,"payment",Toast.LENGTH_LONG).show();
-            //Starting the intent activity for result
-            //the request code will be used on the method onActivityResult
             startActivityForResult(intent, PAYPAL_REQUEST_CODE);
         }
         catch (Exception e)
@@ -236,20 +221,15 @@ public class shoppingCart extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //If the result is from paypal
         if (requestCode == PAYPAL_REQUEST_CODE) {
-
             //If the result is OK i.e. user has not canceled the payment
             if (resultCode == Activity.RESULT_OK) {
                 //Getting the payment confirmation
                 PaymentConfirmation confirm = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
-//                Toast.makeText(MainActivity.this,"hi",Toast.LENGTH_LONG).show();
-                //if confirmation is not null
                 if (confirm != null) {
                     try {
                         //Getting the payment details
                         String paymentDetails = confirm.toJSONObject().toString(4);
                         Log.i("paymentExample", paymentDetails);
-                        //Toast.makeText(shoppingCart.this,paymentDetails,Toast.LENGTH_LONG).show();
-                        //Starting a new activity for the payment details and also putting the payment details with intent
                         startActivity(new Intent(this, PaypalConfirmationActivity.class)
                                 .putExtra("PaymentDetails", paymentDetails)
                                 .putExtra("PaymentAmount", paymentAmount)
