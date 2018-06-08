@@ -102,7 +102,7 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
         ListView cartListView =findViewById(R.id.list1);
         adapter = new cartItemAdapter(this, cartList);
         cartListView.setAdapter(adapter);
-
+        Toast.makeText(this,UserInformation.name,Toast.LENGTH_LONG).show();
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
@@ -218,7 +218,7 @@ public class shoppingCart extends AppCompatActivity { //implements PaytmPaymentT
     private void getPayment() {
         //Getting the amount from editText
         try {
-
+//paymentAmount="10";
             paymentAmount= String.valueOf(totalPrice);
 //        Toast.makeText(MainActivity.this,"hi",Toast.LENGTH_LONG).show();
             //Creating a paypalpayment

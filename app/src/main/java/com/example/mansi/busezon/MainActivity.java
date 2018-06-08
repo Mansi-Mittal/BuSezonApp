@@ -243,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run()
                         {
-
+//                            Toast.makeText(getApplicationContext(),name+"  "+email+"  "+account, Toast.LENGTH_LONG).show();
                                 String id = updateProfileData(name, email, account, zipCode);
 
                         }
@@ -293,7 +293,11 @@ public class MainActivity extends AppCompatActivity {
         public void onDataChange(DataSnapshot dataSnapshot) {
             int f = 0;
             for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                String DBemail = ds.child("email").getValue(String.class);
+//
+                String uId=ds.getKey();
+                String DBemail = ds.child(uId).child("email").getValue(String.class);
+                if(DBemail==null)
+                    break;
                 if (DBemail.equals(email)) {
                     String id = ds.getKey();
                     databaseReference.child(id).child("name").setValue(name);
@@ -306,6 +310,9 @@ public class MainActivity extends AppCompatActivity {
             if (f == 1)
             {
                 Toast.makeText(MainActivity.this, " user details added ", Toast.LENGTH_LONG).show();
+                UserInformation.name=name;
+                UserInformation.email=email;
+                UserInformation.UserId=user_Id;
                 startIntent(name, email,user_Id);
             }
             else {
@@ -314,7 +321,11 @@ public class MainActivity extends AppCompatActivity {
                 user_Id = account.replace("amzn1.account.", "");
                 databaseReference.child(user_Id).setValue(userInformation);
                 Toast.makeText(MainActivity.this, " Registered Successfully !", Toast.LENGTH_LONG).show();
+                UserInformation.name=name;
+                UserInformation.email=email;
+                UserInformation.UserId=user_Id;
                 startIntent(name, email,user_Id);
+
                 f = 1;
 
             }
