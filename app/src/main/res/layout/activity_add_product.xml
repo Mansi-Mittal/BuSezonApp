@@ -87,68 +87,66 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:orientation="horizontal"
-                android:visibility="gone">
+                android:visibility="visible">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="sub category"
-                    android:textAllCaps="true"
-                    android:textColor="#020202"
-                    android:textSize="18sp"
-                    android:textStyle="italic" />
-
-                <Spinner
-                    android:id="@+id/subCategoryF"
+                <LinearLayout
+                    android:id="@+id/subCategoryFLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:entries="@array/sub_category_fashion"
-                    android:text="sub-category"
-                    android:textAlignment="viewEnd">
-
-                </Spinner>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/subCategoryELayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="GENDER"
-                    android:textAllCaps="true"
-                    android:textColor="#020202"
-                    android:textSize="18sp"
-                    android:textStyle="italic" />
+                    android:layout_margin="16dp"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
 
-                <Spinner
-                    android:id="@+id/subCategoryE"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="sub category"
+                        android:textAllCaps="true"
+                        android:textColor="#020202"
+                        android:textSize="18sp"
+                        android:textStyle="italic" />
+
+                    <Spinner
+                        android:id="@+id/subCategoryF"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:entries="@array/sub_category_fashion"
+                        android:text="sub-category"
+                        android:textAlignment="viewEnd">
+
+                    </Spinner>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/subCategoryELayout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:entries="@array/sub_category_electronics"
-                    android:text="sub-category"
-                    android:textAlignment="viewEnd">
-
-                </Spinner>
-                <EditText
-                    android:id="@+id/gender"
-                    android:layout_width="249dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:ems="10"
-                    android:hint="gender"
-                    android:inputType="textPersonName"
-                    android:textAlignment="center"
-                    android:textAllCaps="true"
-                    android:textStyle="italic" />
+                    android:layout_margin="16dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="sub category"
+                        android:textAllCaps="true"
+                        android:textColor="#020202"
+                        android:textSize="18sp"
+                        android:textStyle="italic" />
+
+                    <Spinner
+                        android:id="@+id/subCategoryE"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:entries="@array/sub_category_electronics"
+                        android:text="sub-category"
+                        android:textAlignment="viewEnd">
+
+                    </Spinner>
+
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"

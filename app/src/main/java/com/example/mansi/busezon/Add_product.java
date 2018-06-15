@@ -50,7 +50,7 @@ public class Add_product extends AppCompatActivity {
     private Bitmap bitmap;
     ProgressDialog progressDialog;
     RequestQueue rQueue;
-    Spinner category ,subCategory;
+    Spinner category ,subCategory, subcategoryE;
     String selectedCategory, selectedSubCategory;
     String sizes = "";
     String qty = "" ;
@@ -86,8 +86,10 @@ public class Add_product extends AppCompatActivity {
 
         category = findViewById(R.id.category_btn);
         subCategory = findViewById(R.id.subCategoryF);
+        subcategoryE = findViewById(R.id.subCategoryE);
 
-        final LinearLayout subCatLayout = findViewById(R.id.subCategoryLayout);
+
+        final LinearLayout subCatLayout = findViewById(R.id.subCategoryFLayout);
         final LinearLayout subCatELayout = findViewById(R.id.subCategoryELayout);
 
         category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -96,11 +98,11 @@ public class Add_product extends AppCompatActivity {
                 if(selectedCategory.equalsIgnoreCase("clothing")) {
                     subCatLayout.setVisibility(View.VISIBLE);
                     subCatELayout.setVisibility(View.GONE);
-                    subCategory = findViewById(R.id.subCategoryF);
+                    //subCategory = findViewById(R.id.subCategoryF);
                 }else {
                     subCatELayout.setVisibility(View.VISIBLE);
                     subCatLayout.setVisibility(View.GONE);
-                    subCategory = findViewById(R.id.subCategoryE);
+                    //subCategory = findViewById(R.id.subCategoryE);
                 }
             }
             public void onNothingSelected(AdapterView<?> parent) {
@@ -111,6 +113,17 @@ public class Add_product extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)  {
                 selectedSubCategory = subCategory.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        subcategoryE.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)  {
+                selectedSubCategory = subcategoryE.getSelectedItem().toString();
             }
 
             @Override
